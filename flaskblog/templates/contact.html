@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="contactForm">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <p>Feel free to contact us..</p>
+        {% if form.name.errors %}
+        {{ form.name(class="form-control contactInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.name.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.name(class="contactInput ", placeholder="name") }}
+        {% endif %}
+
+        {% if form.email.errors %}
+        {{ form.email(class="form-control contactInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.email(class="contactInput", placeholder="Email") }}
+        {% endif %}
+
+        {% if form.subject.errors %}
+        {{ form.subject(class="form-control contactInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.subject.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.subject(class="contactInput", placeholder="subject") }}
+        {% endif %}
+
+        {% if form.message.errors %}
+        {{ form.message(class="form-control contactInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.message.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.message(class="contactMessage", placeholder="message") }}
+        {% endif %}
+
+        {{ form.submit(class="registerButton") }}
+    </form>
+</div>
+
+{% endblock %}

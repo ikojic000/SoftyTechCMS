@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="registerForm">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <h1>Register</h1>
+        {% if form.username.errors %}
+        {{ form.username(class="form-control loginInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.username(class="loginInput registerInput", placeholder="Username") }}
+        {% endif %}
+     
+        {% if form.email.errors %}
+        {{ form.email(class="form-control loginInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.email(class="loginInput registerInput", placeholder="Email") }}
+        {% endif %}
+   
+        {% if form.password.errors %}
+        {{ form.password(class="form-control loginInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.password(class="loginInput registerInput", placeholder="Password") }}
+        {% endif %}
+   
+        {% if form.confirm_password.errors %}
+        {{ form.confirm_password(class="form-control loginInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.confirm_password.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.confirm_password(class="loginInput registerInput", placeholder="Confirm Password") }}
+        {% endif %}
+
+        {{ form.submit(class="registerButton") }}
+        <small>You already have account?</small>
+        <a href="{{ url_for('login') }}" id="registerButton">LogIn</a>
+    </form>
+</div>
+{% endblock %}

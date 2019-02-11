@@ -1,0 +1,27 @@
+{% extends "admin_Base.html" %}
+
+
+{% block content %}
+<div class="registerForm">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <h1>Update Account</h1>
+        <h5>{{ user.username }}</h5>
+        <h5>{{ user.email }}</h5>
+        <small>1 - Reader</small>
+        <small>2 - Admin</small>
+        {% if form.role.errors %}
+        {{ form.role(class="form-control loginInput is-invalid") }}
+        <div class="invalid-feedback">
+            {% for error in form.role.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.role(class="loginInput registerInput", placeholder="Role") }}
+        {% endif %}
+
+        {{ form.submit(class="registerButton") }}
+    </form>
+</div>
+{% endblock %}

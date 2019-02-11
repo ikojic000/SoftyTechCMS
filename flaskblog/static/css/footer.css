@@ -1,0 +1,282 @@
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .8);
+    width: 100%;
+    height: 30px;
+}
+
+.footer-full {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+
+.sideSocial button {
+    position: fixed;
+    left: -75px;
+    display: block;
+    width: 100px;
+    height: 80px;
+    border-width: 2px;
+    border-color: #7FCCF7;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    color: white;
+    font-size: 20px;
+    transition: .5s all;
+    cursor: pointer;
+
+}
+
+.sideSocial button:hover {
+    left: 0;
+    font-size: 25px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    border-width: 2px;
+    border-color: #7FCCF7;
+    transform: scale(1.1);
+    color: #f1f1f1;
+}
+
+
+
+
+#fb {
+    top: 220px;
+    background-color: rgba(59,89,152,.5);
+}
+#fb:hover{
+    background-color: rgba(59,89,152,.5);
+    z-index: 1;
+}
+#inst {
+    top: 280px;
+    background-color: rgba(214,41,118,.8);
+}
+#inst:hover {
+    background-color: rgba(214,41,118);
+    z-index: 1;
+}
+#tw {
+    top: 340px;
+    background-color: rgba(0,132,180);
+}
+#tw:hover{
+    background-color: rgba(0,172,237);
+    z-index: 1;
+}
+
+/*#topBtn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    font-size: 40px;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(0, 0, 0, .5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    visibility: hidden;
+    transition: 0.5s all;
+}
+
+#topBtn:hover {
+    background-color: rgba(0, 0, 0, .2);
+    color: #7FCCF7;
+    border-style: solid;
+    border-width: 5px;
+    border-color: rgba(0, 0, 0, .5)
+}*/
+#topBtn {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 0, 0, .5);
+    margin: 0;
+    border-radius: 50%;
+    border-color: black;
+    color: #7FCCF7;
+    overflow: hidden;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    font-size: 35px;
+    /*text-shadow: 0px 0px 3px #FFF;*/
+}
+
+
+
+.topBtn i {
+    transition: 0.2s linear;
+}
+
+#topBtn:hover i {
+    transform: scale(1.1);
+    color: #f1f1f1;
+    text-shadow: 0px 0px 5px #000;
+}
+
+#topBtn::before {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: #7FCCF7;
+    transform: rotate(45deg);
+    left: -110%;
+    top: 90%;
+}
+
+#topBtn:hover::before {
+    animation: aaa 0.7s 1;
+    top: -10%;
+    left: -10%;
+}
+
+
+.footerBtn {
+    color: white;
+    text-decoration: none;
+    font-family: 'Orbitron';
+    font-weight: bold;
+    line-height: 30px;
+    letter-spacing: 5px;
+}
+
+.footerBtn:hover {
+    color: #7FCCF7;
+}
+
+#aboutBtn {
+    float: left;
+}
+
+#contactBtn {
+    float: right;
+}
+
+/* DOWN SOCIAL BUTTONS */
+
+.downSocial {
+    position: absolute;
+    bottom: 35px;
+    float: right;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.btnDS {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, .5);
+    border: 1px solid white;
+    margin: 0;
+    border-radius: 30%;
+    box-shadow: 0 5px 15px -5px #00000070;
+    color: #3498db;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+.btnDS i {
+    line-height: 1.5;
+    font-size: 25px;
+    transition: 0.2s linear;
+}
+
+.btnDS:hover i {
+    transform: scale(1.3);
+    color: #f1f1f1;
+}
+
+.btnDS::before {
+    content: "";
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    background: #3498db;
+    transform: rotate(45deg);
+    left: -110%;
+    top: 90%;
+}
+
+.btnDS:hover::before {
+    animation: aaa 0.7s 1;
+    top: -10%;
+    left: -10%;
+}
+
+@keyframes aaa {
+    0% {
+        left: -110%;
+        top: 90%;
+    }
+
+    50% {
+        left: 10%;
+        top: -30%;
+    }
+
+    100% {
+        top: -10%;
+        left: -10%;
+    }
+}
+
+
+
+
+
+@media only screen and (max-width: 800px) {
+    .sideSocial {
+        display: none;
+    }
+
+    .downSocial {
+        display: none;
+    }
+
+    #topBtn:hover i {
+        transform: scale(1.0);
+        color: #f1f1f1;
+        text-shadow: 0px 0px 5px #000;
+    }
+
+    #topBtn::before {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    .footerBtn {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (max-width: 390px) {
+    .footerBtn {
+        line-height: 2.5;
+        font-size: 12px;
+    }
+}
+
+
+@media only screen and (max-width: 320px) {
+    .footerBtn {
+        line-height: 3;
+        font-size: 10px;
+    }
+}

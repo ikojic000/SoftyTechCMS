@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div id="mainPage">
+    <div class="admins">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="{{ url_for('static', filename='media/images/koki.jpg') }}" alt="Avatar" style="width:200px;height:200px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1>Ivan Kojic</h1>
+                    <p>Architect & Engineer</p>
+                    <p>We love that guy</p>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="{{ url_for('static', filename='media/images/ante.jpg') }}" alt="Avatar" style="width:200px;height:200px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1>Ante Simunov</h1>
+                    <p>Architect & Engineer</p>
+                    <p>We love that guy</p>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="{{ url_for('static', filename='media/images/doki.jpg') }}" alt="Avatar" style="width:200px;height:200px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1>Dorian Karuc</h1>
+                    <p>Architect & Engineer</p>
+                    <p>We love that guy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

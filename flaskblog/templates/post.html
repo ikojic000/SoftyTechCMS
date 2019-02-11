@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="mainContent">
+    <div class="main">
+        <div class="postMain">
+            <div class="postTopContainer">
+                <img class="postMainImg" src="{{ headImg }}" alt="">
+                <h2>{{ post.subtitle }}</h2>
+            </div>
+            <h5 class="postMainDate">{{ post.date_posted.strftime('%d-%b-%Y') }}</h5>
+            <h5 class="postMainAuthor">{{ post.author }}</h5>
+            <div class="spacer"></div>
+            <p>{{ post.content | safe }}</p>
+        </div>
+        {% if current_user.is_authenticated %}
+            <div class="commentForm">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    {% if form.comment.errors %}
+                        {{ form.comment(class="form-control loginInput is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.comment.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.comment(class="commentInput") }}
+                    {% endif %}
+
+                    {{ form.submit(class="commentBtn") }}
+                </form>
+            </div>
+        {% else %}
+            <p class="message">Please login to leave a comment. :)</p>
+        {% endif %}
+        <div class="commentList">
+            {% for comment in comments %}
+                <div class="commentDisplay">
+                    <div class="commentListLeft">
+                        <div class="commentUser">{{ comment.user.username }}</div>
+                        <small class="commentDate">{{ comment.date_posted.strftime('%d-%b-%Y') }}</small>
+                    </div>
+                    <div class="commentListRight">
+                        <div class="comment">{{ comment.content }}</div>
+                    </div>
+                </div>             
+            {% endfor %}
+    </div>
+    </div>
+
+    <div class="leftSide">
+        <div class="sideDiv">
+            <h5>Test</h5>
+            <p> Ipsum is simply dummy text of the printing and typesetting
+                industry.</p>
+            <button class="sideDivBtn" type="button">Read More</button>
+        </div>
+        <div class="sideDiv">
+            <h5>Test</h5>
+            <p> Ipsum is simply dummy text of the printing and typesetting
+                industry.</p>
+            <button class="sideDivBtn" type="button">Read More</button>
+        </div>
+    </div>
+
+    <div class="rightSide">
+        <div class="sideDiv">
+            <h5>{{ news.title }}</h5>
+            <p>{{ news.description }}</p>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=news.slug) }}'">Read
+                More</button>
+        </div>
+        <div class="sideDiv">
+            <h5>{{ reviews.title }}</h5>
+            <p>{{ reviews.description }}</p>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=reviews.slug) }}'">Read
+                More</button>
+        </div>
+        <div class="sideDiv">
+            <h5>{{ commentary.title }}</h5>
+            <p>{{ commentary.description }}</p>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=commentary.slug) }}'">Read
+                More</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#comment").emojioneArea ({
+        pickerPosition: "top",
+        filtersPosition: "bottom",
+        recentEmojis: false,
+        search: false
+
+    });
+</script>
+
+{% include "includes/topBtn.html" %}
+
+{% endblock %}

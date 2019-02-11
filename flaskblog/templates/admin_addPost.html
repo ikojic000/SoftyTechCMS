@@ -1,0 +1,126 @@
+{% extends "admin_Base.html" %}
+
+{% block content %}
+<div class="addForm">
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <h1>New Post</h1>
+        {% if form.title.errors %}
+            {{ form.title(class="form-control addInput is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.title.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.title(class="addInput", placeholder="Title") }}
+        {% endif %}
+
+        {% if form.subtitle.errors %}
+            {{ form.subtitle(class="form-control addInput is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.subtitle.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.subtitle(class="addInput", placeholder="Subtitle") }}
+        {% endif %}
+
+
+
+        
+        {% if form.description.errors %}
+            {{ form.description(class="form-control addTextArea is-invalid", id="desc") }}
+                <div class="invalid-feedback">
+                    {% for error in form.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.description(class="addTextArea addDescription", placeholder="Description") }}
+        {% endif %}
+
+        {% if form.headImg.errors %}
+            {{ form.headImg(class="form-control loginInput is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.headImg.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.headImg(class="mediaInput") }}
+        {% endif %}
+
+        
+        {% if form.slug.errors %}
+            {{ form.slug(class="form-control addInput is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.slug.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.slug(class="addInput", placeholder="Slug") }}
+        {% endif %}
+
+
+
+        
+        {% if form.category.errors %}
+            {{ form.category(class="form-control addSelect is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.category.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.category(class="addSelect") }}
+        {% endif %}
+
+
+
+        
+        {% if form.language.errors %}
+            {{ form.language(class="form-control addSelect is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.language.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.language(class="addSelect") }}
+        {% endif %}
+
+
+
+        
+        {% if form.author.errors %}
+            {{ form.author(class="form-control addInput is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.author.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.author(class="addInput", placeholder="Author") }}
+        {% endif %}
+
+
+
+        
+        {% if form.content.errors %}
+            {{ form.content(class="form-control addTextArea is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+        {% else %}
+            {{ form.content(class="addTextArea addContent",id="editor", placeholder="Content") }}
+        {% endif %}
+
+        {{ form.submit(class="addBtn") }}
+    </form>
+</div>
+{% endblock %}
