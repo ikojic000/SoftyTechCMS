@@ -323,6 +323,7 @@ body {
 /* ABOUT */
 .admins {
     margin: 50px auto;
+
 }
 
 .flip-card {
@@ -432,10 +433,23 @@ body {
     }
 
     .admins {
-        width: 950px;
-        margin: 0 auto;
+        width: 600px;
+        margin: 50px auto;
+        background-color: rgba(0, 0, 0, .5);
+        border-radius: 10px;
+        padding: 10px 30px;
+        -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, .5);
+        -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
+        box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
     }
 
+    .aboutText {
+        color: white;
+        font-family: 'Work Sans', sans-serif;
+        font-size: 20px;
+        text-align: center;
+        line-height: 35px;
+    }
 }
 
 @media only screen and (max-width: 850px) {
