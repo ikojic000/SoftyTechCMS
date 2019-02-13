@@ -4,14 +4,15 @@ Flask CMS for a blogsite
 *** HRV ***
 
 Tehnologije koristene:
+
     - Flask
-    - Flask-SQLAlchemy
-    - Flask-Bcrypt
-    - Flask-Login
-    - Flask-User
-    - Flask-Mail
-    - Flask-WTForms
-    - Flask-WhooshAlchemy
+    - Flask - SQLAlchemy
+    - Flask - Bcrypt
+    - Flask - Login
+    - Flask - User
+    - Flask - Mail
+    - Flask - WTForms
+    - Flask - WhooshAlchemy
     - ***** -
     - CSS Media Queries
     - jQuery
