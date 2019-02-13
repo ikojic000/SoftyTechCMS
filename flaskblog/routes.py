@@ -35,7 +35,7 @@ def home():
         reviews = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Reviews").first()
         commentary = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Commentary").first()
         form.search.data = ''
-    return render_template('index.html', posts=posts, page=page, news=news, reviews=reviews, commentary=commentary, title='home', form=form)
+    return render_template('index.html', posts=posts, page=page, news=news, reviews=reviews, commentary=commentary, title='Home', form=form)
 
 
 # Route for AboutPage
@@ -61,7 +61,7 @@ def contact():
         mail.send(message)
         flash('Thank you for your message. We will reply as soon as possible!', 'success')
         return redirect(url_for('home'))
-    return render_template('contact.html', form=form)
+    return render_template('contact.html', title='Contact', form=form)
 
 
 # Route for User Account 
@@ -102,7 +102,7 @@ def news():
     posts = Post.query.filter_by(category="News").order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
     reviews = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Reviews").first()
     commentary = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Commentary").first()
-    return render_template('news.html', posts=posts, reviews=reviews, commentary=commentary)
+    return render_template('news.html', title='News', posts=posts, reviews=reviews, commentary=commentary)
 
 # Route for ReviewsPage
 # Displaying only Reviews Category from database
@@ -112,7 +112,7 @@ def reviews():
     posts = Post.query.filter_by(category="Reviews").order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
     news = Post.query.order_by(Post.date_posted.desc()).filter_by(category="News").first()
     commentary = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Commentary").first()
-    return render_template('reviews.html', posts=posts, news=news, commentary=commentary, reviews=reviews)
+    return render_template('reviews.html', title='Reviews', posts=posts, news=news, commentary=commentary, reviews=reviews)
 
 # Route for CommentaryPage
 # Displaying only Commentary Category from database
@@ -122,7 +122,7 @@ def commentary():
     posts = Post.query.filter_by(category="Commentary").order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
     news = Post.query.order_by(Post.date_posted.desc()).filter_by(category="News").first()
     reviews = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Reviews").first()
-    return render_template('commentary.html', posts=posts, news=news, reviews=reviews)
+    return render_template('commentary.html', title='Commentary', posts=posts, news=news, reviews=reviews)
 
 # Route for Single Post
 # Displaying Post by its Slug
