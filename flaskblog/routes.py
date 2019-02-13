@@ -128,7 +128,7 @@ def commentary():
 # Displaying Post by its Slug
 @app.route("/<slug>", methods=['GET', 'POST'])
 def post(slug):
-    post = Post.query.filter_by(slug=slug).first()
+    post = Post.query.filter_by(slug=slug).first_or_404()
     news = Post.query.order_by(Post.date_posted.desc()).filter_by(category="News").first()
     reviews = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Reviews").first()
     commentary = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Commentary").first()
