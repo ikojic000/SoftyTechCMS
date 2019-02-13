@@ -2,6 +2,26 @@
 Flask CMS for a blogsite
 
 *** HRV ***
+
+Tehnologije koristene:
+    - Flask
+    - Flask-SQLAlchemy
+    - Flask-Bcrypt
+    - Flask-Login
+    - Flask-User
+    - Flask-Mail
+    - Flask-WTForms
+    - Flask-WhooshAlchemy
+    - ***** -
+    - CSS Media Queries
+    - jQuery
+    - ***** -
+    - EmojiOneArea
+    - ckEditor4
+    
+    
+    
+
 - Flask-WhooshAlchemy -
 Nakon instalacije svega potrebnoga, potrebno je file flask_whooshalchemy.py ili preraditi ili zamijeniti sa onim uploadanim na github.
 Ako se to ne napravi, APP nece raditi jer je Flask-WhooshAlchemy napravljen za Python2, a APP je u Python3.
