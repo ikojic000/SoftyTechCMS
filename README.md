@@ -58,6 +58,13 @@ Ova Web stranica / Web aplikacija jos nije gotova konacno. S obzirom da namjerav
 Planiram dodati jos par funkcionalnosti te popraviti design gdje je to potrebno. 
 Sav design je napravljen rucno i nije koristen nikakav template.
 
+- Reader -
+    mail: test@test.com
+    password: 123456
+- Admin -
+    mail: admin@admin.com
+    password: 123456
+
 Za sve informacije mozete me kontaktirati na ikojic000@gmail.com
 
 
