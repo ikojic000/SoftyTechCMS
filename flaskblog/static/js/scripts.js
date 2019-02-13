@@ -3,6 +3,7 @@ var $, window, document;
 /* TopButton_function */
 $(document).ready(function () {
     'use strict';
+    $('#topBtn').css('visibility', 'hidden');
     $(window).scroll(function () {
         var scrollval = $(window).scrollTop();
         if (scrollval > 80) {
