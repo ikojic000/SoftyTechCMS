@@ -18,9 +18,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     border-radius: 20px;
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
+    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, .5);
+    -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
+    box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
     cursor: pointer;
 }
 
@@ -52,8 +52,9 @@
     background-size: cover;
 }
 
+
 .blog-card .photo.photo1 img {
-    width: 100%;
+    width: 100%; 
 }
 
 .blog-card .photo.photo2 {
@@ -179,7 +180,7 @@
     float: right;
     text-decoration: none;
     font-family: 'Orbitron';
-    
+
 }
 
 .blog-card .description a:hover {
@@ -238,15 +239,21 @@
     font-family: 'Orbitron';
     transition: .5s all;
 }
+
 .postReadMore:hover {
     border: solid blue 3px;
-    font-size: 19px; 
+    font-size: 19px;
 }
 
 @media screen and (min-width: 600px) {
     .blog-card {
         height: 200px;
         max-width: 600px;
+    }
+
+    .blog-card .photo.photo1 img {
+        width: 150%;
+
     }
 
     .blog-card:hover .photo {
@@ -316,3 +323,12 @@
         bottom: 0;
     }
 }
+
+/*
+@media only screen and (max-width: 601px) {
+    .blog-card .photo.photo1 img {
+        width: 100%;
+
+    }
+}
+*/
