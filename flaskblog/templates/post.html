@@ -13,7 +13,9 @@
             <h5 class="postMainDate">{{ post.date_posted.strftime('%d-%b-%Y') }}</h5>
             <h5 class="postMainAuthor">{{ post.author }}</h5>
             <div class="spacer"></div>
-            <p>{{ post.content | safe }}</p>
+            <div class="postMainContent">
+                <p>{{ post.content | safe }}</p>
+            </div>
         </div>
         {% if current_user.is_authenticated %}
             <div class="commentForm">
