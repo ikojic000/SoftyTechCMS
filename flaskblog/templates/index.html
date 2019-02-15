@@ -12,6 +12,12 @@
 
 
         <div class="pagination">
+            {% set prev = posts.page - 1 %}
+            {% if prev > 0 %}
+                <a class="pageBtn" href="{{ url_for('home', page=prev) }}"><i class="fas fa-chevron-left"></i></a>
+            {% else %}
+                <a class="pageBtn" href="{{ url_for('home', page=1) }}"><i class="fas fa-chevron-left"></i></a>
+            {% endif %}
             {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
                 {% if page_num %}
                     {% if posts.page == page_num %}
@@ -23,6 +29,13 @@
                     ...
                 {% endif %}
             {% endfor %}
+            {% set next = posts.page + 1 %}
+            {% if next > posts.pages %}
+                <a class="pageBtn" href="{{ url_for('home', page=posts.pages) }}"><i class="fas fa-chevron-right"></i></a>
+            {% else %}
+                <a class="pageBtn" href="{{ url_for('home', page=next) }}"><i class="fas fa-chevron-right"></i></a>
+            {% endif %}
+
         </div>
 
     </div>
