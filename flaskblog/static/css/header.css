@@ -77,7 +77,7 @@
 
 .menuBtn {
     position: relative;
-    
+
 }
 
 
@@ -92,6 +92,7 @@
     top: 0;
     left: 0;
 }
+
 .menuBtn:hover::after {
     content: '';
     width: 50%;
@@ -118,12 +119,13 @@
     height: 200x;
     width: 250px;
     border-radius: 15px;
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
+    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, .5);
+    -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
+    box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
 }
+
 .userAccountMenu a {
-    display: block; 
+    display: block;
     margin-bottom: 30px;
     margin-top: 30px;
 }
@@ -191,11 +193,10 @@
         display: block;
         text-align: center;
         color: white;
-        border-style: solid;
-        border-color: rgba(1, 1, 1, .2);
         padding-top: 20px;
         padding-bottom: 20px;
-        margin: 20px;
+        margin: 20px auto;
+        width: 150px;
     }
 
     #loginBtn {
@@ -278,6 +279,7 @@
         line-height: 1;
     }
 }
+
 @media only screen and (max-width : 312px) {
     #titleID h1 {
         padding-top: 30px;
@@ -295,7 +297,10 @@
     }
 
     .btnH {
-        font-size: 25px width: 25px height: 25px line-height: 25px;
+        font-size: 25px;
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
         right: 5px;
     }
 
