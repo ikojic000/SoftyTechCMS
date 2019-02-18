@@ -63,22 +63,46 @@
     font-family: 'Orbitron';
     font-size: 20px;
     text-decoration: none;
-    font-weight: bold;
-    padding: 3px 10px 3px 10px;
+
+    padding: 6px 15px;
     overflow: hidden;
     transition: all .5s;
     text-transform: capitalize;
 }
 
-.menu a:hover {
-    color: #7FCCF7;
-    border-top-color: white;
-    border-top-style: solid;
-    border-top-width: 1px;
-}
 
 #loginBtn {
     cursor: pointer;
+}
+
+.menuBtn {
+    position: relative;
+    margin: auto 5px;
+    
+}
+
+
+.menuBtn:hover::before {
+    content: '';
+    width: 50%;
+    height: 50%;
+    background-color: transparent;
+    border-top: solid 1px #7FCCF7;
+    border-left: solid 1px #7FCCF7;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.menuBtn:hover::after {
+    content: '';
+    width: 50%;
+    height: 50%;
+    background-color: transparent;
+    border-right: solid 1px #007bff;
+    border-bottom: solid 1px #007bff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .userAccountMenu {
@@ -95,13 +119,12 @@
     height: 200x;
     width: 250px;
     border-radius: 15px;
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, .5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
-    box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
+    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
+    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
+    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
 }
-
 .userAccountMenu a {
-    display: block;
+    display: block; 
     margin-bottom: 30px;
     margin-top: 30px;
 }
@@ -256,7 +279,6 @@
         line-height: 1;
     }
 }
-
 @media only screen and (max-width : 312px) {
     #titleID h1 {
         padding-top: 30px;
