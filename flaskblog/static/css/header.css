@@ -88,6 +88,7 @@
     background-color: transparent;
     border-top: solid 1px white;
     border-left: solid 1px #7FCCF7;
+    border-top-left-radius: 3px;
     position: absolute;
     top: 0;
     left: 0;
@@ -100,6 +101,7 @@
     background-color: transparent;
     border-right: solid 1px #007bff;
     border-bottom: solid 1px white;
+    border-bottom-right-radius: 3px;
     position: absolute;
     bottom: 0;
     right: 0;
