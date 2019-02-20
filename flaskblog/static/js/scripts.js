@@ -34,6 +34,8 @@ $(document).ready(function () {
     });
 });
 
+
+
 /* AccountMenu_function */
 $(document).ready(function () {
     'use strict';
@@ -46,6 +48,13 @@ $(document).ready(function () {
     'use strict';
     $('#loginBtnSmall').on('click', function () {
         $('.userAccountMenu').toggleClass('userAccountMenuShow');
+        if($(this).find('i').hasClass('fa-user')) {
+            $(this).find('i').removeClass('fa-user');
+            $(this).find('i').addClass('fa-times');
+        } else {
+            $(this).find('i').removeClass('fa-times');
+            $(this).find('i').addClass('fa-user');
+        };
     });
 });
 

@@ -119,24 +119,62 @@
     position: fixed;
     top: 50px;
     right: 10px;
-    height: 200x;
+    height: 200px;
     width: 250px;
-    border-radius: 15px;
+    border-radius: 5px;
     -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, .5);
     -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
     box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
+    visibility: visible;
 }
 
 .userAccountMenu a {
     display: block;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin: 10px auto;
+    padding: 10px;
+    width: 150px;
+    font-size: 15px;
+}
+.userAccountMenu a:first-child {
+    margin-top: 25px;
 }
 
 .userAccountMenuShow {
     display: block;
 }
 
+.userAccountMenu a {
+    position: relative;
+
+}
+
+.userAccountMenu a:hover::before {
+    content: '';
+    width: 50%;
+    height: 50%;
+    background-color: transparent;
+    border-top: solid 1px white;
+    border-left: solid 1px #7FCCF7;
+    border-top-left-radius: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.userAccountMenu a:hover::after {
+    content: '';
+    width: 50%;
+    height: 50%;
+    background-color: transparent;
+    border-right: solid 1px #007bff;
+    border-bottom: solid 1px white;
+    border-bottom-right-radius: 3px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    
+}
 
 
 
@@ -217,6 +255,14 @@
         transition: .5s all;
         visibility: visible;
     }
+
+    .userAccountMenu a {
+        display: block;
+        margin: 10px auto;
+        padding: 10px;
+        width: 150px;
+        font-size: 15px;
+}
 
     #titleID h1 {
         font-size: 70px;

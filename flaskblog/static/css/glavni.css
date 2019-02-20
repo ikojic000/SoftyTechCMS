@@ -156,14 +156,10 @@ body {
 .pagination {
     margin: 0 auto;
     padding: 5px;
-    background-color: rgba(0, 0, 0, .5);
     border: none;
     border-radius: 15px;
     color: white;
     text-align: center;
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, .5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
-    box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, .5);
 }
 
 .pageBtn {
