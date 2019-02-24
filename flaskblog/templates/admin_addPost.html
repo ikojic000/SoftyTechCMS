@@ -123,4 +123,11 @@
         {{ form.submit(class="addBtn") }}
     </form>
 </div>
+
+<script>
+    CKEDITOR.replace( 'editor', {
+        filebrowserImageUploadUrl: '/ckupload/',
+        filebrowserUploadMethod: 'form',
+    });
+</script>
 {% endblock %}
