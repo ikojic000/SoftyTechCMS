@@ -26,8 +26,11 @@
 </div>
 <div class="mediaGallery">
     <ul class="galleryUL">
+        {% set i = 1 %}
         {% for image_name in image_names %}
-        <li class="galleryLI"><img src="{{ image_name }}" class="mediaGalleryImg" alt=""></li>
+            <h1>{{ i }}</h1>
+            <li class="galleryLI"><img src="{{ image_name }}" class="mediaGalleryImg" alt=""></li>
+            {% set i = i+1 %}
         {% endfor %}
     </ul>
 </div>
