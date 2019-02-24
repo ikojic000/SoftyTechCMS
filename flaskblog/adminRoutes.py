@@ -207,6 +207,38 @@ def delete_post(post_id):
 
 
 
+# Updating Posts in the database
+@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
+@login_required
+@roles_required('Admin')
+def update_post(post_id):
+    post = Post.query.filter_by(id=post_id).first()
+    form = PostForm()
+
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, subtitle=form.subtitle.data, description=form.description.data, slug=form.slug.data, category=form.category.data, language=form.language.data, author=form.author.data, content=form.content.data)
+        
+        db.session.commit()
+        flash('Post Updated', 'success')
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.subtitle.data = post.subtitle
+        form.description.data = post.description
+        form.headImg.data = post.headImg
+        form.slug.data = post.slug
+        form.category.data = post.category
+        form.language.data = post.language
+        form.author.data = post.author
+        form.content.data = post.content
+
+
+    return render_template('admin_addPost.html', title='UpdatePost', form=form)
+
+
+
+
+
 # Uploading media to a folder on a server
 # Displaying preview of those images so Admin can know what was uploaded
 @app.route("/admin/media", methods=['GET', 'POST'])
