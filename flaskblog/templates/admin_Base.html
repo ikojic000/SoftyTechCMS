@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <link rel="icon" href="{{ url_for('static', filename='css/images/SoFtYTechIcon.ico') }}" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% if title %}
     <title>Softy Tech | {{ title }}</title>
@@ -39,7 +40,7 @@
 </head>
 
 <body>
-    {% include "admin_Header.html" %}
+    {% include "includes/admin_Header.html" %}
 
     <div class="sideMenu">
         <a href="{{ url_for('admin') }}">Home</a>
@@ -51,18 +52,18 @@
 
     <div class="container">
         {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-        {% endif %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
         {% endwith %}
         {% block content%}
         {% endblock %}
     </div>
-    {% include "admin_Footer.html" %}
+    {% include "includes/admin_Footer.html" %}
 
 
     <script>

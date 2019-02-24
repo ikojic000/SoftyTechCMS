@@ -13,6 +13,8 @@
         <th>Language</th>-->
         <th>Author</th>
         <th>Date Posted</th>
+        <th>Update</th>
+        <th>Delete</th>
     </tr>
     {% for post in posts %}
     <tr>
@@ -25,6 +27,7 @@
         <td>{{post.language}}</td>-->
         <td>{{post.author}}</td>
         <td>{{post.date_posted}}</td>
+        <td><a href="{{ url_for('update_post', post_id=post.id) }}">Update</a></td>
         <td><a href="{{ url_for('delete_post', post_id=post.id) }}">Delete</a></td>
     </tr>
     {% endfor %}

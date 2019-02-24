@@ -216,11 +216,19 @@ def update_post(post_id):
     form = PostForm()
 
     if form.validate_on_submit():
-        post = Post(title=form.title.data, subtitle=form.subtitle.data, description=form.description.data, slug=form.slug.data, category=form.category.data, language=form.language.data, author=form.author.data, content=form.content.data)
-        
+        post.title = form.title.data
+        post.subtitle = form.subtitle.data
+        post.description = form.description.data
+        post.slug = form.slug.data
+        post.category = form.category.data
+        post.language = form.language.data 
+        post.author = form.author.data
+        post.content = form.content.data
+
         db.session.commit()
         flash('Post Updated', 'success')
         return redirect(url_for('admin'))
+        
     elif request.method == 'GET':
         form.title.data = post.title
         form.subtitle.data = post.subtitle
@@ -231,7 +239,6 @@ def update_post(post_id):
         form.language.data = post.language
         form.author.data = post.author
         form.content.data = post.content
-
 
     return render_template('admin_addPost.html', title='UpdatePost', form=form)
 
