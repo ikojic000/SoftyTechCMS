@@ -9,14 +9,14 @@
             {{ form.mediaFile.label(class="mediaLabel") }}
             <br>
             {% if form.mediaFile.errors %}
-            {{ form.mediaFile(class="form-control loginInput is-invalid") }}
-            <div class="invalid-feedback">
-                {% for error in form.mediaFile.errors %}
-                <span>{{ error }}</span>
-                {% endfor %}
-            </div>
+                {{ form.mediaFile(class="form-control loginInput is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.mediaFile.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
             {% else %}
-            {{ form.mediaFile(class="mediaInput") }}
+                {{ form.mediaFile(class="mediaInput") }}
             {% endif %}
             {{ form.submit(class="mediaSubmitButton") }}
         </fieldset>
