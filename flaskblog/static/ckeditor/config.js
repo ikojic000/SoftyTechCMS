@@ -8,6 +8,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// config.language = 'fr';
 	// config.uiColor = '#AADC6E';
 	config.extraPlugins = 'youtube';
-	config.extraPlugins = 'filebrowser';
-	//config.extraPlugins = 'slideshow';
+	//config.extraPlugins = 'filebrowser';
+	config.extraPlugins = 'slideshow';
 };
