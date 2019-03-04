@@ -141,7 +141,7 @@ def save_picture(form_picture):
     return picture_fn
 
 
-@app.route('/ckupload/', methods=['POST', 'OPTIONS'])
+@app.route('/ckupload/', methods=['POST', 'OPTIONS', 'GET'])
 def ckupload():
     """CKEditor file upload"""
     error = ''
@@ -266,3 +266,14 @@ def media():
 
 
 
+"""
+@app.route("/filebrowser/", methods=['GET', 'POST'])
+def filebrowser():
+    files = os.listdir('flaskblog\static\media\images')
+    file_urls = []
+    for file in files:
+        file_urls.append(url_for('static', filename='media/images/' + file))
+    for file_url in file_urls:
+        return file_url
+
+"""
