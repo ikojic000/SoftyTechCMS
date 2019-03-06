@@ -13,9 +13,9 @@
             {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
             {% if page_num %}
             {% if posts.page == page_num %}
-            <a class="pageBtn currentPageBtn" href="{{ url_for('commentary', page=page_num) }}">{{ page_num }}</a>
+            <a class="pageBtn currentPageBtn" href="{{ url_for('main.commentary', page=page_num) }}">{{ page_num }}</a>
             {% else %}
-            <a class="pageBtn" href="{{ url_for('commentary', page=page_num) }}">{{ page_num }}</a>
+            <a class="pageBtn" href="{{ url_for('main.commentary', page=page_num) }}">{{ page_num }}</a>
             {% endif %}
             {% else %}
             ...
@@ -43,13 +43,13 @@
         <div class="sideDiv">
             <h5>{{ news.title }}</h5>
             <p>{{ news.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=news.slug) }}'">Read
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=news.slug) }}'">Read
                 More</button>
         </div>
         <div class="sideDiv">
             <h5>{{ reviews.title }}</h5>
             <p>{{ reviews.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=reviews.slug) }}'">Read
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=reviews.slug) }}'">Read
                 More</button>
         </div>
     </div>

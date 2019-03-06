@@ -43,11 +43,11 @@
     {% include "includes/admin_Header.html" %}
 
     <div class="sideMenu">
-        <a href="{{ url_for('admin') }}">Home</a>
-        <a href="{{ url_for('add') }}">AddPosts</a>
-        <a href="{{ url_for('media') }}">Media</a>
-        <a href="{{ url_for('users') }}">Users</a>
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <a href="{{ url_for('users.admin') }}">Home</a>
+        <a href="{{ url_for('posts.add') }}">AddPosts</a>
+        <a href="{{ url_for('posts.media') }}">Media</a>
+        <a href="{{ url_for('users.userList') }}">Users</a>
+        <a href="{{ url_for('users.logout') }}">Logout</a>
     </div>
 
     <div class="container">

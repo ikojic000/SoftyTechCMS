@@ -2,12 +2,12 @@
     <div class="navbar">
         <a href="/" id="logo"></a>
         <div class="navbarMobile">
-            <a href="{{ url_for('home') }}" class="btn btnM">
+            <a href="{{ url_for('main.home') }}" class="btn btnM">
                 <i class="fa fa-home"></i>
             </a>
             {% if current_user.is_authenticated %}
                 {% if current_user.roles[0].name == 'Admin' %}
-                    <a class="btn btnM" href="{{ url_for('admin') }}">
+                    <a class="btn btnM" href="{{ url_for('users.admin') }}">
                         <i class="fas fa-user"></i>
                     </a>
                 {% else %}
@@ -16,7 +16,7 @@
                     </a>
                 {% endif %}
             {% else %}
-                <a class="btn btnM" href="{{ url_for('login') }}">
+                <a class="btn btnM" href="{{ url_for('users.login') }}">
                         <i class="fas fa-user"></i>
                 </a>
             {% endif %}
@@ -25,23 +25,23 @@
             <i class="fas fa-bars"></i>
         </a>
         <div class="menu">
-            <a class="menuBtn" href="{{ url_for('home') }}">Home</a>
-            <a class="menuBtn" href="{{ url_for('news') }}">News</a>
-            <a class="menuBtn" href="{{ url_for('reviews') }}">Reviews</a>
-            <a class="menuBtn" href="{{ url_for('commentary') }}">Commentary</a>
+            <a class="menuBtn" href="{{ url_for('main.home') }}">Home</a>
+            <a class="menuBtn" href="{{ url_for('main.news') }}">News</a>
+            <a class="menuBtn" href="{{ url_for('main.reviews') }}">Reviews</a>
+            <a class="menuBtn" href="{{ url_for('main.commentary') }}">Commentary</a>
             {% if current_user.is_authenticated %}
                 {% if current_user.roles[0].name == 'Admin' %}
-                    <a id="loginBtn" class="menuBtn" href="{{ url_for('admin') }}">{{ current_user.username }}</a>
+                    <a id="loginBtn" class="menuBtn" href="{{ url_for('users.admin') }}">{{ current_user.username }}</a>
                 {% else %}
                     <a id="loginBtn" class="menuBtn">{{ current_user.username }}</a>
                     <div class="userAccountMenu">
-                        <a çlass="userAccountMenuBtn" href="{{ url_for('account') }}">Account Settings</a>
+                        <a çlass="userAccountMenuBtn" href="{{ url_for('users.account') }}">Account Settings</a>
                         <a çlass="userAccountMenuBtn" href="{{ url_for('user.change_password') }}">Change Password</a>
-                        <a çlass="userAccountMenuBtn" href="{{ url_for('logout') }}">Log out</a>
+                        <a çlass="userAccountMenuBtn" href="{{ url_for('users.logout') }}">Log out</a>
                     </div>
                 {% endif %}
             {% else %}
-                <a id="loginBtn" class="menuBtn" href="{{ url_for('login') }}">Sign in</a>
+                <a id="loginBtn" class="menuBtn" href="{{ url_for('users.login') }}">Sign in</a>
             {% endif %}
         </div>
     </div>

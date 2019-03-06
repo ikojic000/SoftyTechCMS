@@ -1,12 +1,10 @@
-# PYTHON FILE WITH / FOR FORMS
-
-# Imports
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField,TextAreaField, FileField, SelectField, SelectMultipleField, validators
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from flask_wtf.file import FileAllowed
 from flaskblog.models import User
 from flask_login import current_user
+
 
 # Function for checking if username is taken when new user registers
 def validate_username(self, username):
@@ -69,56 +67,3 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', 
                         validators=[DataRequired()])
     submit = SubmitField('Login')
-
-# Form for posting comments
-class CommentForm(FlaskForm):
-    comment = TextAreaField('Comment',
-                        validators=[DataRequired(), Length(min=3, max=150)])
-    submit = SubmitField('Comment')
-
-# Form for search
-class SearchForm(FlaskForm):
-    search = StringField('Search',
-                        validators=[DataRequired(), Length(min=3)])
-    submit = SubmitField('')
-
-# ADMIN SIDE FORMS
-# Form for adding posts
-class PostForm(FlaskForm):
-    title = StringField('Title', 
-        	            validators=[DataRequired(), Length(min=5, max=30)])
-    subtitle = StringField('Subitle', 
-                        validators=[DataRequired(), Length(min=5, max=30)])
-    description = TextAreaField('Description', 
-                        validators=[DataRequired(), Length(min=5, max=100)])
-    slug = StringField('Slug', 
-                        validators=[DataRequired(), Length(min=5, max=30)])
-    headImg = FileField('Post Header Image', validators=[FileAllowed(['jpg', 'png'])])
-    category = SelectField('Category', 
-                        choices=[('News', 'News'), ('Reviews', 'Reviews'), ('Commentary', 'Commentary')]) 
-    language = SelectField('Language', 
-                        choices=[('HRV', 'Hrvatski'), ('ENG', 'English')])
-    author = StringField('Author', 
-                        validators=[DataRequired(), Length(min=5, max=15)])
-    content = TextAreaField('Content')
-    submit = SubmitField('Post')
-
-# Form for uploading images to a folder on a server
-class MediaForm(FlaskForm):
-    mediaFile = FileField('Upload Media', validators=[FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Upload')
-
-# Form for contact page
-class ContactForm(FlaskForm):
-    name = StringField('Name',
-                        validators=[DataRequired(), Length(min=3, max=20)])
-    email = StringField('Email',
-                        validators=[DataRequired(), Email()])
-    subject = StringField('Subject',
-                        validators=[DataRequired(), Length(min=3, max=20)])
-    message = TextAreaField('Message',
-                        validators=[DataRequired(), Length(min=5, max=50)])
-    submit = SubmitField('Send')
-
-
-                    

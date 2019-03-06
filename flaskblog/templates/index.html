@@ -14,16 +14,16 @@
         <div class="pagination">
             {% set prev = posts.page - 1 %}
             {% if prev > 0 %}
-                <a class="pageBtn" href="{{ url_for('home', page=prev) }}"><i class="fas fa-chevron-left"></i></a>
+                <a class="pageBtn" href="{{ url_for('main.home', page=prev) }}"><i class="fas fa-chevron-left"></i></a>
             {% else %}
-                <a class="pageBtn" href="{{ url_for('home', page=1) }}"><i class="fas fa-chevron-left"></i></a>
+                <a class="pageBtn" href="{{ url_for('main.home', page=1) }}"><i class="fas fa-chevron-left"></i></a>
             {% endif %}
             {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
                 {% if page_num %}
                     {% if posts.page == page_num %}
-                        <a class="pageBtn currentPageBtn" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+                        <a class="pageBtn currentPageBtn" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
                     {% else %}
-                        <a class="pageBtn" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+                        <a class="pageBtn" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
                     {% endif %}
                 {% else %}
                     ...
@@ -31,9 +31,9 @@
             {% endfor %}
             {% set next = posts.page + 1 %}
             {% if next > posts.pages %}
-                <a class="pageBtn" href="{{ url_for('home', page=posts.pages) }}"><i class="fas fa-chevron-right"></i></a>
+                <a class="pageBtn" href="{{ url_for('main.home', page=posts.pages) }}"><i class="fas fa-chevron-right"></i></a>
             {% else %}
-                <a class="pageBtn" href="{{ url_for('home', page=next) }}"><i class="fas fa-chevron-right"></i></a>
+                <a class="pageBtn" href="{{ url_for('main.home', page=next) }}"><i class="fas fa-chevron-right"></i></a>
             {% endif %}
 
         </div>
@@ -68,17 +68,17 @@
         <div class="sideDiv">
             <h5>{{ news.title }}</h5>
             <p>{{ news.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=news.slug) }}'">Read More</button>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=news.slug) }}'">Read More</button>
         </div>
         <div class="sideDiv">
             <h5>{{ reviews.title }}</h5>
             <p>{{ reviews.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=reviews.slug) }}'">Read More</button>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=reviews.slug) }}'">Read More</button>
         </div>
         <div class="sideDiv">
             <h5>{{ commentary.title }}</h5>
             <p>{{ commentary.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=commentary.slug) }}'">Read More</button>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=commentary.slug) }}'">Read More</button>
         </div>
     </div>
 </div>

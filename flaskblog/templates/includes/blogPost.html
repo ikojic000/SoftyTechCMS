@@ -1,4 +1,4 @@
-<div class="blog-card" onclick="window.location.href='{{url_for('post', slug=post.slug)}}'">
+<div class="blog-card" onclick="window.location.href='{{url_for('main.post', slug=post.slug)}}'">
     <div class="photo photo1"><img src="{{ url_for('static', filename='media/images/' + post.headImg) }}" alt=""></div>
     <ul class="details">
         <li class="author"><a href="#">{{ post.author }}</a></li>
@@ -8,7 +8,7 @@
         <h1>{{ post.title }}</h1>
         <h2>{{ post.subtitle }}</h2>
         <p class="summary">{{ post.description }}</p>
-        <a href="{{ url_for('post', slug=post.slug) }}">Read More</a>
+        <a href="{{ url_for('main.post', slug=post.slug) }}">Read More</a>
     </div>
 </div>
 <div class="spacer"></div>

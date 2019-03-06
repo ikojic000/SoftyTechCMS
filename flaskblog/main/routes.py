@@ -1,21 +1,25 @@
-# PYTHON FILE WITH / FOR USER SIDE ROUTES
 
-# Imports
-from flask import render_template, url_for, redirect, flash, request
+from flask import render_template, url_for, redirect, flash, request, Blueprint
 from flaskblog import app, db, mail
 from flaskblog.models import Post, Comment, User
-from flaskblog.forms import UpdateAccountForm, CommentForm, SearchForm, ContactForm
-from flask_login import current_user, login_required, logout_user
+from flaskblog.main.forms import CommentForm, SearchForm, ContactForm
+from flask_login import current_user
 from flask_mail import Message
 import flask_whooshalchemy as wa
 import os
+import secrets
+import datetime
+import random
+
+
+main = Blueprint('main', __name__)
 
 wa.whoosh_index(app, Post)
 
 # Route for HomePage
 # Displaying Posts and Search Function
-@app.route("/", methods=['GET', 'POST'])
-@app.route("/home", methods=['GET', 'POST'])
+@main.route("/", methods=['GET', 'POST'])
+@main.route("/home", methods=['GET', 'POST'])
 def home():
     form = SearchForm()
     if request.method == "POST":
@@ -39,12 +43,12 @@ def home():
 
 
 # Route for AboutPage
-@app.route("/about")
+@main.route("/about")
 def about():
     return render_template('about.html')
 
 # Route for ContactPage
-@app.route("/contact", methods=['GET', 'POST'])
+@main.route("/contact", methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
 
@@ -60,43 +64,16 @@ def contact():
         """ % (form.name.data, form.email.data, form.message.data)
         mail.send(message)
         flash('Thank you for your message. We will reply as soon as possible!', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
     return render_template('contact.html', title='Contact', form=form)
 
 
-# Route for User Account 
-# Displaying user account details and updating account function
-@app.route("/account", methods=['GET', 'POST'])
-@login_required
-def account():
-    form = UpdateAccountForm()
-    if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-        return redirect(url_for('account'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.email.data = current_user.email
-    return render_template('account.html', form=form, title=current_user.username)
 
-
-@app.route("/account/<int:user_id>/delete", methods=['GET'])
-@login_required
-def delete_account(user_id):
-    print(user_id)
-    logout_user()
-    user = User.query.filter_by(id=user_id).first()
-    db.session.delete(user)
-    db.session.commit()
-    flash('You have deleted your account..', 'success')
-    return redirect(url_for('home'))
 
 
 # Route for NewsPage
 # Displaying only News Category from database
-@app.route("/news")
+@main.route("/news")
 def news():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter_by(category="News").order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
@@ -106,7 +83,7 @@ def news():
 
 # Route for ReviewsPage
 # Displaying only Reviews Category from database
-@app.route("/reviews")
+@main.route("/reviews")
 def reviews():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter_by(category="Reviews").order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
@@ -116,7 +93,7 @@ def reviews():
 
 # Route for CommentaryPage
 # Displaying only Commentary Category from database
-@app.route("/commentary")
+@main.route("/commentary")
 def commentary():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter_by(category="Commentary").order_by(Post.date_posted.desc()).paginate(page=page, per_page=2)
@@ -126,7 +103,7 @@ def commentary():
 
 # Route for Single Post
 # Displaying Post by its Slug
-@app.route("/<slug>", methods=['GET', 'POST'])
+@main.route("/<slug>", methods=['GET', 'POST'])
 def post(slug):
     post = Post.query.filter_by(slug=slug).first_or_404()
     news = Post.query.order_by(Post.date_posted.desc()).filter_by(category="News").first()
@@ -140,9 +117,8 @@ def post(slug):
         db.session.add(comment)
         db.session.commit()
         flash('Comment added', 'success')
-        return redirect(url_for('post',slug=post.slug))
+        return redirect(url_for('main.post',slug=post.slug))
     print("slika: " + post.headImg)
     print("lokacija: " + headImg)
     return render_template('post.html', title=post.title, post=post, news=news, reviews=reviews, commentary=commentary, comments=comments, form=form, headImg = headImg )
-
 

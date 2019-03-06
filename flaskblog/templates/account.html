@@ -32,8 +32,8 @@
                 {% endif %}
         
                 {{ form.submit(class="registerButton") }}
-                <a class="logoutButton leftLogout" href="{{ url_for('logout') }}">Logout</a>
-                <a class="logoutButton rightLogout" href="{{ url_for('delete_account', user_id=current_user.id) }}">Delete</a>
+                <a class="logoutButton leftLogout" href="{{ url_for('users.logout') }}">Logout</a>
+                <a class="logoutButton rightLogout" href="{{ url_for('users.delete_account', user_id=current_user.id) }}">Delete</a>
             </form>
         </div>
 

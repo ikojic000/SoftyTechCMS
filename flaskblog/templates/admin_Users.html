@@ -17,8 +17,8 @@
         <td>{{user.username}}</td>
         <td>{{user.email}}</td>
         <td>{{ user.roles[0].name }}</td>
-        <td><a href="{{ url_for('delete_user', user_id=user.id) }}">Delete</a></td>
-        <td><a href="{{ url_for('update_user', user_id=user.id) }}">Update</a></td>
+        <td><a href="{{ url_for('users.delete_user', user_id=user.id) }}">Delete</a></td>
+        <td><a href="{{ url_for('users.update_user', user_id=user.id) }}">Update</a></td>
 
     </tr>
     {% endfor %}

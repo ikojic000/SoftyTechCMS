@@ -40,17 +40,17 @@
         <div class="sideDiv">
             <h5>{{ news.title }}</h5>
             <p>{{ news.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=news.slug) }}'">Read More</button>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=news.slug) }}'">Read More</button>
         </div>
         <div class="sideDiv">
             <h5>{{ reviews.title }}</h5>
             <p>{{ reviews.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=reviews.slug) }}'">Read More</button>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=reviews.slug) }}'">Read More</button>
         </div>
         <div class="sideDiv">
             <h5>{{ commentary.title }}</h5>
             <p>{{ commentary.description }}</p>
-            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('post', slug=commentary.slug) }}'">Read More</button>
+            <button class="sideDivBtn" type="button" onclick="window.location.href='{{ url_for('main.post', slug=commentary.slug) }}'">Read More</button>
         </div>
     </div>
 </div>
