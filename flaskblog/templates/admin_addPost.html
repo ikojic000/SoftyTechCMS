@@ -121,6 +121,11 @@
         {% endif %}
 
         {{ form.submit(class="addBtn") }}
+
+        
+		<a href="{{ url_for('flaskfilemanager.index') }}">
+			File Manager
+		</a>
     </form>
 </div>
 
@@ -128,7 +133,7 @@
     CKEDITOR.replace( 'editor', {
         filebrowserImageUploadUrl: '/ckupload/',
         filebrowserUploadMethod: 'form',
-        // filebrowserBrowseUrl: '/filebrowser/'
+        filebrowserBrowseUrl: '/fm/index.html'
     });
 </script>
 {% endblock %}

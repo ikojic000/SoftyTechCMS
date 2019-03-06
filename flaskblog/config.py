@@ -18,3 +18,4 @@ class Config:
     USER_CHANGE_PASSWORD_URL = '/user/change-password'
     USER_ENABLE_USERNAME = False
     USER_AUTO_LOGIN_AFTER_RESET_PASSWORD = False
+    FLASKFILEMANAGER_FILE_PATH = '/static/media/images/'
