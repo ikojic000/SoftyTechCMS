@@ -110,7 +110,7 @@ def post(slug):
     reviews = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Reviews").first()
     commentary = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Commentary").first()
     comments = Comment.query.order_by(Comment.date_posted.desc()).filter_by(post_id=post.id).all()
-    headImg = url_for('static', filename='media/images/' + post.headImg )
+    headImg = url_for('static', filename='upload/media/images/head_Images/' + post.headImg )
     form = CommentForm()
     if form.validate_on_submit():
         comment = Comment(content=form.comment.data, user_id=current_user.id, post_id=post.id)

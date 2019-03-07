@@ -1,5 +1,5 @@
 <div class="blog-card" onclick="window.location.href='{{url_for('main.post', slug=post.slug)}}'">
-    <div class="photo photo1"><img src="{{ url_for('static', filename='media/images/' + post.headImg) }}" alt=""></div>
+    <div class="photo photo1"><img src="{{ url_for('static', filename='upload/media/images/head_Images/' + post.headImg) }}" alt=""></div>
     <ul class="details">
         <li class="author"><a href="#">{{ post.author }}</a></li>
         <li class="date">{{ post.date_posted.strftime('%d-%b-%Y') }}</li>

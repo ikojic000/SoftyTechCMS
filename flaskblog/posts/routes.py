@@ -34,7 +34,7 @@ def save_picture(form_picture):
     f_name, f_ext = os.path.splitext(form_picture.filename)
 
     picture_fn = f_name + f_ext
-    picture_path = os.path.join(app.root_path, 'static/media/images', picture_fn)
+    picture_path = os.path.join(app.root_path, 'static/upload/media/images/head_Images', picture_fn)
     print(picture_path)
 
     i = Image.open(form_picture)
@@ -54,7 +54,7 @@ def ckupload():
         fileobj = request.files['upload']
         fname, fext = os.path.splitext(fileobj.filename)
         rnd_name = '%s%s' % (gen_rnd_filename(), fext)
-        filepath = os.path.join(app.root_path, 'static/upload', rnd_name)
+        filepath = os.path.join(app.root_path, 'static/upload/media/images', rnd_name)
         dirname = os.path.dirname(filepath)
         if not os.path.exists(dirname):
             try:
@@ -65,7 +65,7 @@ def ckupload():
             error = 'ERROR_DIR_NOT_WRITEABLE'
         if not error:
             fileobj.save(filepath)
-            url = url_for('static', filename='%s/%s' % ('upload', rnd_name))
+            url = url_for('static', filename='%s/%s' % ('upload/media/images/', rnd_name))
             print(url)
     else:
         error = 'post error'

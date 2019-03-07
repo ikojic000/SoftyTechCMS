@@ -1,4 +1,8 @@
+from flaskblog import app
 import os
+
+
+filemanager_route = os.path.join(app.root_path, 'static/upload')
 
 class Config:
     SECRET_KEY = 'y.o.u.s.h.a.l.l.n.o.t.k.n.o.w'
@@ -18,4 +22,4 @@ class Config:
     USER_CHANGE_PASSWORD_URL = '/user/change-password'
     USER_ENABLE_USERNAME = False
     USER_AUTO_LOGIN_AFTER_RESET_PASSWORD = False
-    FLASKFILEMANAGER_FILE_PATH = '/static/media/images/'
+    FLASKFILEMANAGER_FILE_PATH = filemanager_route

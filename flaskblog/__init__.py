@@ -6,9 +6,9 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user
 from flask_mail import Mail
-from flaskblog.config import Config
+
 import flaskfilemanager
 
 # App Configuration
@@ -18,7 +18,7 @@ mail = Mail()
 mail.init_app(app)
 bcrypt = Bcrypt(app)
 
-
+from flaskblog.config import Config
 app.config.from_object(Config)
 
 
@@ -30,9 +30,17 @@ from flaskblog.models import User
 from flask_user import UserManager
 user_manager = UserManager(app, db, User)
 
+def accessControl_function():
+    if current_user.is_authenticated:
+        if current_user.roles[0].name == 'Admin':
+            return True
+        else:
+            return False
+    else:
+        return False
 
 print('000')
-flaskfilemanager.init(app)
+flaskfilemanager.init(app, access_control_function = accessControl_function)
 
 # Routes are last to be imported
  
