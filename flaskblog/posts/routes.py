@@ -161,8 +161,8 @@ def media():
             media_File = save_picture(form.mediaFile.data)
             flash('Upload Successfull!', 'success')
             return redirect(url_for('posts.media'))
-    images = os.listdir('flaskblog\static\media\images')
+    images = os.listdir('flaskblog\\static\\upload\\media\\images\\head_Images')
     images_urls = []
     for image in images:
-        images_urls.append(url_for('static', filename='media/images/' + image))
+        images_urls.append(url_for('static', filename='upload/media/images/head_Images/' + image))
     return render_template('admin_Media.html', title='Media', form=form, image_names=images_urls)
