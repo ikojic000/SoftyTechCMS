@@ -16,7 +16,7 @@
         <th>Update</th>
         <th>Delete</th>
     </tr>
-    {% for post in posts %}
+    {% for post in posts | reverse %}
     <tr>
         <td>{{post.id}}</td>
         <td>{{post.title}}</td>
