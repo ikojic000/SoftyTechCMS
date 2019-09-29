@@ -7,7 +7,7 @@ filemanager_route = os.path.join(app.root_path, 'static/upload')
 
 class Config:
     SECRET_KEY = 'y.o.u.s.h.a.l.l.n.o.t.k.n.o.w'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:administrator@localhost/softy?charset=utf8mb4'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
@@ -29,5 +29,5 @@ class Config:
 # ALTER TABLE comment modify name text charset utf8mb4;
 
 # 'mysql://root:administrator@localhost/softy'
-# 'mysql+pymysql://root:administrator@localhost/softy'
+# 'mysql+pymysql://root:administrator@localhost/softy?charset=utf8mb4'
 # 'sqlite:///site.db'

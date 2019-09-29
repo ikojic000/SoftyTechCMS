@@ -11,6 +11,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.extraPlugins = 'filebrowser';
 	// *NEEDS FIXING*
 	config.extraPlugins = 'slideshow';
+	
+
 	// config.filebrowserImageUploadUrl = '/filebrowser/';
 
 };
