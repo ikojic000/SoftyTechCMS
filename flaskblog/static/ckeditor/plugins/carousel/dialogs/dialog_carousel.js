@@ -84,19 +84,34 @@ function makeCarousel() {
 	var strHtml = "",
 		guid = createGuid(5),
 		scriptStr = '<script>var length = document.querySelector(".' + guid + '").children.length,i=0;setInterval(function(){var El = document.querySelector(".' + guid + '"),marginLeft = El.style.marginLeft,moveNum = marginLeft.split("").reverse().join;if(++i<length){El.style.marginLeft = "-"+i*' + num_width + '+"px";}else{El.style.marginLeft = "-0px";i=0;}},' + delay_time + ')</script>';
+		console.log(scriptStr);
+
 
 	for (var i = 0; i < imgSrc.length; i++) {
-		var imgStr = '<img style="height:100%;width:' + num_width + 'px;transition:all .5s;-webkit-transition:all .5s;" src="' + imgSrc[i] + '">';
+		var imgStr = '<img src="' + imgSrc[i] + '">';
 		strHtml += imgStr;
 	}
+	var firstDiv = '<div class="carousel-container>';
+	console.log(firstDiv);
+	var br = '<br>' + 
+	console.log(br);
+	var btn1Html = '<button id="prevBtn">Prev</button>';
+	console.log(btn1Html);
+	var btn2Html = '<button id="nextBtn">Next</button>';
+	console.log(btn2Html);
 
-	strHtml = '<div style="width: ' + num_width + 'px;height: ' + num_height + 'px;overflow: hidden;position:relative;">' +
-		'<div class="' + guid + '" style="transition:all .5s;-webkit-transition:all .5s;width:10000px;height:100%;font-size: 0px;">' +
-		strHtml +
-		'</div>' + scriptStr + '</div>';
-
+	
+	strHtml = '<div class="carousel-container">'+
+						'<i class="fas fa-arrow-left" id="prevBtn"></i>'+
+						'<i class="fas fa-arrow-right" id="nextBtn"></i>'+
+						'<div class="carousel-slide">'+
+						strHtml+
+						'</div></div>';
 	return strHtml;
 }
+
+console.log(strHtml);
+
 //生成一个自定义长度的表示guid，由0-9，a-z组成
 function createGuid(num) {
 	var numberArr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
