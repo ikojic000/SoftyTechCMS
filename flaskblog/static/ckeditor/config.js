@@ -10,7 +10,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.extraPlugins = 'youtube';
 	config.extraPlugins = 'filebrowser';
 	// *NEEDS FIXING*
-	config.extraPlugins = 'slideshow';
+	//config.extraPlugins = 'slideshow';
+	config.extraPlugins = 'carousel'
 	
 
 	// config.filebrowserImageUploadUrl = '/filebrowser/';
