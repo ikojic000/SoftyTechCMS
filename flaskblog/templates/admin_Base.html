@@ -44,10 +44,14 @@
 
     <div class="sideMenu">
         <a href="{{ url_for('users.admin') }}">Home</a>
+        <a href="{{ url_for('flaskfilemanager.index') }}">
+			File Manager
+		</a>
         <a href="{{ url_for('posts.add') }}">AddPosts</a>
         <a href="{{ url_for('posts.media') }}">Media</a>
         <a href="{{ url_for('users.userList') }}">Users</a>
         <a href="{{ url_for('users.logout') }}">Logout</a>
+        
     </div>
 
     <div class="container">
