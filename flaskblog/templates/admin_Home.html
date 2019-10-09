@@ -19,7 +19,7 @@
     {% for post in posts | reverse %}
     <tr>
         <td>{{post.id}}</td>
-        <td>{{post.title}}</td>
+        <td><a href="{{ url_for('main.post', slug=post.slug) }}">{{post.title}}</a></td>
         <!--<td>{{post.subtitle}}</td>
         <td>{{post.description}}</td>
         <td>{{post.slug}}</td>
