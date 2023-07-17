@@ -34,7 +34,7 @@ def home():
             return render_template('search.html', posts=posts, news=news, reviews=reviews, commentary=commentary, form=form)
     else:
         page = request.args.get('page', 1, type=int)
-        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=1)
+        posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=3)
         news = Post.query.order_by(Post.date_posted.desc()).filter_by(category="News").first()
         reviews = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Reviews").first()
         commentary = Post.query.order_by(Post.date_posted.desc()).filter_by(category="Commentary").first()
