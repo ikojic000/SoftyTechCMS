@@ -7,7 +7,11 @@ filemanager_route = os.path.join(app.root_path, 'static/upload')
 
 class Config:
     SECRET_KEY = 'y.o.u.s.h.a.l.l.n.o.t.k.n.o.w'
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:administrator@localhost/softy?charset=utf8mb4'
+    # Lenovo Legion Database Config
+    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:administrator@localhost/softy?charset=utf8mb4' 
+
+    # Lenovo Yoga Database Config
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:root@localhost/softy?charset=utf8mb4'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
