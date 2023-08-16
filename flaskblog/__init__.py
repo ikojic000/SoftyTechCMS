@@ -42,16 +42,16 @@ wa.whoosh_index(app, Post)
 from flaskblog.users.routes import users
 from flaskblog.posts.routes import posts
 from flaskblog.comments.routes import comments
-from flaskblog.main.routes import main
 from flaskblog.logs.routes import logs
 from flaskblog.errors.routes import errors
+from flaskblog.main.routes import main
 
 app.register_blueprint(users)
 app.register_blueprint(posts)
 app.register_blueprint(comments)
-app.register_blueprint(main)
 app.register_blueprint(logs)
 app.register_blueprint(errors)
+app.register_blueprint(main)
 
 
 user_manager = CustomUserManager(app, db, User)
