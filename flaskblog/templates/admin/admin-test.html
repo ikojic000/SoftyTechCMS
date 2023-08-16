@@ -1,0 +1,65 @@
+{% extends "admin/admin-base.html" %}
+
+{% block content %}
+
+<!-- Ono sto se vidi na page-u -->
+<div class="row mb-3">
+    <div class="col">
+        <h1 class="h3 text-light">{{ pageTitle }}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <!-- <div class="col-12 col-lg-8 col-xxl-9 d-flex"> -->
+    <div class="col-12">
+        <div class="card rounded-3 bg-dark">
+            {% if errorLogs is defined and errorLogs|length > 0%}
+            <div class="card-header bg-dark">
+                <h5 class="card-title mb-0">List of all logged errors</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-hover my-0" id="datatable-errorLogs">
+                    <thead>
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Endpoint</th>
+                            <th>Method Type</th>
+                            <th>User</th>
+                            <th>Timestamp</th>
+                            <th class="d-none d-md-table-cell">Error Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for error in errorLogs %}
+                        <tr>
+                            <td>{{ error.status_code }}</td>
+                            <td>{{ error.endpoint }}</td>
+                            <td>{{ error.methodType }}</td>
+                            <td>{{ error.user.username }}</td>
+                            <td>{{ error.timestamp }}</td>
+                            <td class="d-none d-md-table-cell">{{ error.error_message }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {%endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // DataTable - Tablica
+    $(document).ready(function () {
+        $("#datatable-requestLogs").DataTable({
+            "order": [[3, "desc"]]
+        });
+        $("#datatable-errorLogs").DataTable({
+            "order": [[4, "desc"]]
+        });
+
+
+    });
+</script>
+{% endblock %}

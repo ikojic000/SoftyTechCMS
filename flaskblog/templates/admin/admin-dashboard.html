@@ -1,0 +1,161 @@
+{% extends "admin/admin-base.html" %}
+
+{% block content %}
+
+<!-- Ono sto se vidi na page-u -->
+<div class="row mb-3">
+    <div class="col">
+        <h1 class="h3 text-light">{{ pageTitle }}</h1>
+    </div>
+    <div class="col d-flex justify-content-end">
+        <!-- Button trigger modal 
+        <button type="button" class="btn btn-dark rounded-3 p-md-3" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+            Launch demo modal
+        </button> -->
+    </div>
+</div>
+
+<!-- Broj korisnika kartica -->
+<div class="row">
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <a class="card-title text-primary text-decoration-none"
+                            href="{{ url_for('users.allUsers') }}">Users</a>
+                    </div>
+                    <div class="col-auto">
+                        <div class="stat bg-black bg-opacity-50">
+                            <i class="align-middle" data-feather="users"></i>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="mt-1 mb-3 text-white" id="numberOfUsers"></h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Broj članaka kartica -->
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <a class="card-title text-primary text-decoration-none"
+                            href="{{ url_for('posts.allPosts') }}">Posts</a>
+                    </div>
+                    <div class="col-auto">
+                        <div class="stat bg-black bg-opacity-50">
+                            <i class="align-middle" data-feather="file-text"></i>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="mt-1 mb-3 text-white" id="numberOfPosts"></h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Broj komentara kartica -->
+    <div class="col-12 col-md-4">
+        <div class="card bg-dark">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col mt-0">
+                        <a class="card-title text-primary text-decoration-none"
+                            href="{{ url_for('comments.all_comments') }}">Comments</a>
+                    </div>
+                    <div class="col-auto">
+                        <div class="stat bg-black bg-opacity-50">
+                            <i class="align-middle" data-feather="message-square"></i>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="mt-1 mb-3 text-white" id="numberOfComments"></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Grafovi -->
+<!-- Korisnici graf -->
+<div class="row">
+    <div class="col-12">
+        <div class="card bg-dark">
+            <div class="card-header bg-dark">
+                <h5 class="card-title">Users</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart chart-sm">
+                    <canvas id="dashboard-users"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <!-- Članci - graf -->
+    <div class="col-md-6">
+        <div class="card text-white bg-dark flex-fill w-100">
+            <div class="card-header text-white bg-dark">
+                <h5 class="card-title">Posts</h5>
+            </div>
+            <div class="card-body py-md-3">
+                <div class="chart chart-sm">
+                    <canvas id="dashboard-articles"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Komentari - graf -->
+    <div class="col-md-6">
+        <div class="card text-white bg-dark flex-fill w-100">
+            <div class="card-header text-white bg-dark">
+                <h5 class="card-title">Comments</h5>
+            </div>
+            <div class="card-body py-3">
+                <div class="chart chart-sm">
+                    <canvas id="dashboard-comments"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "/user/number_of_users",
+            method: "GET",
+            success: function (data) {
+                var numberOfUsers = data.number_of_users;
+                $("#numberOfUsers").text(numberOfUsers);
+            }
+        });
+
+        $.ajax({
+            url: "/post/number_of_posts",
+            method: "GET",
+            success: function (data) {
+                var numberOfPosts = data.number_of_posts;
+                $("#numberOfPosts").text(numberOfPosts);
+            }
+        });
+
+        $.ajax({
+            url: "/api/comments/number_of_comments",
+            method: "GET",
+            success: function (data) {
+                var numberOfComments = data.number_of_comments;
+                $("#numberOfComments").text(numberOfComments);
+            }
+        });
+    });
+
+</script>
+
+<script src="{{ url_for('static', filename='adminKit/test.js') }}"></script>
+
+{% endblock %}

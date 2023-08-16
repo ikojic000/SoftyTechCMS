@@ -28,7 +28,6 @@
         <td>{{post.author}}</td>
         <td>{{post.date_posted}}</td>
         <td><a href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a></td>
-        <td><a href="{{ url_for('posts.delete_post', post_id=post.id) }}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>

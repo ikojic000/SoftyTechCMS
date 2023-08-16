@@ -1,0 +1,85 @@
+{% extends 'admin/admin-base.html' %}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col">
+        <h1 class="h3 text-light">{{ pageTitle }}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card rounded-3 bg-dark text-light">
+            <div class="card-header bg-dark">
+                <h5 class="card-title">Are you sure you want to delete this Post ?</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <label class="form-label d-flex justify-content-start">
+                        <div class="col-auto">
+                            <i class="align-middle me-3" data-feather="key"></i>
+                            ID:
+                        </div>
+                        <div class="col-auto">
+                            <p class="text-primary ms-3">{{ post.id }} </p>
+                        </div>
+                    </label>
+                </div>
+                <div class="row mb-3">
+                    <label class="form-label d-flex justify-content-start">
+                        <div class="col-auto">
+                            <i class="align-middle me-3" data-feather="book-open"></i>
+                            Title:
+                        </div>
+                        <div class="col-auto">
+                            <p class="text-primary ms-3">{{ post.title }} </p>
+                        </div>
+                    </label>
+                </div>
+                <div class="row mb-3">
+                    <label class="form-label d-flex justify-content-start">
+                        <div class="col-auto">
+                            <i class="align-middle me-3" data-feather="calendar"></i>
+                            Posted on:
+                        </div>
+                        <div class="col-auto">
+                            <p class="text-primary ms-3">{{ post.date_posted.strftime('%d-%m-%Y %H:%M:%S') }} </p>
+                        </div>
+                    </label>
+                </div>
+                <div class="row mb-3">
+                    <label class="form-label d-flex justify-content-start">
+                        <div class="col-auto">
+                            <i class="align-middle me-3" data-feather="user"></i>
+                            Author:
+                        </div>
+                        <div class="col-auto">
+                            <p class="text-primary ms-3">{{ post.author }} </p>
+                        </div>
+                    </label>
+                </div>
+                <div class="row mb-3">
+                    <label class="form-label d-flex justify-content-start">
+                        <div class="col-auto">
+                            <i class="align-middle me-3" data-feather="globe"></i>
+                            URL:
+                        </div>
+                        <div class="col-auto">
+                            <p class="text-primary ms-3"><a class="text-decoration-none "
+                                    href="{{ url_for('main.post', slug=post.slug) }}">{{ post.slug }}</a> </p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="card-footer bg-dark d-flex justify-content-end">
+                <form method="post">
+                    <button class="btn btn-danger"
+                        href="{{ url_for('posts.delete_post', post_id=post.id) }}">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

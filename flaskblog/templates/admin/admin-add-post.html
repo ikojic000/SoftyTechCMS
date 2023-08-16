@@ -1,0 +1,146 @@
+{% extends 'admin/admin-base.html' %}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col">
+        <h1 class="h3 text-light">{{ pageTitle }}</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card rounded-3 bg-dark text-light">
+            <div class="card-body">
+                <form method="POST" action="" enctype="multipart/form-data" class="row g-3" novalidate>
+                    {{ form.hidden_tag() }}
+
+                    <div class="col-md-12">
+                        {% if form.title.errors %}
+                        <label for="{{ form.title.id }}" class="form-label">{{ form.title.label.text }}</label>
+                        {{ form.title(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <label for="{{ form.title.id }}" class="form-label">{{ form.title.label.text }}</label>
+                        {{ form.title(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.subtitle.id }}" class="form-label">{{ form.subtitle.label.text }}</label>
+                        {% if form.subtitle.errors %}
+                        {{ form.subtitle(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.subtitle.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.subtitle(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.description.id }}" class="form-label">{{ form.description.label.text
+                            }}</label>
+                        {% if form.description.errors %}
+                        {{ form.description(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.description.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.description(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.slug.id }}" class="form-label">{{ form.slug.label.text }}</label>
+                        {% if form.slug.errors %}
+                        {{ form.slug(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.slug.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.slug(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.headImg.id }}" class="form-label">{{ form.headImg.label.text }}</label>
+                        {% if form.headImg.errors %}
+                        {{ form.headImg(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.headImg.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.headImg(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.category.id }}" class="form-label">{{ form.category.label.text }}</label>
+                        {{ form.category(class="form-select bg-dark text-light") }}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.language.id }}" class="form-label">{{ form.language.label.text }}</label>
+                        {{ form.language(class="form-select bg-dark text-light") }}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.author.id }}" class="form-label">{{ form.author.label.text }}</label>
+                        {% if form.author.errors %}
+                        {{ form.author(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.author.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ form.author(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ form.content.id }}" class="form-label">{{ form.content.label.text }}</label>
+                        {{ form.content(class="form-control bg-dark text-light", id="editor") }}
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-check">
+                            {{ form.isPublished(class="form-check-input") }}
+                            <label class="form-check-label" for="{{ form.isPublished.id }}">{{
+                                form.isPublished.label.text
+                                }}</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        {{ form.submit(class="btn btn-primary btn-lg px-5") }}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    CKEDITOR.replace('editor', {
+        filebrowserImageUploadUrl: '/ckupload/',
+        filebrowserUploadMethod: 'form',
+        filebrowserBrowseUrl: '/fm/index.html'
+    });
+</script>
+
+{% endblock %}

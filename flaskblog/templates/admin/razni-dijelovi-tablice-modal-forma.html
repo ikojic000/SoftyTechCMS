@@ -1,0 +1,389 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card rounded-3 bg-dark">
+            <div class="card-header bg-dark">
+                <h5 class="card-title">Korisnici</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-striped" id="datatable-users">
+                    <thead>
+                        <tr>
+                            <th style="width:40%;">Name</th>
+                            <th style="width:25%">Phone Number</th>
+                            <th class="d-none d-md-table-cell" style="width:25%">Date of Birth</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vanessa Tucker</td>
+                            <td>864-348-0485</td>
+                            <td class="d-none d-md-table-cell">June 21, 1961</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle " data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>William Harris</td>
+                            <td>914-939-2458</td>
+                            <td class="d-none d-md-table-cell">May 15, 1948</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sharon Lessman</td>
+                            <td>704-993-5435</td>
+                            <td class="d-none d-md-table-cell">September 14, 1965</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Christina Mason</td>
+                            <td>765-382-8195</td>
+                            <td class="d-none d-md-table-cell">April 2, 1971</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Robin Schneiders</td>
+                            <td>202-672-1407</td>
+                            <td class="d-none d-md-table-cell">October 12, 1966</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- <div class="col-12 col-lg-8 col-xxl-9 d-flex"> -->
+    <div class="col-12">
+        <div class="card rounded-3 bg-dark">
+            <div class="card-header bg-dark">
+                <h5 class="card-title mb-0">Članci</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-dark table-hover my-0" id="datatable-posts">
+                    <thead>
+                        <tr>
+                            <th>Naslov</th>
+                            <th class="d-none d-xl-table-cell">Datum pisanja</th>
+                            <th class="d-none d-xl-table-cell">Datum objave</th>
+                            <th>Status</th>
+                            <th class="d-none d-md-table-cell">Autor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in posts | reverse %}
+                        <tr>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.date_posted }}</td>
+                            <td>{{ post.date_posted }}</td>
+                            <td><span class="badge bg-success">Objavljeno</span></td>
+                            <td>{{ post.author }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card rounded-3 bg-dark">
+            <div class="card-header text-white bg-dark">
+                <h5 class="card-title mb-0">Komentari</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-dark" id="datatable-comments">
+                    <thead>
+                        <tr>
+                            <th scope="col">Korisnik</th>
+                            <th scope="col">Članak</th>
+                            <th scope="col">Komentar</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Softy</th>
+                            <td>Test Yoga</td>
+                            <td>Ovo je test komentar</td>
+                            <td class="table-action">
+                                <a href="#"><i class="align-middle" data-feather="edit-2"></i></a>
+                                <a href="#"><i class="align-middle" data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Test Form -->
+<div class="row d-flex justify-content-center">
+    <div class=" col-lg-8 ">
+        <div class="card rounded-3 bg-dark text-light">
+            <div class="card-body">
+                <form class="row g-3 needs-validation" novalidate>
+                    <div class="col-12 col-md-4">
+                        <label for="validationCustom01" class="form-label">Ime</label>
+                        <input type="text" class="form-control bg-dark text-light" id="validationCustom01" value="Mark"
+                            required>
+                        <div class="invalid-feedback">
+                            Polje "Ime" je obavezno
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="validationCustom02" class="form-label">Prezime</label>
+                        <input type="text" class="form-control bg-dark text-light" id="validationCustom02" value="Otto"
+                            required>
+                        <div class="invalid-feedback">
+                            Polje "Prezime" je obavezno
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label for="validationCustomUsername" class="form-label">Korisničko
+                            ime</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text bg-dark text-light" id="inputGroupPrepend">@</span>
+                            <input type="text" class="form-control bg-dark text-light" id="validationCustomUsername"
+                                aria-describedby="inputGroupPrepend" required>
+                            <div class="invalid-feedback">
+                                Polje "Korisničko ime" je obavezno
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="validationCustom03" class="form-label">Grad</label>
+                        <input type="text" class="form-control bg-dark text-light" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                            Polje "Grad" je obavezno
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label for="validationCustom04" class="form-label">Županija</label>
+                        <select class="form-select bg-dark text-light" id="validationCustom04" required>
+                            <option selected disabled value="">Odaberi...</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Polje "Županija" je obavezno
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <label for="validationCustom05" class="form-label">Poštanski
+                            broj</label>
+                        <input type="text" class="form-control bg-dark text-light" id="validationCustom05" required>
+                        <div class="invalid-feedback">
+                            Polje "Poštanski broj" je obavezno
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                                Prihvati korisničke uvjete
+                            </label>
+                            <div class="invalid-feedback">
+                                Potrebno je pristati prije nastavka.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Uredu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-bottom-0 text-light">
+                <h5 class="modal-title text-light" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close text-light" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-light">
+                ...
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div> <!-- Kraj Modal -->

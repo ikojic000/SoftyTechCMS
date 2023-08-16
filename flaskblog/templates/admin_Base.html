@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/test.css') }}">
 
     <!--- FontAwesomeIcons CSS --->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!--- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">  --->
 
@@ -31,7 +31,8 @@
     <!--- JQuery Scripts --->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--- Bootstrap Scripts--->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <!--- My Scripts --->
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
@@ -45,13 +46,12 @@
     <div class="sideMenu">
         <a href="{{ url_for('users.admin') }}">Home</a>
         <a href="{{ url_for('flaskfilemanager.index') }}">
-			File Manager
-		</a>
+            File Manager
+        </a>
         <a href="{{ url_for('posts.add') }}">AddPosts</a>
-        <a href="{{ url_for('posts.media') }}">Media</a>
         <a href="{{ url_for('users.userList') }}">Users</a>
         <a href="{{ url_for('users.logout') }}">Logout</a>
-        
+
     </div>
 
     <div class="container">

@@ -489,7 +489,8 @@ textarea.form-control {
 /* Search Form */
 .search {
     position: relative;
-    margin-bottom: -35px;
+    margin: 0 auto;
+    width: 90%;
 }
 
 .searchInput {

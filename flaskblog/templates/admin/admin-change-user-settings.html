@@ -1,0 +1,115 @@
+{% extends "admin/admin-base.html" %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col">
+        <h3 class="h3 text-light">{{ pageTitle }}</h3>
+    </div>
+</div>
+
+<div class="col-lg-6 col-xxl-4">
+    <div class="card rounded-3 bg-dark text-light">
+        <div class="card-header bg-dark">
+            <h5 class="card-title mb-0">{{ pageTitle }} for user: {{ user.username }}</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" class="row d-flex justify-content-between" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="{{ form.username.id }}" class="form-label">{{ form.username.label.text }}</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark text-light" id="inputGroupPrepend">@</span>
+                            {{ form.username(class="form-control bg-dark text-light", readonly="readonly") }}
+                        </div>
+                        <p class="fw-light text-secondary">
+                            ** You cannot edit user's username
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="{{ form.email.id }}" class="form-label">{{form.email.label.text}}</label>
+                        {{ form.email(class="form-control bg-dark text-light", readonly="readonly") }}
+                        <p class="fw-light text-secondary">
+                            ** You cannot edit user's email
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-4 mb-2">
+                    <div class="col">
+                        <p class="text-light ">Current Role: {% for role in user.roles %}
+                            {{ role.name }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- {{ form.role.label }}
+                        {% for subfield in form.role %}
+                        {% if user_has_role(current_user, 'Superadmin') %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input") }}
+                            <label class="form-check-label" for="{{ subfield.id }}">
+                                {{ subfield.label.text }}
+                            </label>
+                        </div>
+                        {% elif user_has_role(current_user, 'Admin') %}
+                        {% if subfield.data == 'Reader' or subfield.data == 'Admin' %}
+                        <div class="form-check">
+                            {{ subfield(class="form-check-input") }}
+                            <label class="form-check-label" for="{{ subfield.id }}">
+                                {{ subfield.label.text }}
+                            </label>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %} -->
+
+                        {{ form.role.label }}
+                        {% for role, label in form.role.choices %}
+                        {% if user_has_role(current_user, 'Superadmin') %}
+                        <div class="form-check">
+                            <input type="checkbox" name="{{ form.role.name }}" value="{{ role }}" {% if role in
+                                form.role.data %}checked{% endif %} class="form-check-input" id="{{ role }}">
+                            <label class="form-check-label" for="{{ role }}">{{ label }}</label>
+                        </div>
+                        {% elif user_has_role(current_user, 'Admin') %}
+                        <div class="form-check">
+                            <input type="checkbox" name="{{ form.role.name }}" value="{{ role }}" {% if role in
+                                form.role.data %}checked{% endif %} class="form-check-input" id="{{ role }}" {% if
+                                role=='Superadmin' %}disabled{% endif %}>
+                            <label class="form-check-label" for="{{ role }}">{{ label }}</label>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="row mt-5 ">
+                    <div class="col">
+                        <p class="text-light ">User is currently {{ 'Active' if user.active else 'not Active' }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-check">
+                            {{ form.active(class="form-check-input") }}
+                            <label class="form-check-label" for="{{ form.active.id }}">{{ form.active.label.text
+                                }}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-lg px-5">Save settings</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
