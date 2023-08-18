@@ -1,8 +1,18 @@
-from flask import render_template, url_for, redirect, flash, request, Blueprint, g
+from flask import (
+    render_template,
+    url_for,
+    redirect,
+    flash,
+    request,
+    Blueprint,
+    g,
+    abort,
+)
 from sqlalchemy.sql import text
 from flask.json import jsonify
 from flaskblog import app, db, mail
-from flaskblog.models import Post, Comment, RequestLog, User
+from flaskblog.logs.request_logging import after_request, before_request
+from flaskblog.models import ErrorLog, Post, Comment, RequestLog, User
 from flaskblog.posts.forms import PostForm, MediaForm
 from flask_login import current_user, login_required, logout_user
 import flask_whooshalchemy as wa
@@ -16,18 +26,24 @@ import random
 
 posts = Blueprint("posts", __name__)
 
+posts.before_request(before_request)
+posts.after_request(after_request)
+
 
 # Dashoard - Table wih all posts with edit/delete buttons - New Design
 @posts.route("/admin/posts/all")
 @login_required
 @roles_required(["Admin", "Superadmin"])
-def allPosts():
+def all_posts():
     posts = Post.query.all()
     title = "All Posts"
 
-    return render_template(
-        "admin/admin-posts.html", posts=posts, pageTitle=title, title=title
-    )
+    context = {
+        "posts": posts,
+        "pageTitle": title,
+        "title": title,
+    }
+    return render_template("admin/admin-posts.html", **context)
 
 
 # Adding Posts to a database - New
@@ -36,46 +52,35 @@ def allPosts():
 @roles_required(["Admin", "Superadmin"])
 def add_post():
     title = "Add New Post"
-    logged_in_user = current_user
-    form = PostForm(author=logged_in_user.username)
+    form = PostForm(author=current_user.username)
 
     if form.validate_on_submit():
+        headImg = None
         if form.headImg.data:
-            # headImg = save_picture(
-            #     form.headImg.data, form.title.data
-            # )
             headImg = save_head_image(form.headImg.data, form.title.data)
-            post = Post(
-                title=form.title.data,
-                subtitle=form.subtitle.data,
-                description=form.description.data,
-                headImg=headImg,
-                slug=form.slug.data,
-                category=form.category.data,
-                language=form.language.data,
-                author=form.author.data,
-                content=form.content.data,
-            )
-        else:
-            post = Post(
-                title=form.title.data,
-                subtitle=form.subtitle.data,
-                description=form.description.data,
-                slug=form.slug.data,
-                category=form.category.data,
-                language=form.language.data,
-                author=form.author.data,
-                content=form.content.data,
-            )
+            # headImg = save_picture(form.headImg.data, form.title.data)
+
+        post = Post(
+            title=form.title.data,
+            subtitle=form.subtitle.data,
+            description=form.description.data,
+            headImg=headImg,
+            slug=form.slug.data,
+            category=form.category.data,
+            language=form.language.data,
+            author=form.author.data,
+            content=form.content.data,
+            isPublished=form.isPublished.data,
+        )
 
         db.session.add(post)
         db.session.commit()
         flash("Post Added", "success")
-        return redirect(url_for("posts.allPosts"))
+        return redirect(url_for("posts.all_posts"))
 
-    return render_template(
-        "admin/admin-add-post.html", pageTitle=title, form=form, title=title
-    )
+    context = {"pageTitle": title, "form": form, "title": title}
+
+    return render_template("admin/admin-add-post.html", **context)
 
 
 # Updating Post - New
@@ -84,47 +89,30 @@ def add_post():
 @roles_required(["Admin", "Superadmin"])
 def update_post(post_id):
     title = "Update Post"
-    post = Post.query.filter_by(id=post_id).first()
-    form = PostForm()
+    post = Post.query.get_or_404(post_id)
+    form = PostForm(obj=post)
 
     if form.validate_on_submit():
-        post.title = form.title.data
-        post.subtitle = form.subtitle.data
-        post.description = form.description.data
-        post.slug = form.slug.data
-        post.category = form.category.data
-        post.language = form.language.data
-        post.author = form.author.data
-        post.content = form.content.data
-        post.isPublished = form.isPublished.data
-
+        form.populate_obj(post)
         db.session.commit()
         flash("Post Updated", "success")
+
         source = request.args.get("source")
         if source == "all_posts":
-            return redirect(url_for("posts.allPosts"))
+            return redirect(url_for("posts.all_posts"))
         elif source == "user_details":
             user_id = request.args.get("user_id")
             if user_id is not None:
                 return redirect(url_for("users.user_details", user_id=user_id))
         else:
-            return redirect(url_for("posts.allPosts"))
+            return redirect(url_for("posts.all_posts"))
 
-    elif request.method == "GET":
-        form.title.data = post.title
-        form.subtitle.data = post.subtitle
-        form.description.data = post.description
-        form.headImg.data = post.headImg
-        form.slug.data = post.slug
-        form.category.data = post.category
-        form.language.data = post.language
-        form.author.data = post.author
-        form.content.data = post.content
-        form.isPublished.data = post.isPublished
-
-    return render_template(
-        "admin/admin-add-post.html", pageTitle=title, title=title, form=form
-    )
+    context = {
+        "pageTitle": title,
+        "title": title,
+        "form": form,
+    }
+    return render_template("admin/admin-add-post.html", **context)
 
 
 # Changing post isPublish to True or False
@@ -132,26 +120,26 @@ def update_post(post_id):
 @login_required
 @roles_required(["Admin", "Superadmin"])
 def publish_post(post_id):
-    post = Post.query.filter_by(id=post_id).first_or_404()
+    post = Post.query.get_or_404(post_id)
 
     if post.isPublished:
         post.isPublished = False
-        db.session.commit()
         flash("Post Drafted", "warning")
     else:
         post.isPublished = True
-        db.session.commit()
         flash("Post Published", "success")
+
+    db.session.commit()
 
     source = request.args.get("source")
     if source == "all_posts":
-        return redirect(url_for("posts.allPosts"))
+        return redirect(url_for("posts.all_posts"))
     elif source == "user_details":
         user_id = request.args.get("user_id")
         if user_id is not None:
             return redirect(url_for("users.user_details", user_id=user_id))
     else:
-        return redirect(url_for("posts.allPosts"))
+        return redirect(url_for("posts.all_posts"))
 
 
 # Delete Post - New
@@ -168,17 +156,44 @@ def delete_post(post_id):
         flash("Post Deleted", "success")
         source = request.args.get("source")
         if source == "all_posts":
-            return redirect(url_for("posts.allPosts"))
+            return redirect(url_for("posts.all_posts"))
         elif source == "user_details":
             user_id = request.args.get("user_id")
             if user_id is not None:
                 return redirect(url_for("users.user_details", user_id=user_id))
         else:
-            return redirect(url_for("posts.allPosts"))
+            return redirect(url_for("posts.all_posts"))
 
-    return render_template(
-        "admin/admin-delete-post.html", pageTitle=title, title=title, post=post
-    )
+    context = {
+        "pageTitle": title,
+        "title": title,
+        "post": post,
+    }
+    return render_template("admin/admin-delete-post.html", **context)
+
+
+# Route to delete all comments by a specific user
+@posts.route("/admin/posts/delete/user/<int:user_id>")
+@login_required
+@roles_required(["Admin", "Superadmin"])
+def delete_all_posts_by_user(user_id):
+    try:
+        user = User.query.filter_by(id=user_id).first_or_404()
+        num_deleted = Post.query.filter_by(author=user.username).delete()
+
+        if num_deleted > 0:
+            db.session.commit()
+            flash(f"Deleted {num_deleted} posts by {user.username}.", "success")
+        else:
+            flash(f"No posts by {user.username} to delete.", "info")
+
+    except Exception as e:
+        flash("An error occurred while deleting posts.", "error")
+        db.session.rollback()
+        abort(500)
+
+    # Redirect back to the user details page
+    return redirect(url_for("users.user_details", user_id=user_id))
 
 
 # Method that returns total number of posts
@@ -240,39 +255,6 @@ def ckupload():
     )
     response = make_response(res)
     response.headers["Content-Type"] = "text/html"
-    return response
-
-
-# Logging methods
-
-
-@posts.before_request
-def before_request():
-    g.start_time = datetime.utcnow()
-
-
-@posts.after_request
-def after_request(response):
-    endpoint = request.endpoint
-    method = request.method
-    user_id = None
-
-    if current_user.is_authenticated:
-        user_id = current_user.id
-
-    timestamp = g.start_time
-
-    # Create a new RequestLog instance
-    request_log = RequestLog(
-        endpoint=endpoint, methodType=method, user_id=user_id, timestamp=timestamp
-    )
-
-    # Add the new request log to the database session
-    db.session.add(request_log)
-
-    # Commit the changes to the database
-    db.session.commit()
-
     return response
 
 

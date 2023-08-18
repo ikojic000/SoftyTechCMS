@@ -26,9 +26,9 @@
         </a>
         <div class="menu">
             <a class="menuBtn" href="{{ url_for('main.home') }}">Home</a>
-            <a class="menuBtn" href="{{ url_for('main.news') }}">News</a>
-            <a class="menuBtn" href="{{ url_for('main.reviews') }}">Reviews</a>
-            <a class="menuBtn" href="{{ url_for('main.commentary') }}">Commentary</a>
+            <a class="menuBtn" href="#">News</a>
+            <a class="menuBtn" href="#">Reviews</a>
+            <a class="menuBtn" href="#">Commentary</a>
             {% if current_user.is_authenticated %}
             {% if user_has_role(current_user, 'Admin') or user_has_role(current_user, 'Superadmin') %}
             <a id="loginBtn" class="menuBtn" href="{{ url_for('users.admin') }}">{{ current_user.username }}</a>

@@ -86,24 +86,16 @@ def register():
         #     "utf-8"
         # )
         hashed_password = bcrypt.hash(form.password.data)
+        role_reader = Role.query.filter_by(name="Reader").first_or_404()
         user = User(
             username=form.username.data, email=form.email.data, password=hashed_password
         )
+        user.roles.append(role_reader)
         db.session.add(user)
         db.session.commit()
         flash("Your account has been created! You are now able to log in", "success")
-        return redirect(url_for("users.automaticRole", user_id=user.id))
+        return redirect(url_for("users.login"))
     return render_template("register.html", title="Register", form=form)
-
-
-# Automatically giving role 'reader' when registered
-@users.route("/register/<int:user_id>/role", methods=["GET", "POST"])
-def automaticRole(user_id):
-    user = User.query.filter_by(id=user_id).first()
-    user_role = UserRoles(user_id=user_id, role_id="1")
-    db.session.add(user_role)
-    db.session.commit()
-    return redirect(url_for("users.login"))
 
 
 # Logging into a website
@@ -114,11 +106,9 @@ def login():
         return redirect(url_for("main.home"))
     form = LoginForm()
     if form.validate_on_submit():
-        # user = User.query.filter_by(email=form.email.data).first()
         user = User.query.filter(
             or_(User.email == form.email.data, User.username == form.email.data)
         ).first()
-        # if user and bcrypt.check_password_hash(user.password, form.password.data):
         if user and bcrypt.verify(form.password.data, user.password):
             print("login12345")
             login_user(user)
@@ -138,20 +128,11 @@ def logout():
     return redirect(url_for("users.login"))
 
 
-# Displaying users in a table
-@users.route("/admin/users")
-@login_required
-@roles_required(["Admin", "Superadmin"])
-def userList():
-    users = User.query.all()
-    return render_template("admin_Users.html", users=users)
-
-
 # Dashoard - Table wih all users with edit/delete buttons - New
 @users.route("/admin/users/all")
 @login_required
 @roles_required(["Admin", "Superadmin"])
-def allUsers():
+def all_users():
     users = User.query.all()
     title = "All Users"
     return render_template(
@@ -195,7 +176,7 @@ def delete_user(user_id):
         db.session.delete(user)
         db.session.commit()
         flash("User has been deleted!", "success")
-        return redirect(url_for("users.allUsers"))
+        return redirect(url_for("users.all_users"))
 
     return render_template(
         "admin/admin-delete-user.html", title=title, pageTitle=title, user=user
@@ -237,7 +218,7 @@ def change_user_role(user_id):
         source = request.args.get("source", "all_users")
         return redirect(
             url_for(
-                "users.allUsers" if source == "all_users" else "users.user_details",
+                "users.all_users" if source == "all_users" else "users.user_details",
                 user_id=user.id,
             )
         )
@@ -296,11 +277,11 @@ def change_user_role(user_id):
 
 #         source = request.args.get("source")
 #         if source == "all_users":
-#             return redirect(url_for("users.allUsers"))
+#             return redirect(url_for("users.all_users"))
 #         elif source == "user_details":
 #             return redirect(url_for("users.user_details", user_id=user.id))
 #         else:
-#             return redirect(url_for("users.allUsers"))
+#             return redirect(url_for("users.all_users"))
 
 #     return render_template(
 #         "admin/admin-change-user-settings.html", form=form, user=user, pageTitle=title
