@@ -48,13 +48,13 @@
     <!--- My Scripts --->
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>2
             (adsbygoogle = window.adsbygoogle || []).push({
                 google_ad_client: "ca-pub-4447542487593101",
                 enable_page_level_ads: true
             });
-    </script>
+    </script> -->
 
 
 </head>
@@ -71,6 +71,10 @@
 
 
     {% include "includes/footer.html" %}
+
+    {% block scripts %}
+
+    {% endblock scripts %}
 </body>
 
 </html>

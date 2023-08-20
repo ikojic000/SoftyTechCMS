@@ -80,7 +80,7 @@ def add_post():
 
     context = {"pageTitle": title, "form": form, "title": title}
 
-    return render_template("admin/admin-add-post.html", **context)
+    return render_template("admin/admin-post-create.html", **context)
 
 
 # Updating Post - New
@@ -112,7 +112,7 @@ def update_post(post_id):
         "title": title,
         "form": form,
     }
-    return render_template("admin/admin-add-post.html", **context)
+    return render_template("admin/admin-post-create.html", **context)
 
 
 # Changing post isPublish to True or False
@@ -169,7 +169,7 @@ def delete_post(post_id):
         "title": title,
         "post": post,
     }
-    return render_template("admin/admin-delete-post.html", **context)
+    return render_template("admin/admin-post-delete.html", **context)
 
 
 # Route to delete all comments by a specific user

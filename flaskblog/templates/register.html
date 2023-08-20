@@ -15,7 +15,7 @@
         {% else %}
         {{ form.username(class="loginInput registerInput", placeholder="Username") }}
         {% endif %}
-     
+
         {% if form.email.errors %}
         {{ form.email(class="form-control loginInput is-invalid") }}
         <div class="invalid-feedback">
@@ -26,7 +26,7 @@
         {% else %}
         {{ form.email(class="loginInput registerInput", placeholder="Email") }}
         {% endif %}
-   
+
         {% if form.password.errors %}
         {{ form.password(class="form-control loginInput is-invalid") }}
         <div class="invalid-feedback">
@@ -37,7 +37,7 @@
         {% else %}
         {{ form.password(class="loginInput registerInput", placeholder="Password") }}
         {% endif %}
-   
+
         {% if form.confirm_password.errors %}
         {{ form.confirm_password(class="form-control loginInput is-invalid") }}
         <div class="invalid-feedback">
@@ -51,7 +51,7 @@
 
         {{ form.submit(class="registerButton") }}
         <small>You already have account?</small>
-        <a href="{{ url_for('users.login') }}" id="registerButton">LogIn</a>
+        <a href="{{ url_for('auth.login') }}" id="registerButton">LogIn</a>
     </form>
 </div>
 {% endblock %}

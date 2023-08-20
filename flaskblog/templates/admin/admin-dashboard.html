@@ -124,6 +124,11 @@
 </div>
 
 
+
+{% endblock %}
+
+{% block scripts %}
+
 <script>
     $(document).ready(function () {
         $.ajax({
@@ -158,4 +163,4 @@
 
 <script src="{{ url_for('static', filename='adminKit/test.js') }}"></script>
 
-{% endblock %}
+{% endblock scripts %}

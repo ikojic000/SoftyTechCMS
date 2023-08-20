@@ -33,17 +33,8 @@ class Config:
     USER_LOGIN_TEMPLATE = "/admin_Login.html"
     USER_FORGOT_PASSWORD_TEMPLATE = "/resetPassword.html"
     USER_CHANGE_PASSWORD_TEMPLATE = "/changePassword.html"
+    USER_RESET_PASSWORD_TEMPLATE = "/changeResetPassword.html"  # TODO: Edit design
     USER_LOGIN_URL = "/login"
     USER_CHANGE_PASSWORD_URL = "/user/change-password"
     USER_ENABLE_USERNAME = True
     USER_AUTO_LOGIN_AFTER_RESET_PASSWORD = False
-    # TODO:
-    # USER_UNAUTHORIZED_ENDPOINT = "errors.unauthorized_error"
-
-
-# ALTER TABLE comment CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-# ALTER TABLE comment modify name text charset utf8mb4;
-
-# 'mysql://root:administrator@localhost/softy'
-# 'mysql+pymysql://root:administrator@localhost/softy?charset=utf8mb4'
-# 'sqlite:///site.db'

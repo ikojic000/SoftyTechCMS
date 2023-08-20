@@ -16,7 +16,7 @@
             </a>
             {% endif %}
             {% else %}
-            <a class="btn btnM" href="{{ url_for('users.login') }}">
+            <a class="btn btnM" href="{{ url_for('auth.login') }}">
                 <i class="fas fa-user"></i>
             </a>
             {% endif %}
@@ -37,11 +37,11 @@
             <div class="userAccountMenu">
                 <a class="userAccountMenuBtn" href="{{ url_for('users.account') }}">Account Settings</a>
                 <a class="userAccountMenuBtn" href="{{ url_for('user.change_password') }}">Change Password</a>
-                <a class="userAccountMenuBtn" href="{{ url_for('users.logout') }}">Log out</a>
+                <a class="userAccountMenuBtn" href="{{ url_for('auth.logout') }}">Log out</a>
             </div>
             {% endif %}
             {% else %}
-            <a id="loginBtn" class="menuBtn" href="{{ url_for('users.login') }}">Sign in</a>
+            <a id="loginBtn" class="menuBtn" href="{{ url_for('auth.login') }}">Sign in</a>
             {% endif %}
         </div>
     </div>

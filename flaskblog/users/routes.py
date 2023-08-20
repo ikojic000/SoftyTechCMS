@@ -11,19 +11,21 @@ from flask import (
 
 from flaskblog import app, db
 from passlib.hash import bcrypt
+from flaskblog.decorators import own_account_required
 from flaskblog.users.forms import (
-    LoginForm,
-    RegisterForm,
+    CreateNewUserForm,
     UpdateAccountForm,
     UpdateAccountRoleForm,
+    UserAccountSettingsForm,
+    UserChangePasswordForm,
     UserRoleForm,
 )
 from flaskblog.models import User, Post, UserRoles, Role, Comment
-from flask_login import login_user, logout_user, current_user, login_required
+from flask_login import current_user, login_required, logout_user
 from flask_user import roles_required
 from sqlalchemy import or_
 from datetime import datetime
-from flaskblog.users.utils import user_has_role
+from flaskblog.users.utils import get_users_count, user_has_role
 
 
 users = Blueprint("users", __name__)
@@ -50,18 +52,6 @@ def account():
     return render_template("account.html", form=form, title=current_user.username)
 
 
-@users.route("/account/<int:user_id>/delete", methods=["GET"])
-@login_required
-def delete_account(user_id):
-    print(user_id)
-    logout_user()
-    user = User.query.filter_by(id=user_id).first()
-    db.session.delete(user)
-    db.session.commit()
-    flash("You have deleted your account..", "success")
-    return redirect(url_for("main.home"))
-
-
 # Admin HomePage - Dashboard - New
 @users.route("/admin")
 @login_required
@@ -72,60 +62,6 @@ def admin():
         "admin/admin-dashboard.html",
         pageTitle=pageTitle,
     )
-
-
-# Registering to a website
-# Admin and User side Route
-@users.route("/register", methods=["GET", "POST"])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for("main.home"))
-    form = RegisterForm()
-    if form.validate_on_submit():
-        # hashed_password = bcrypt.generate_password_hash(form.password.data).decode(
-        #     "utf-8"
-        # )
-        hashed_password = bcrypt.hash(form.password.data)
-        role_reader = Role.query.filter_by(name="Reader").first_or_404()
-        user = User(
-            username=form.username.data, email=form.email.data, password=hashed_password
-        )
-        user.roles.append(role_reader)
-        db.session.add(user)
-        db.session.commit()
-        flash("Your account has been created! You are now able to log in", "success")
-        return redirect(url_for("users.login"))
-    return render_template("register.html", title="Register", form=form)
-
-
-# Logging into a website
-# Admin and User side Route
-@users.route("/login", methods=["GET", "POST"])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for("main.home"))
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter(
-            or_(User.email == form.email.data, User.username == form.email.data)
-        ).first()
-        if user and bcrypt.verify(form.password.data, user.password):
-            print("login12345")
-            login_user(user)
-            next_page = request.args.get("next")
-            flash("Logged In!", "success")
-            return redirect(next_page) if next_page else redirect(url_for("main.home"))
-        else:
-            flash("Login Failed! Please check your email and password", "danger")
-    return render_template("admin_Login.html", title="Login", form=form)
-
-
-# Logging out User
-# Admin and User side Route
-@users.route("/logout")
-def logout():
-    logout_user()
-    return redirect(url_for("users.login"))
 
 
 # Dashoard - Table wih all users with edit/delete buttons - New
@@ -156,13 +92,47 @@ def user_details(user_id):
     )
 
     return render_template(
-        "admin/admin-preview-user.html",
+        "admin/admin-user-preview.html",
         title=title,
         pageTitle=title,
         user=user,
         posts=posts,
         comments=comments,
     )
+
+
+# Adding new user to the database - New
+@users.route("/admin/users/new", methods=["GET", "POST"])
+@login_required
+@roles_required(["Admin", "Superadmin"])
+def create_user():
+    title = "Create User"
+    form = CreateNewUserForm()
+
+    if form.validate_on_submit():
+        hashed_password = bcrypt.hash("SoftyTest123")
+
+        user = User(
+            username=form.username.data,
+            email=form.email.data,
+            password=hashed_password,
+            name=form.name.data,
+            active=form.active.data,
+        )
+
+        for role in form.role.data:
+            user_role = Role.query.filter_by(name=role).first()
+            if user_role:
+                user.roles.append(user_role)
+
+        db.session.add(user)
+        db.session.commit()
+
+        flash("User created successfully", "success")
+        return redirect(url_for("users.all_users"))
+
+    context = {"form": form, "title": title, "pageTitle": title}
+    return render_template("admin/admin-user-create.html", **context)
 
 
 # Deleting User from the database - New
@@ -179,7 +149,7 @@ def delete_user(user_id):
         return redirect(url_for("users.all_users"))
 
     return render_template(
-        "admin/admin-delete-user.html", title=title, pageTitle=title, user=user
+        "admin/admin-user-delete.html", title=title, pageTitle=title, user=user
     )
 
 
@@ -224,7 +194,7 @@ def change_user_role(user_id):
         )
 
     return render_template(
-        "admin/admin-change-user-settings.html",
+        "admin/admin-user-access-settings.html",
         form=form,
         user=user,
         pageTitle=title,
@@ -232,60 +202,42 @@ def change_user_role(user_id):
     )
 
 
-# # Updating User in the database - New
-# @users.route("/admin/edit/<int:user_id>", methods=["GET", "POST"])
-# @login_required
-# @roles_required(["Admin", "Superadmin"])
-# def change_user_role(user_id):
-#     title = "Change User settings"
-#     user = User.query.get_or_404(user_id)
+@users.route("/user/account-settings/<int:user_id>", methods=["GET", "POST"])
+@login_required
+@own_account_required
+def update_user_account_settings(user_id):
+    title = "Update User Settings"
+    user = User.query.filter_by(id=user_id).first_or_404()
 
-#     selected_roles = [role.name for role in user.roles]  # Get the user's roles
-#     form = UserRoleForm(
-#         username=user.username,
-#         email=user.email,
-#         role=selected_roles,  # Pass the selected roles
-#         active=user.active,
-#     )
+    # Bind the form to the User object
+    userSettingsForm = UserAccountSettingsForm(obj=user)
+    changePasswordForm = UserChangePasswordForm()
 
-#     is_user_superadmin = user_has_role(user, "Superadmin")
+    # Handle form submission
+    if userSettingsForm.submitAccountSettings.data and userSettingsForm.validate():
+        user.name = userSettingsForm.name.data
+        user.username = userSettingsForm.username.data
+        user.email = userSettingsForm.email.data
 
-#     if form.validate_on_submit():
-#         # Update user's roles based on form submission
+        db.session.commit()
+        flash("User settings updated successfully", "success")
+        return redirect(url_for("users.update_user_account_settings", user_id=user.id))
 
-#         if user_has_role(current_user, "Superadmin"):
-#             new_role_names = form.role.data
+    if changePasswordForm.submitChangePassword.data and changePasswordForm.validate():
+        hashed_password = bcrypt.hash(changePasswordForm.password.data)
+        user.password = hashed_password
+        db.session.commit()
+        flash("Password updated successfully", "success")
+        return redirect(url_for("users.update_user_account_settings", user_id=user.id))
 
-#             # Clear existing roles and assign the new roles
-#             user.roles.clear()
-#             for role_name in new_role_names:
-#                 role = Role.query.filter_by(name=role_name).first()
-#                 if role:
-#                     user.roles.append(role)
-#         else:
-#             new_role_names = form.role.data
-#             if is_user_superadmin:
-#                 new_role_names.append("Superadmin")
-#             user.roles.clear()
-#             for role_name in new_role_names:
-#                 role = Role.query.filter_by(name=role_name).first()
-#                 if role:
-#                     user.roles.append(role)
-
-#         user.active = form.active.data
-#         db.session.commit()
-
-#         source = request.args.get("source")
-#         if source == "all_users":
-#             return redirect(url_for("users.all_users"))
-#         elif source == "user_details":
-#             return redirect(url_for("users.user_details", user_id=user.id))
-#         else:
-#             return redirect(url_for("users.all_users"))
-
-#     return render_template(
-#         "admin/admin-change-user-settings.html", form=form, user=user, pageTitle=title
-#     )
+    context = {
+        "user": user,
+        "userSettingsForm": userSettingsForm,
+        "changePasswordForm": changePasswordForm,
+        "pageTitle": title,
+        "title": title,
+    }
+    return render_template("admin/admin-user-settings.html", **context)
 
 
 # Updating User in the database
@@ -306,6 +258,9 @@ def update_user(user_id):
     return render_template("userAccountUpdate.html", form=form, user=user)
 
 
+# Admin settings - updating your name, mail, username, password
+
+
 @users.route("/user/number_of_users", methods=["GET"])
 def number_of_users():
     number_of_users = User.query.count()
@@ -321,24 +276,3 @@ def posts_count():
         usersCountList.append(get_users_count(x))
 
     return jsonify(usersCountList=usersCountList)
-
-
-# Util methods
-
-
-# Method for getting user count for a single month
-def get_users_count(month):
-    current_year = datetime.utcnow().year
-    start_date = datetime(current_year, month, 1)
-    if month == 12:
-        end_date = datetime(current_year + 1, 1, 1)
-    else:
-        end_date = datetime(current_year, month + 1, 1)
-
-    user_count = User.query.filter(
-        User.email_confirmed_at >= start_date, User.email_confirmed_at < end_date
-    ).count()
-
-    # response = {"month": month, "year": current_year, "user_count": user_count}
-    # return jsonify(response)
-    return user_count

@@ -22,15 +22,13 @@ from flaskblog.config import Config
 app.config.from_object(Config)
 
 login_manager = LoginManager(app)
-login_manager.login_view = "users.login"
+login_manager.login_view = "auth.login"
 
 from flaskblog.models import User, Post
 
 # from flask_user import UserManager
-from flaskblog.customUserManager import CustomUserManager
-
-
-from flaskblog.users.utils import accessControl_function
+from flaskblog.auth.customUserManager import CustomUserManager
+from flaskblog.auth.utils import accessControl_function
 
 flaskfilemanager.init(app, access_control_function=accessControl_function)
 
@@ -38,7 +36,7 @@ wa.whoosh_index(app, Post)
 
 
 # Routes are last to be imported
-
+from flaskblog.auth.routes import auth
 from flaskblog.users.routes import users
 from flaskblog.posts.routes import posts
 from flaskblog.comments.routes import comments
@@ -46,6 +44,7 @@ from flaskblog.logs.routes import logs
 from flaskblog.errors.routes import errors
 from flaskblog.main.routes import main
 
+app.register_blueprint(auth)
 app.register_blueprint(users)
 app.register_blueprint(posts)
 app.register_blueprint(comments)

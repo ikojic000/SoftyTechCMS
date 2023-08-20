@@ -1,0 +1,155 @@
+{% extends 'admin/admin-base.html' %}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col">
+        <h3 class="h3 text-light">{{ pageTitle }} - {{ user.username }}</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card rounded-3 bg-dark text-light">
+            <div class="card-body">
+                <form method="POST" action="" class="row g-3">
+                    {{ userSettingsForm.hidden_tag() }}
+
+                    <div class="col-md-12">
+                        <label for="{{ userSettingsForm.name.id }}" class="form-label">{{
+                            userSettingsForm.name.label.text }}</label>
+                        {% if userSettingsForm.name.errors %}
+                        <label for="{{ userSettingsForm.name.id }}" class="form-label">{{
+                            userSettingsForm.name.label.text }}</label>
+                        {{ userSettingsForm.name(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in userSettingsForm.name.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ userSettingsForm.name(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ userSettingsForm.username.id }}" class="form-label">{{
+                            userSettingsForm.username.label.text }}</label>
+                        {% if userSettingsForm.username.errors %}
+                        {{ userSettingsForm.username(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in userSettingsForm.username.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ userSettingsForm.username(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ userSettingsForm.email.id }}" class="form-label">{{
+                            userSettingsForm.email.label.text
+                            }}</label>
+                        {% if userSettingsForm.email.errors %}
+                        {{ userSettingsForm.email(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in userSettingsForm.email.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ userSettingsForm.email(class="form-control bg-dark text-light") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        {{ userSettingsForm.submitAccountSettings(class="btn btn-primary btn-lg px-5") }}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card rounded-3 bg-dark text-light">
+            <div class="card-body">
+                <form method="POST" action="" class="row g-3">
+                    {{ changePasswordForm.hidden_tag() }}
+
+                    <div class="col-md-12">
+                        {% if changePasswordForm.password.errors %}
+                        <label for="{{ changePasswordForm.password.id }}" class="form-label">{{
+                            changePasswordForm.password.label.text }}</label>
+                        {{ changePasswordForm.password(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in changePasswordForm.password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <label for="{{ changePasswordForm.password.id }}" class="form-label">{{
+                            changePasswordForm.password.label.text }}</label>
+                        <!-- {{ changePasswordForm.password(class="form-control bg-dark text-light") }} -->
+                        <div class="input-group mb-3">
+                            <input class="form-control bg-dark text-light password" id="password" type="password"
+                                name="password" />
+                            <span class="input-group-text togglePassword" id="">
+                                <i data-feather="eye" style="cursor: pointer"></i>
+                            </span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="{{ changePasswordForm.confirm_password.id }}" class="form-label">{{
+                            changePasswordForm.confirm_password.label.text }}</label>
+                        {% if changePasswordForm.confirm_password.errors %}
+                        {{ changePasswordForm.confirm_password(class="form-control bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in changePasswordForm.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        {{ changePasswordForm.confirm_password(class="form-control bg-dark text-light password") }}
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        {{ changePasswordForm.submitChangePassword(class="btn btn-primary btn-lg px-5") }}
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+
+{% block scripts %}
+
+<script>
+    $(".togglePassword").click(function (e) {
+        e.preventDefault();
+        var form = $(this).closest("form"); // Find the closest form element
+        var passwordInput = form.find(".password"); // Find the password input within the form
+        var type = passwordInput.attr("type");
+        console.log(type);
+        if (type == "password") {
+            $(this).html(feather.icons["eye-off"].toSvg()); // Update the icon
+            passwordInput.attr("type", "text"); // Change input type to text
+        } else if (type == "text") {
+            $(this).html(feather.icons["eye"].toSvg()); // Update the icon
+            passwordInput.attr("type", "password"); // Change input type to password
+        }
+    });
+</script>
+
+{% endblock scripts %}
