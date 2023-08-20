@@ -1,5 +1,6 @@
 from flask import render_template, url_for, redirect, flash, request, Blueprint
 from flaskblog import app, db, mail
+from flaskblog.logs.request_logging import after_request, before_request
 from flaskblog.models import Post, Comment, User
 from flaskblog.main.forms import SearchForm, ContactForm
 from flaskblog.comments.forms import CommentForm
@@ -9,6 +10,9 @@ import flask_whooshalchemy as wa
 
 
 main = Blueprint("main", __name__)
+
+main.before_request(before_request)
+main.after_request(after_request)
 
 # wa.whoosh_index(app, Post)
 

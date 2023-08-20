@@ -12,6 +12,7 @@ from flask import (
 from flaskblog import app, db
 from passlib.hash import bcrypt
 from flaskblog.decorators import own_account_required
+from flaskblog.logs.request_logging import after_request, before_request
 from flaskblog.users.forms import (
     CreateNewUserForm,
     UpdateAccountForm,
@@ -29,6 +30,9 @@ from flaskblog.users.utils import get_users_count, user_has_role
 
 
 users = Blueprint("users", __name__)
+
+users.before_request(before_request)
+users.after_request(after_request)
 
 # Method for getting adding user_has_role function to jinja templates
 app.jinja_env.globals.update(user_has_role=user_has_role)

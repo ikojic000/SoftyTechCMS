@@ -4,10 +4,14 @@ from passlib.hash import bcrypt
 from sqlalchemy import or_
 from flaskblog import db
 from flaskblog.auth.forms import LoginForm, RegisterForm
+from flaskblog.logs.request_logging import after_request, before_request
 from flaskblog.models import Role, User
 
 
 auth = Blueprint("auth", __name__)
+
+auth.before_request(before_request)
+auth.after_request(after_request)
 
 
 # Registering to a website

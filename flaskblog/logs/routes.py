@@ -6,9 +6,13 @@ from flask_user import roles_required
 from flaskblog import db
 import json
 from flask import Response
+from flaskblog.logs.request_logging import after_request, before_request
 from flaskblog.models import RequestLog, User, ErrorLog
 
 logs = Blueprint("logs", __name__)
+
+logs.before_request(before_request)
+logs.after_request(after_request)
 
 
 @logs.route("/admin/logs/request", methods=["GET"])

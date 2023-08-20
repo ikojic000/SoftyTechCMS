@@ -57,7 +57,8 @@ class Post(db.Model):
     description = db.Column(db.Text, nullable=False)
     slug = db.Column(db.String(100), nullable=False)
     headImg = db.Column(db.String(254), nullable=False, default="default.jpg")
-    category = db.Column(db.String(50), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
+    category = db.relationship("Category", backref="posts")
     language = db.Column(db.String(30), nullable=False)
     author = db.Column(db.String(50), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -68,6 +69,12 @@ class Post(db.Model):
     def __repr__(self):
         formatted_date_posted = self.date_posted.strftime("%d-%m-%Y %H:%M:%S")
         return f"Post('{self.title}', '{self.language}', '{self.slug}', '{formatted_date_posted}')"
+
+
+# Category table
+class Category(db.Model):
+    id = db.Column(db.Integer(), primary_key=True)
+    name = db.Column(db.String(50), unique=True)
 
 
 # Comment table
@@ -103,7 +110,6 @@ class ErrorLog(db.Model):
 
 
 """
-
 print("------------------DB START------------------")
 db.create_all()
 print("------------------DB CREATE DONE------------------")

@@ -1,17 +1,16 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField,
-    PasswordField,
     BooleanField,
     SubmitField,
     TextAreaField,
     FileField,
     SelectField,
-    SelectMultipleField,
-    validators,
 )
-from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length
 from flask_wtf.file import FileAllowed
+
+from flaskblog.models import Category
 
 
 # ADMIN SIDE FORMS
@@ -28,11 +27,8 @@ class PostForm(FlaskForm):
     headImg = FileField("Post Header Image", validators=[FileAllowed(["jpg", "png"])])
     category = SelectField(
         "Category",
-        choices=[
-            ("News", "News"),
-            ("Reviews", "Reviews"),
-            ("Commentary", "Commentary"),
-        ],
+        coerce=int,  # Ensure that the selected value is stored as an integer (category_id)
+        choices=[(category.id, category.name) for category in Category.query.all()],
     )
     language = SelectField(
         "Language", choices=[("HRV", "Hrvatski"), ("ENG", "English")]
@@ -44,11 +40,3 @@ class PostForm(FlaskForm):
     content = TextAreaField("Content")
     isPublished = BooleanField("Published")
     submit = SubmitField("Save")
-
-
-# Form for uploading images to a folder on a server
-
-
-class MediaForm(FlaskForm):
-    mediaFile = FileField("Upload Media", validators=[FileAllowed(["jpg", "png"])])
-    submit = SubmitField("Upload")
