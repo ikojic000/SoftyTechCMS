@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 from flaskblog import app
 import os
 from PIL import Image
@@ -47,6 +48,11 @@ def save_head_image(image_data, title):
         return unique_filename
     else:
         return None
+
+
+def gen_rnd_filename():
+    filename_prefix = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    return "%s%s" % (filename_prefix, str(random.randrange(1000, 10000)))
 
 
 # Method that returns post count in a single month

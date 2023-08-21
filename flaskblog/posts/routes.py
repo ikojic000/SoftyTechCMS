@@ -19,7 +19,7 @@ from datetime import datetime
 import os
 import random
 
-from flaskblog.posts.utils import get_posts_count, save_head_image
+from flaskblog.posts.utils import gen_rnd_filename, get_posts_count, save_head_image
 
 
 posts = Blueprint("posts", __name__)
@@ -45,7 +45,7 @@ def all_posts():
 
 
 # Adding Posts to a database - New
-@posts.route("/admin/posts/add", methods=["GET", "POST"])
+@posts.route("/admin/posts/new", methods=["GET", "POST"])
 @login_required
 @roles_required(["Admin", "Superadmin"])
 def add_post():
@@ -58,6 +58,8 @@ def add_post():
             headImg = save_head_image(form.headImg.data, form.title.data)
             # headImg = save_picture(form.headImg.data, form.title.data)
 
+        print("category form: " + str(form.category.data))
+
         post = Post(
             title=form.title.data,
             subtitle=form.subtitle.data,
@@ -69,8 +71,7 @@ def add_post():
             content=form.content.data,
             isPublished=form.isPublished.data,
         )
-        category = Category.query.get(form.category.data)
-        post.category = category
+        post.category = form.category.data
 
         db.session.add(post)
         db.session.commit()
@@ -92,7 +93,6 @@ def update_post(post_id):
     current_headImg = post.headImg
 
     # Query the Category object associated with the post
-    category = Category.query.get(post.category_id)
 
     if form.validate_on_submit():
         # Update the post object with the form data
@@ -104,7 +104,7 @@ def update_post(post_id):
         post.author = form.author.data
         post.content = form.content.data
         post.isPublished = form.isPublished.data
-        post.category = Category.query.get(form.category.data)
+        post.category = form.category.data
 
         # Check if a new image file has been provided
         if form.headImg.data:
@@ -127,7 +127,19 @@ def update_post(post_id):
             return redirect(url_for("posts.all_posts"))
 
     # Set the form's category field with the ID of the category associated with the post
-    form.category.data = post.category_id
+    form.category.data = post.category
+    # Construct the URL for the image
+    if post.headImg:
+        image_url = url_for(
+            "static",
+            filename=f"upload/media/images/head_Images/{post.headImg}",
+        )
+    else:
+        image_url = None
+
+    print("Image URL: " + image_url)
+    # Set the form's headImg data to the image URL
+    form.headImg.data = image_url
 
     context = {
         "pageTitle": title,
@@ -236,11 +248,6 @@ def posts_count():
     return jsonify(postsCountList=postsCountList)
 
 
-def gen_rnd_filename():
-    filename_prefix = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    return "%s%s" % (filename_prefix, str(random.randrange(1000, 10000)))
-
-
 @posts.route("/ckupload/", methods=["POST", "OPTIONS", "GET"])
 def ckupload():
     """CKEditor file upload"""
@@ -268,13 +275,13 @@ def ckupload():
             print(url)
     else:
         error = "post error"
-    res = """<script type="text/javascript"> 
+        res = """<script type="text/javascript"> 
              window.parent.CKEDITOR.tools.callFunction(%s, '%s', '%s');
              </script>""" % (
-        callback,
-        url,
-        error,
-    )
+            callback,
+            url,
+            error,
+        )
     response = make_response(res)
     response.headers["Content-Type"] = "text/html"
     return response

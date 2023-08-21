@@ -75,16 +75,37 @@
                     <div class="col-md-12">
                         <label for="{{ form.headImg.id }}" class="form-label">{{ form.headImg.label.text }}</label>
                         {% if form.headImg.errors %}
-                        {{ form.headImg(class="form-control bg-dark text-light is-invalid") }}
+                        {{ form.headImg(class="form-control bg-dark text-light is-invalid", id="headImgInput") }}
                         <div class="invalid-feedback">
                             {% for error in form.headImg.errors %}
                             <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.headImg(class="form-control bg-dark text-light") }}
+                        {{ form.headImg(class="form-control bg-dark text-light", id="headImgInput") }}
                         {% endif %}
                     </div>
+                    {% if form.headImg.data %}
+                    <div class="col-md-12">
+                        <label class="form-label current-head-image-label">Current Head Image</label>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <!-- Hidden input to store the image filename -->
+                        <input type="hidden" id="headImgField" name="headImg" value="{{ form.headImg.data }}">
+
+                        <!-- Display the image preview -->
+                        <img id="headImgPreview" src="{{form.headImg.data}}" alt="Post Image" style="max-width: 100%;">
+                    </div>
+                    {% else %}
+                    <div class="col-md-12">
+                        <label class="form-label current-head-image-label">Default Head Image</label>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <!-- Display the image preview -->
+                        <img id="headImgPreview" src="\static\upload\media\images\head_Images\default.jpg"
+                            alt="Post Image" style="max-width: 100%;">
+                    </div>
+                    {% endif %}
 
                     <div class="col-md-12">
                         <label for="{{ form.category.id }}" class="form-label">{{ form.category.label.text }}</label>
@@ -143,6 +164,27 @@
         filebrowserImageUploadUrl: '/ckupload/',
         filebrowserUploadMethod: 'form',
         filebrowserBrowseUrl: '/fm/index.html'
+    });
+</script>
+
+<script>
+    const headImgInput = document.getElementById('headImgInput');
+    const headImgPreview = document.getElementById('headImgPreview');
+    const currentHeadImageLabel = document.querySelector('.current-head-image-label');
+
+    headImgInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                headImgPreview.src = e.target.result;
+                currentHeadImageLabel.textContent = 'New Head Image';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            headImgPreview.src = ''; // Clear the image preview if no file is selected
+            currentHeadImageLabel.textContent = 'Current Head Image';
+        }
     });
 </script>
 

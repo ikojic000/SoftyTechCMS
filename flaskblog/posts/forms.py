@@ -9,7 +9,7 @@ from wtforms import (
 )
 from wtforms.validators import DataRequired, Length
 from flask_wtf.file import FileAllowed
-
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from flaskblog.models import Category
 
 
@@ -23,12 +23,18 @@ class PostForm(FlaskForm):
     description = TextAreaField(
         "Description", validators=[DataRequired(), Length(min=5, max=100)]
     )
-    slug = StringField("Slug", validators=[DataRequired(), Length(min=5, max=30)])
+    slug = StringField("Slug", validators=[DataRequired(), Length(min=3, max=50)])
     headImg = FileField("Post Header Image", validators=[FileAllowed(["jpg", "png"])])
-    category = SelectField(
+    # category = SelectField(
+    #     "Category",
+    #     coerce=int,  # Ensure that the selected value is stored as an integer (category_id)
+    #     choices=[(category.id, category.name) for category in Category.query.all()],
+    # )
+    category = QuerySelectField(
         "Category",
-        coerce=int,  # Ensure that the selected value is stored as an integer (category_id)
-        choices=[(category.id, category.name) for category in Category.query.all()],
+        query_factory=lambda: Category.query,
+        allow_blank=True,
+        get_label="name",
     )
     language = SelectField(
         "Language", choices=[("HRV", "Hrvatski"), ("ENG", "English")]
