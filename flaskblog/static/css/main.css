@@ -1,0 +1,31 @@
+:root {
+  --primary-color: #7fccf7;
+  --light-color: #e4f1fe;
+  --dark-secondary-color: rgba(34, 49, 63);
+  --dark-color: rgba(35, 38, 41, 0.8);
+}
+
+body {
+  background: linear-gradient(
+      to bottom right,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url(images/background.jpg) fixed;
+}
+
+main {
+  margin: 100px 0;
+  color: var(--light-color);
+}
+
+.wrapper {
+  margin-top: 20px;
+}
+
+.main-content {
+  background-color: var(--dark-color);
+  padding: 20px 40px;
+  margin-top: 20px;
+  border-radius: 10px;
+}

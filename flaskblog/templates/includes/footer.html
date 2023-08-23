@@ -1,24 +1,5 @@
-<footer>
-    <!--
-    <div class="sideSocial">
-        <button onclick="location.href='http://www.facebook.com/softytech101'" id="fb"><i class="fab fa-facebook-f"></i></button>
-        <button onclick="location.href='http://www.instagram.com/softytech101'" id="inst"><i class="fab fa-instagram"></i></button>
-        <button onclick="location.href='http://www.twitter.com/softytech101'" id="tw"><i class="fab fa-twitter"></i></button>
-    </div>
-    
-    <div class="downSocial">
-        <a href="http://facebook.com/softytech101" class="btnDS" id="leftDS" href="#">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="http://instagram.com/softytech101" class="btnDS" id="middleDS" href="#">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="http://twitter.com/softytech101" class="btnDS" id="rightDS" href="#">
-            <i class="fab fa-twitter"></i>
-        </a>
-    </div>
-    -->
-    <div class="footer-full">
+<footer class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
         <a href="{{ url_for('main.about') }}" class="footerBtn" id="aboutBtn">About</a>
         <a href="{{ url_for('auth.login') }}" class="footerBtn" id="creditsBtn"> &copyMPD</a>
         <a href="{{ url_for('main.contact') }}" class="footerBtn" id="contactBtn">Contact</a>

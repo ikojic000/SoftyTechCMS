@@ -78,7 +78,7 @@ def contact():
         "form": form,
     }
 
-    return render_template("contact.html", **context)
+    return render_template("/form-templates/contact.html", **context)
 
 
 # Route for Single Post

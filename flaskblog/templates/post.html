@@ -3,6 +3,62 @@
 
 {% block content %}
 
+<div class="post-main">
+    <div class="post-head-image-container">
+        <img src="{{ headImg }}" alt="">
+        <h1 class="post-title"><span>{{ post.title }}</span></h1>
+    </div>
+    <div class="post-content">
+        <div class="row mb-2">
+            <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+        </div>
+        <span class="line"></span>
+        <div class="row d-flex d-flex justify-content-between mb-5">
+            <div class="col post-date">{{ post.date_posted.strftime('%d-%b-%Y') }}</div>
+            <div class="col post-author">Written by: {{ post.author }}</div>
+        </div>
+        <p>{{ post.content | safe }}</p>
+    </div>
+    {% if current_user.is_authenticated %}
+    <div class="commentForm">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            {% if form.comment.errors %}
+            {{ form.comment(class="form-control loginInput is-invalid") }}
+            <div class="invalid-feedback">
+                {% for error in form.comment.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            {{ form.comment(class="commentInput") }}
+            {% endif %}
+
+            {{ form.submit(class="commentBtn") }}
+        </form>
+    </div>
+    {% else %}
+    <p class="message">Please login to leave a comment. :)</p>
+    {% endif %}
+    <div class="commentList">
+        {% for comment in comments %}
+        <div class="commentDisplay">
+            <div class="commentListLeft">
+                <div class="commentUser">{{ comment.user.username }}</div>
+                <small class="commentDate">{{ comment.date_posted.strftime('%d-%b-%Y') }}</small>
+            </div>
+            <div class="commentListRight">
+                <div class="comment">{{ comment.content }}</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+<!-- 
 <div class="mainContent">
     <div class="main">
         <div class="postMain">
@@ -53,7 +109,7 @@
         </div>
     </div>
 
-</div>
+</div> -->
 
 <script>
     $("#comment").emojioneArea({

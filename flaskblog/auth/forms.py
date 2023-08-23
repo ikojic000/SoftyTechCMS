@@ -27,6 +27,7 @@ class LoginForm(FlaskForm):
 
 # Form for registration
 class RegisterForm(FlaskForm):
+    name = StringField("Name", validators=[Length(min=2, max=50)])
     username = StringField(
         "Username",
         validators=[DataRequired(), Length(min=3, max=15), validate_username],

@@ -29,14 +29,17 @@ def register():
         print("Hashed password: ", hashed_password)
         role_reader = Role.query.filter_by(name="Reader").first_or_404()
         user = User(
-            username=form.username.data, email=form.email.data, password=hashed_password
+            name=form.name.data,
+            username=form.username.data,
+            email=form.email.data,
+            password=hashed_password,
         )
         user.roles.append(role_reader)
         db.session.add(user)
         db.session.commit()
         flash("Your account has been created! You are now able to log in", "success")
         return redirect(url_for("auth.login"))
-    return render_template("register.html", title="Register", form=form)
+    return render_template("/form-templates/register.html", title="Register", form=form)
 
 
 # Logging into a website
@@ -58,7 +61,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for("main.home"))
         else:
             flash("Login Failed! Please check your email and password", "danger")
-    return render_template("admin_Login.html", title="Login", form=form)
+    return render_template("/form-templates/login.html", title="Login", form=form)
 
 
 # Logging out User

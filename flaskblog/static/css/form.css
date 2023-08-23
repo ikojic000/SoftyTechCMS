@@ -1,569 +1,317 @@
-/*
-form {
-    margin: 50px auto;
-    font-size: 20px;
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-    font-family: 'Orbitron';
-    letter-spacing: 10px;
-    width: 90%;
-    height: auto;
-
-}*/
-
-
-.registerForm {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    margin-top: 60px;
-    width: 320px;
-    text-align: center;
-    background: rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
+:root {
+  --primary-color: #7fccf7;
+  --light-color: #e4f1fe;
+  --dark-secondary-color: rgba(34, 49, 63);
+  --dark-color: rgba(35, 38, 41, 0.8);
+  --dark-text-color: rgba(35, 38, 41);
 }
 
-.registerForm h1 {
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    font-family: 'Orbitron';
+.form {
+  text-align: center;
+  background-color: var(--dark-color);
+  padding: 20px 0;
+  border-radius: 10px;
 }
 
-.registerButton {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    padding: 8px 20px;
-    border: 2px solid #7FCCF7;
-    border-radius: 25px;
-    outline: none;
-    text-align: center;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: .25s;
-    text-decoration: none;
-    font-family: 'Work Sans', sans-serif;
+.form h1 {
+  color: var(--light-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 25px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-family: "Orbitron", sans-serif;
 }
 
-.registerButton:hover {
-    color: #7FCCF7;
-    border-color: rgb(0, 162, 255);
-    background-color: rgba(255, 255, 255, 0.3);
+.form p {
+  color: var(--light-color);
+  font-family: "Orbitron", sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
-.logoutButton {
-    border: 0;
-    width: 50px;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    padding: 8px 20px;
-    border: 2px solid rgb(0, 162, 255);
-    border-radius: 25px;
-    outline: none;
-    text-align: center;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: .25s;
-    text-decoration: none;
-    font-family: 'Work Sans', sans-serif;
-
-}
-.logoutButton:hover {
-    color: #da0e22;
-    border-color: #dc3545;
-    font-weight: 700;
-    background-color: rgba(71,71,71,.5);
+.form-input {
+  display: block;
+  width: 50%;
+  min-width: 250px;
+  max-width: 450px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 15px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  background: none;
+  border: 0;
+  border: 2px solid #7fccf7;
+  border-radius: 15px;
+  outline: none;
+  transition: 0.25s;
 }
 
-.leftLogout {
-    float: left;
-    margin-left: 20px;
-}
-.rightLogout {
-    float: right;
-    margin-right: 20px;
+.form-input:focus {
+  border-color: rgb(0, 162, 255);
 }
 
-.registerInput {
-    margin-top: 10px;
+.form-textarea {
+  height: 15rem;
 }
 
-.registerForm small {
-    color: white;
-    text-decoration: none;
-    font-family: sans-serif;
-    font-size: 12px;
+.form-submit-button {
+  border: 0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  padding: 8px 20px;
+  border: 2px solid var(--primary-color);
+  border-radius: 15px;
+  outline: none;
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.25s;
+  font-family: "Orbitron", sans-serif;
 }
 
-
-/* Login Form */
-.loginForm {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 320px;
-    text-align: center;
-    background: rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
+.form-submit-button:hover {
+  color: var(--dark-text-color);
+  font-weight: bold;
+  letter-spacing: 2px;
+  border-color: rgb(0, 162, 255);
+  background-color: var(--primary-color);
 }
 
-
-.loginForm h1 {
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    font-family: 'Orbitron';
+.form-link-text,
+.form-link-button {
+  color: white;
+  text-decoration: none;
+  font-family: "Orbitron", sans-serif;
+  font-size: 14px;
 }
 
-.loginInput {
-    display: block;
-    width: 200px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    padding: 10px;
-    text-align: center;
-    color: white;
-    font-size: 15px;
-    background: none;
-    border: 0;
-    border: 2px solid #7FCCF7;
-    border-radius: 25px;
-    outline: none;
-    transition: .25s;
+.form-link-button {
+  font-family: "Orbitron", sans-serif;
+  color: #7fccf7;
+}
+.form-link-button:hover {
+  color: rgb(0, 162, 255);
 }
 
-.loginInput:focus {
-    width: 250px;
-    border-color: rgb(0, 162, 255);
+.invalid-feedback {
+  width: 100%;
+  font-size: 12px;
+  color: #dc3545;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0 auto;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
-.loginButton {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    padding: 8px 20px;
-    border: 2px solid #7FCCF7;
-    border-radius: 25px;
-    outline: none;
-    text-align: center;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: .25s;
-    font-family: 'Work Sans', sans-serif;
+.is-invalid {
+  border-color: #dc3545;
 }
 
-.loginButton:hover {
-    color: #7FCCF7;
-    border-color: rgb(0, 162, 255);
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.loginForm small, #registerButton {
-    color: white;
-    text-decoration: none;
-    font-family: sans-serif;
-    font-size: 12px;
-}
-
-#registerButton {
-    font-weight: bold;
-    font-family: 'Orbitron';
-    color: #7FCCF7;
-}
-#registerButton:hover {
-    color: rgb(0, 162, 255);
+textarea.form-control {
+  height: auto;
 }
 
 /* Comment Form */
 
 .commentForm {
-    width: 100%;
-    height: 100px;
-    position: relative;
+  width: 100%;
+  height: 100px;
+  position: relative;
 }
-.commentForm form{
-    margin: 10px;
-    
+.commentForm form {
+  margin: 10px;
 }
 
 .commentInput {
-    width: 75%;
-    height: 70px;
-    background-color: rgba(0, 0, 0, .8);
-    padding: 10px;
-    border: solid 1px #7FCCF7;
-    border-radius: 10px;
-    color: white;
-    font-family: 'sans-serif';
-    font-size: 15px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.7);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.7);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.7);
+  width: 75%;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border: solid 1px #7fccf7;
+  border-radius: 10px;
+  color: white;
+  font-family: "sans-serif";
+  font-size: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, 0.7);
+  -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, 0.7);
+  box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, 0.7);
 }
 
 .emojionearea.commentInput {
-    width: 75%;
+  width: 75%;
+  z-index: 1000;
 }
 .commentBtn {
-    cursor: pointer;
-    background-color: black;
-    font-family: 'Orbitron';
-    font-size: 12px;
-    color: #7FCCF7;
-    text-align: center;
-    border: none;
-    outline: none;
-    width: 100px;
-    height: 30px;
-    border-radius: 15px;
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translate(-50%, 0px);
-    transition: .5s;
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.8);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.8);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.8);
+  cursor: pointer;
+  background-color: black;
+  font-family: "Orbitron";
+  font-size: 12px;
+  color: #7fccf7;
+  text-align: center;
+  border: none;
+  outline: none;
+  width: 100px;
+  height: 30px;
+  border-radius: 15px;
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translate(-50%, 0px);
+  transition: 0.5s;
+  -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, 0.8);
+  -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, 0.8);
+  box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, 0.8);
 }
 
 .commentBtn:hover {
-    color: rgb(0, 162, 255);
+  color: rgb(0, 162, 255);
 }
 
 .message {
-    text-align: center;
-    color: white;
-    font-family: 'Orbitron';
-    font-size: 15px;
+  text-align: center;
+  color: white;
+  font-family: "Orbitron";
+  font-size: 15px;
 }
 
 /* Contact Form */
 .contactForm {
-    background: rgba(0, 0, 0, .5);
-    margin: 50px auto;
-    width: 300px;
-    padding: 10px;
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
+  text-align: center;
 }
 .contactInput {
-    display: block;
-    width: 200px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    padding: 10px;
-    text-align: center;
-    color: white;
-    font-size: 15px;
-    background: none;
-    border: 0;
-    border-bottom: 2px solid #7FCCF7;
-    outline: none;
-    transition: .25s;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid #7fccf7;
+  outline: none;
+  transition: 0.25s;
 }
 
 .contactInput:focus {
-    width: 250px;
-    border-color: rgb(0, 162, 255);
+  width: 250px;
+  border-color: rgb(0, 162, 255);
 }
 
 .contactMessage {
-    display: block;
-    width: 200px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    padding: 10px;
-    text-align: center;
-    color: white;
-    font-size: 15px;
-    background: none;
-    border: 0;
-    border: 2px solid #7FCCF7;
-    border-radius: 10px;
-    outline: none;
-    transition: .25s;
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-size: 15px;
+  background: none;
+  border: 0;
+  border: 2px solid #7fccf7;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.25s;
 }
 .contactMessage:focus {
-    width: 250px;
-    border-color: rgb(0, 162, 255);
+  width: 250px;
+  border-color: rgb(0, 162, 255);
 }
 
 .contactForm p {
-    color: white;
-    font-family: 'Orbitron';
-    font-size: 20px;
-    text-align: center;
-}
-
-/* Add Form */
-
-.addForm {
-    height: auto;
-    margin: 50px auto;
-    padding: 10px;
-    text-align: center;
-    width: 100%;
-    max-width: 550px;
-    text-align: center;
-    background: rgba(0, 0, 0, .5);
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-}
-
-.addForm h1 {
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 25px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    font-family: 'Orbitron';
-}
-
-.addInput {
-    width: 275px;
-    height: 40px;
-    margin: 15px auto;
-    border-bottom: solid 2px white;
-    border-radius: 50px;
-    background-color: rgba(0, 0, 0, .8);
-    font-size: 15px;
-    font-family: 'Orbitron';
-    text-align: center;
-    color: white;
-    transition: .5s all;
-}
-
-.addInput::placeholder {
-    text-align: center;
-}
-
-.addInput:focus {
-    border-color: #7FCCF7;
-}
-
-.addTextArea {
-    width: 420px;
-    height: 200px;
-    margin: 15px auto;
-    background-color: rgba(0, 0, 0, .8);
-    font-family: 'Orbitron';
-    font-size: 15px;
-    color: white;
-    border: solid 2px white;
-    border-radius: 20px;
-}
-
-.addTextArea::placeholder {
-    text-align: center;
-}
-
-.addDescription {
-    width: 350px;
-    min-height: 100px;
-    margin-bottom: 0;
-}
-
-.addSelect {
-    width: 50%;
-    height: 40px;
-    background-color: rgba(0, 0, 0, .8);
-    color: white;
-    font-size: 15px;
-    font-family: 'Orbitron';
-    border: solid 2px white;
-    border-radius: 25px;
-    margin: 10px auto;
-    padding: 5px;
-
-}
-
-.addSelect option {
-    font-size: 15px;
-}
-
-.addBtn {
-    border: 0;
-    background: none;
-    display: block;
-    margin: 10px auto;
-    margin-top: 0;
-    padding: 5px 30px;
-    border: 2px solid #7FCCF7;
-    border-radius: 25px;
-    outline: none;
-    text-align: center;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: .25s;
-}
-
-.addBtn:hover {
-    color: #7FCCF7;
-    border-color: rgb(0, 162, 255);
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.invalid-feedback {
-    width: 100%;
-    font-size: 12px;
-    color: #dc3545;
-    font-family: sans-serif;
-    padding: 0;
-    margin: 0 auto;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.is-invalid {
-    border-color: #dc3545;
-}
-
-textarea.form-control {
-    height: auto;
-}
-
-/* MEDIA FORM */
-.mediaSubmitButton {
-    width: 150px;
-    height: 40px;
-    border: solid white 2px;
-    border-radius: 50px;
-    background-color: rgba(0, 0, 0, .8);
-    color: white;
-    font-family: 'Orbitron';
-    font-size: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    transition: .5s all;
-    margin-bottom: 10px;
-    margin-right: 50px;
-    float: right;
-
-}
-.mediaSubmitButton:hover {
-    border: solid 3px #7FCCF7;
-    font-size: 22px;
-}
-
-.mediaInput {
-    font-size: 15px;
-    width: 300px;
-    float: left;
-    margin-left: 50px;
-    color: darkgrey;
-}
-
-.mediaLabel {
-    color: darkgray;
+  color: white;
+  font-family: "Orbitron";
+  font-size: 20px;
+  text-align: center;
 }
 
 /* Search Form */
 .search {
-    position: relative;
-    margin: 0 auto;
-    width: 90%;
+  position: relative;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .searchInput {
-    background-color: black;
-    border: none;
-    color: white;
-    padding: 5px 8px;
-    width: 90%;
-    height: 30px;
-    margin: 0 auto;
-    border-radius: 15px;
-    outline: none;
-    transition: all .5s;
-    -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71,71,71,.5);
-    -moz-box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
-    box-shadow: 1px 3px 20px 0px rgba(71,71,71,.5);
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 5px 8px;
+  width: 90%;
+  height: 30px;
+  margin: 0 auto;
+  border-radius: 15px;
+  outline: none;
+  transition: all 0.5s;
+  -webkit-box-shadow: 1px 3px 20px 5px 0px rgba(71, 71, 71, 0.5);
+  -moz-box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, 0.5);
+  box-shadow: 1px 3px 20px 0px rgba(71, 71, 71, 0.5);
 }
 .searchInput:focus {
-    border: solid 1px #7FCCF7;
+  border: solid 1px #7fccf7;
 }
 
 .searchBtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    font-family: FontAwesome;
-    background-color: transparent;
-    color: #7FCCF7;
-    font-size: 18px;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    outline: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  font-family: FontAwesome;
+  background-color: transparent;
+  color: #7fccf7;
+  font-size: 18px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
 .searchBtn::before {
-    content: '\f002';
+  content: "\f002";
 }
 
 .searchBtnActive {
-    font-family: FontAwesome;
-    color: #7FCCF7;
-    font-size: 18px;
-    text-align: center;
+  font-family: FontAwesome;
+  color: #7fccf7;
+  font-size: 18px;
+  text-align: center;
 }
 
 .searchBtnActive::before {
-    content: "\f061";
+  content: "\f061";
 }
 
-
 @media only screen and (max-width: 950px) {
-    .search {
-        width: 60%;
-        margin: 0 auto;
-        margin-top: 20px;
-    }
+  .search {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
 
-    .searchForm {
-        width: 100%;
-        margin: 0 auto;
-    }
-    .searchInput {
-        width: 100%;
-    }
-
+  .searchForm {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .searchInput {
+    width: 100%;
+  }
 }
 
 @media only screen and (max-width: 425px) {
-    .registerForm {
-        margin-top: 25px;
-    }
+  .registerForm {
+    margin-top: 25px;
+  }
 }
-
-

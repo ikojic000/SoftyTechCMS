@@ -1,0 +1,58 @@
+<header>
+    <div class="header-wrapper container d-flex justify-content-between align-items-center">
+        <div class="col d-flex align-items-center">
+            <a class="nav-logo me-4" href="/"></a>
+            <h4>Softy Tech</h4>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <nav>
+                <ul class="d-inline-flex">
+                    {% if current_user.is_authenticated %}
+                    <li class="mx-3">
+                        <a href="{{ url_for('main.home') }}">
+                            <span class="menu-icon"><i class="fa-solid fa-house"></i></span>
+                            <span class="menu-text">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="mx-3">
+                        {% if user_has_role(current_user, 'Admin') or user_has_role(current_user, 'Superadmin') %}
+                        <a href="{{ url_for('users.admin') }}">
+                            <span class="menu-icon"><i class="fa-solid fa-user"></i></span>
+                            <span class="menu-text">{{ current_user.username }}</span>
+                        </a>
+                        {% else %}
+                        <a href="">
+                            <span class="menu-icon"><i class="fa-solid fa-user"></i></span>
+                            <span class="menu-text">{{ current_user.username }}</span>
+                        </a>
+                        {% endif %}
+
+                    </li>
+                    <li class="mx-3">
+                        <a href="{{ url_for('auth.logout') }}">
+                            <span class="menu-icon"><i
+                                    class="fa-solid fa-person-walking-dashed-line-arrow-right"></i></span>
+                            <span class="menu-text">Logout</span>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="mx-3">
+                        <a href="{{ url_for('main.home') }}">
+                            <span class="menu-icon"><i class="fa-solid fa-house"></i></span>
+                            <span class="menu-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="mx-3">
+                        <a href="{{ url_for('auth.login') }}">
+                            <span class="menu-icon"><i class="fa-solid fa-user"></i></span>
+                            <span class="menu-text">Login</span>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
