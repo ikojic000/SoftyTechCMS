@@ -10,9 +10,14 @@
     </form>
   </div>
 
-  <!-- Prvi -->
-  {% for post in posts.items %} {% include 'includes/blogPost.html' %} {%
-  endfor %}
+  {% for post in posts.items %}
+  {% if loop.index is divisibleby(2) %}
+  {% include 'includes/blogPost-Alt.html' %}
+  {% else %}
+  {% include 'includes/blogPost.html' %}
+  {% endif %}
+  {% endfor %}
+
   <div class="pagination">
     {% set prev = posts.page - 1 %} {% if prev > 0 %}
     <a class="pageBtn" href="{{ url_for('main.home', page=prev) }}"><i class="fas fa-chevron-left"></i></a>

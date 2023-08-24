@@ -241,7 +241,12 @@ def update_user_account_settings(user_id):
         "pageTitle": title,
         "title": title,
     }
-    return render_template("admin/admin-user-settings.html", **context)
+    if user_has_role(current_user, "Admin") or user_has_role(
+        current_user, "Superadmin"
+    ):
+        return render_template("admin/admin-user-settings.html", **context)
+
+    return render_template("form-templates/user-settings.html", **context)
 
 
 # Updating User in the database

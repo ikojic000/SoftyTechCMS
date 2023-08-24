@@ -29,3 +29,29 @@ main {
   margin-top: 20px;
   border-radius: 10px;
 }
+
+.about-title {
+  font-family: "Orbitron", sans-serif;
+}
+
+.about-subtitle {
+  font-family: "Orbitron", sans-serif;
+  margin-top: 20px;
+}
+
+.about-text,
+.about-list {
+  margin-top: 10px;
+  font-family: "Work Sans", sans-serif;
+}
+
+.about-list {
+  list-style: none;
+  margin-left: 25px;
+}
+
+.about-link {
+  text-decoration: none;
+  font-family: "Work Sans", sans-serif;
+  color: var(--primary-color);
+}

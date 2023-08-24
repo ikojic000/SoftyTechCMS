@@ -1,0 +1,82 @@
+:root {
+  --primary-color: #7fccf7;
+  --light-color: #e4f1fe;
+  --dark-secondary-color: rgba(34, 49, 63);
+  --dark-color: rgba(35, 38, 41, 0.8);
+  --dark-text-color: rgba(35, 38, 41, 0.8);
+  --warning-color: rgba(220, 53, 69, 1);
+}
+/* ==============
+    ERRORI
+============== */
+
+.error-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-family: "Orbitron", sans-serif;
+}
+
+/* Heading Styles */
+.error-code {
+  color: var(--heading);
+  font-size: 12.5rem;
+  letter-spacing: 0.1em;
+  margin: 0.025em 0;
+  text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+}
+
+@media (max-width: 50rem) {
+  .not-found-code {
+    font-size: 8.5rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .not-found-code {
+    font-size: 6.5rem;
+  }
+}
+
+.error-code > span {
+  animation: spooky 2s alternate infinite linear;
+  display: inline-block;
+}
+
+.forbidden-span {
+  color: var(--warning-color);
+}
+
+.server-error-span {
+  color: var(--warning-color);
+}
+
+.not-found-span {
+  color: var(--primary-color);
+}
+
+/* Subheading Styles */
+.error-title {
+  color: var(--heading);
+  margin-bottom: 0.4em;
+}
+
+/* Paragraph Styles */
+.error-text {
+  color: #ccc;
+  margin-top: 0;
+}
+
+/* Keyframes */
+@keyframes spooky {
+  from {
+    transform: translateY(0.15em) scaleY(0.95);
+  }
+
+  to {
+    transform: translateY(-0.15em);
+  }
+}

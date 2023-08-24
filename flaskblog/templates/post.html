@@ -9,6 +9,7 @@
         <h1 class="post-title"><span>{{ post.title }}</span></h1>
     </div>
     <div class="post-content">
+        <div class="test-background"></div>
         <div class="row mb-2">
             <h3 class="post-subtitle">{{ post.subtitle }}</h3>
         </div>
@@ -24,14 +25,14 @@
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             {% if form.comment.errors %}
-            {{ form.comment(class="form-control loginInput is-invalid") }}
-            <div class="invalid-feedback">
+            {{ form.comment(class="form-control form-input comment-input is-invalid") }}
+            <div class="invalid-feedback comment-invalid-feedback">
                 {% for error in form.comment.errors %}
                 <span>{{ error }}</span>
                 {% endfor %}
             </div>
             {% else %}
-            {{ form.comment(class="commentInput") }}
+            {{ form.comment(class="form-input comment-input") }}
             {% endif %}
 
             {{ form.submit(class="commentBtn") }}
@@ -42,12 +43,12 @@
     {% endif %}
     <div class="commentList">
         {% for comment in comments %}
-        <div class="commentDisplay">
-            <div class="commentListLeft">
+        <div class="commentDisplay container d-flex justify-content-between">
+            <div class="col-auto">
                 <div class="commentUser">{{ comment.user.username }}</div>
                 <small class="commentDate">{{ comment.date_posted.strftime('%d-%b-%Y') }}</small>
             </div>
-            <div class="commentListRight">
+            <div class="col">
                 <div class="comment">{{ comment.content }}</div>
             </div>
         </div>
@@ -55,62 +56,11 @@
     </div>
 </div>
 
+{% include "includes/topBtn.html" %}
 
+{% endblock %}
 
-
-<!-- 
-<div class="mainContent">
-    <div class="main">
-        <div class="postMain">
-            <div class="postTopContainer">
-                <img class="postMainImg" src="{{ headImg }}" alt="">
-                <h2>{{ post.subtitle }}</h2>
-            </div>
-            <h5 class="postMainDate">{{ post.date_posted.strftime('%d-%b-%Y') }}</h5>
-            <h5 class="postMainAuthor">{{ post.author }}</h5>
-            <div class="spacer"></div>
-            <div class="postMainContent">
-                <p>{{ post.content | safe }}</p>
-            </div>
-        </div>
-        {% if current_user.is_authenticated %}
-        <div class="commentForm">
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                {% if form.comment.errors %}
-                {{ form.comment(class="form-control loginInput is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.comment.errors %}
-                    <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-                {% else %}
-                {{ form.comment(class="commentInput") }}
-                {% endif %}
-
-                {{ form.submit(class="commentBtn") }}
-            </form>
-        </div>
-        {% else %}
-        <p class="message">Please login to leave a comment. :)</p>
-        {% endif %}
-        <div class="commentList">
-            {% for comment in comments %}
-            <div class="commentDisplay">
-                <div class="commentListLeft">
-                    <div class="commentUser">{{ comment.user.username }}</div>
-                    <small class="commentDate">{{ comment.date_posted.strftime('%d-%b-%Y') }}</small>
-                </div>
-                <div class="commentListRight">
-                    <div class="comment">{{ comment.content }}</div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-</div> -->
-
+{% block scripts %}
 <script>
     $("#comment").emojioneArea({
         pickerPosition: "top",
@@ -121,6 +71,11 @@
     });
 </script>
 
-{% include "includes/topBtn.html" %}
-
-{% endblock %}
+<script>
+    $(document).ready(function () {
+        $(".post-content p img").each(function () {
+            $(this).removeAttr("style");
+        });
+    });
+</script>
+{% endblock scripts %}

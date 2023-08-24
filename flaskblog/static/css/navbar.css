@@ -50,6 +50,7 @@ nav li a:hover,
   background: var(--light-color);
   background-image: url(images/SoftyTech.png);
   background-size: contain;
+  background-repeat: no-repeat;
   height: 50px;
   width: 50px;
   border: solid var(--primary-color) 2px;

@@ -14,11 +14,7 @@ main = Blueprint("main", __name__)
 main.before_request(before_request)
 main.after_request(after_request)
 
-# wa.whoosh_index(app, Post)
 
-
-# Route for HomePage
-# Displaying Posts and Search Function
 @main.route("/", methods=["GET", "POST"])
 @main.route("/home", methods=["GET", "POST"])
 def home():
@@ -29,11 +25,11 @@ def home():
         page = request.args.get("page", 1, type=int)
         query = Post.query.filter_by(isPublished=True).order_by(Post.date_posted.desc())
         search_results = query.whoosh_search(search_term)
-        posts = search_results.paginate(page=page, per_page=3)
+        posts = search_results.paginate(page=page, per_page=5)
     else:
         page = request.args.get("page", 1, type=int)
         query = Post.query.filter_by(isPublished=True).order_by(Post.date_posted.desc())
-        posts = query.paginate(page=page, per_page=3)
+        posts = query.paginate(page=page, per_page=5)
 
     context = {"posts": posts, "form": form}
 
@@ -44,9 +40,6 @@ def home():
 @main.route("/about")
 def about():
     return render_template("about.html")
-
-
-# Route for ContactPage
 
 
 @main.route("/contact", methods=["GET", "POST"])
@@ -79,10 +72,6 @@ def contact():
     }
 
     return render_template("/form-templates/contact.html", **context)
-
-
-# Route for Single Post
-# Displaying Post by its Slug
 
 
 @main.route("/<slug>", methods=["GET", "POST"])

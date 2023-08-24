@@ -15,9 +15,10 @@
   background: var(--dark-color);
   line-height: 1.4;
   font-family: sans-serif;
-  border-radius: 5px;
+  border-radius: 10px;
   overflow: hidden;
   z-index: 0;
+  cursor: pointer;
 }
 
 .blog-card a {
@@ -113,7 +114,8 @@
 
 .blog-card .description h1,
 .blog-card .description h2 {
-  font-family: Poppins, sans-serif;
+  font-family: "Orbitron", sans-serif;
+  text-transform: capitalize;
 }
 
 .blog-card .description h1 {
@@ -132,6 +134,7 @@
 
 .blog-card .description .read-more {
   text-align: right;
+  font-family: "Orbitron", sans-serif;
 }
 
 .blog-card .description .read-more a {

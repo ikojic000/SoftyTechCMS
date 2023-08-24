@@ -15,6 +15,7 @@
   overflow: hidden;
   max-height: 30rem;
   border-radius: 10px;
+  vertical-align: middle;
 }
 
 .post-head-image-container img {
@@ -52,6 +53,16 @@
   text-align: justify;
 }
 
+.test-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: red;
+  width: 100%;
+  height: 100px;
+  z-index: 1100;
+}
+
 .line {
   display: block;
   width: 100%;
@@ -72,4 +83,8 @@
 .post-author {
   text-align: right;
   font-family: "Orbitron", sans-serif;
+}
+
+.post-content p img {
+  width: 100%;
 }

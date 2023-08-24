@@ -1,5 +1,5 @@
 <header>
-    <div class="header-wrapper container d-flex justify-content-between align-items-center">
+    <div class="header-wrapper container-md d-flex justify-content-between align-items-center">
         <div class="col d-flex align-items-center">
             <a class="nav-logo me-4" href="/"></a>
             <h4>Softy Tech</h4>
@@ -22,7 +22,7 @@
                             <span class="menu-text">{{ current_user.username }}</span>
                         </a>
                         {% else %}
-                        <a href="">
+                        <a href="{{ url_for('users.update_user_account_settings', user_id=current_user.id) }}">
                             <span class="menu-icon"><i class="fa-solid fa-user"></i></span>
                             <span class="menu-text">{{ current_user.username }}</span>
                         </a>
