@@ -1,66 +1,97 @@
-from flask import render_template, url_for, redirect, flash, request, Blueprint
-from flaskblog import app, db, mail
+from flask import render_template, url_for, redirect, flash, request, Blueprint, abort
+from flaskblog.comments.database_manager import add_comment, comments_by_post_id
 from flaskblog.logs.request_logging import after_request, before_request
-from flaskblog.models import Post, Comment, User
+from flaskblog.main.utils import send_mail
 from flaskblog.main.forms import SearchForm, ContactForm
 from flaskblog.comments.forms import CommentForm
 from flask_login import current_user
-from flask_mail import Message
-import flask_whooshalchemy as wa
 
+from flaskblog.posts.database_manager import (
+    get_post_by_slug,
+    get_posts_pagination,
+    get_posts_searched_pagination,
+)
 
+# Create a Blueprint for the main routes
 main = Blueprint("main", __name__)
 
+# Register before and after request handlers for logging
 main.before_request(before_request)
 main.after_request(after_request)
 
 
+@main.route("/test_error")
+def test_error():
+    print("Test error - 500")
+    abort(500, "Test error message")
+
+
+# Home page route
 @main.route("/", methods=["GET", "POST"])
 @main.route("/home", methods=["GET", "POST"])
 def home():
+    """
+    Display the home page, including a list of posts.
+
+    Returns:
+        render_template: Renders the home page template.
+    """
+    # Create a search form
     form = SearchForm()
 
+    # Check if the form is submitted and validate it
     if form.validate_on_submit():
-        search_term = form.search.data
-        page = request.args.get("page", 1, type=int)
-        query = Post.query.filter_by(isPublished=True).order_by(Post.date_posted.desc())
-        search_results = query.whoosh_search(search_term)
-        posts = search_results.paginate(page=page, per_page=5)
+        posts = get_posts_searched_pagination(request, 5, form.search.data)
     else:
-        page = request.args.get("page", 1, type=int)
-        query = Post.query.filter_by(isPublished=True).order_by(Post.date_posted.desc())
-        posts = query.paginate(page=page, per_page=5)
+        posts = get_posts_pagination(request, 5)
 
     context = {"posts": posts, "form": form}
 
     return render_template("index.html", **context)
 
 
-# Route for AboutPage
+# About page route
 @main.route("/about")
 def about():
+    """
+    Display the about page.
+
+    Returns:
+        render_template: Renders the about page template.
+    """
     return render_template("about.html")
 
 
+# About page route
+@main.route("/about/MPDTech")
+def about_mpd_tech():
+    """
+    Display the MPD Tech about page.
+
+    Returns:
+        render_template: Renders the about-mpd-tech page template.
+    """
+    return render_template("about-mpd-tech.html")
+
+
+# Contact page route
 @main.route("/contact", methods=["GET", "POST"])
 def contact():
+    """
+    Display the contact page and handle contact form submissions.
+
+    Returns:
+        render_template or redirect: Renders the contact page template or redirects to the home page.
+    """
     form = ContactForm()
 
+    # Pre-fill form fields if user is authenticated
     if current_user.is_authenticated:
         form.name.data = current_user.username
         form.email.data = current_user.email
 
     if form.validate_on_submit():
-        message = Message(
-            form.subject.data,
-            sender="softythetechguy@gmail.com",
-            recipients=["ikojic000@gmail.com"],
-        )
-        message.body = f"""
-        From: {form.name.data} <{form.email.data}>
-        {form.message.data}
-        """
-        mail.send(message)
+        send_mail(form.subject.data, form.name.data, form.email.data, form.message.data)
         flash(
             "Thank you for your message. We will reply as soon as possible!", "success"
         )
@@ -74,15 +105,21 @@ def contact():
     return render_template("/form-templates/contact.html", **context)
 
 
+# Individual post page route
 @main.route("/<slug>", methods=["GET", "POST"])
 def post(slug):
-    post = Post.query.filter_by(slug=slug).first_or_404()
+    """
+    Display an individual blog post page, including comments and a comment submission form.
 
-    comments = (
-        Comment.query.order_by(Comment.date_posted.desc())
-        .filter_by(post_id=post.id)
-        .all()
-    )
+    Args:
+        slug (str): The unique slug of the post.
+
+    Returns:
+        render_template or redirect: Renders the post page template or redirects to the home page.
+    """
+    post = get_post_by_slug(slug)
+
+    comments = comments_by_post_id(post.id)
 
     head_img_url = url_for(
         "static", filename=f"upload/media/images/head_Images/{post.headImg}"
@@ -90,11 +127,7 @@ def post(slug):
 
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(
-            content=form.comment.data, user_id=current_user.id, post_id=post.id
-        )
-        db.session.add(comment)
-        db.session.commit()
+        add_comment(form.comment.data, current_user.id, post.id)
         flash("Comment added", "success")
         return redirect(url_for("main.post", slug=post.slug))
 

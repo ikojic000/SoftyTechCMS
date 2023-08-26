@@ -46,22 +46,7 @@
     <!--- Google Font --->
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Orbitron" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600" rel="stylesheet">
-    <!--- SCRIPTS --->
-    <!--- JQuery Scripts --->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Emoji Plugin -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/emojionearea.css') }}">
-    <script src="{{ url_for('static', filename='js/emojionearea.js') }}"></script>
-    <!--- Popper Scripts --->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <!--- Bootstrap Scripts --->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-    <!--- My Scripts --->
-    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
 
 </head>
 
@@ -81,6 +66,39 @@
     </main>
 
     {% include "includes/footer.html" %}
+
+    <!--- SCRIPTS --->
+    <!--- JQuery Scripts --->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Emoji Plugin -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/emojionearea.css') }}">
+    <script src="{{ url_for('static', filename='js/emojionearea.js') }}"></script>
+    <!--- Popper Scripts --->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <!--- Bootstrap Scripts --->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!--- My Scripts --->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Find all elements with ".alert" class
+            $('.alert').each(function () {
+                var timeout = $(this).data('timeout'); // Read "data-timeout" attribute
+                var alert = $(this); // Store the alert element reference
+
+                // Use setTimeout to close the alert after the specified time
+                setTimeout(function () {
+                    alert.alert('close'); // Close the alert using Bootstrap's close method
+                }, timeout);
+            });
+        });
+    </script>
+
 
     {% block scripts %}
 

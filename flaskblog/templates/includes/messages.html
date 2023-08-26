@@ -7,18 +7,3 @@
 {% endfor %}
 {% endif %}
 {% endwith %}
-
-<script>
-    $(document).ready(function () {
-        // Find all elements with ".alert" class
-        $('.alert').each(function () {
-            var timeout = $(this).data('timeout'); // Read "data-timeout" attribute
-            var alert = $(this); // Store the alert element reference
-
-            // Use setTimeout to close the alert after the specified time
-            setTimeout(function () {
-                alert.alert('close'); // Close the alert using Bootstrap's close method
-            }, timeout);
-        });
-    });
-</script>

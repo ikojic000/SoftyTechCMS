@@ -6,7 +6,9 @@
 <div class="post-main">
     <div class="post-head-image-container">
         <img src="{{ headImg }}" alt="">
-        <h1 class="post-title"><span>{{ post.title }}</span></h1>
+        <h1 class="post-title">
+            <div class="post-title-span">{{ post.title }}</div>
+        </h1>
     </div>
     <div class="post-content">
         <div class="test-background"></div>
@@ -61,20 +63,19 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-    $("#comment").emojioneArea({
-        pickerPosition: "top",
-        filtersPosition: "bottom",
-        recentEmojis: false,
-        search: false
-
-    });
-</script>
 
 <script>
     $(document).ready(function () {
         $(".post-content p img").each(function () {
             $(this).removeAttr("style");
+        });
+
+        $("#comment").emojioneArea({
+            pickerPosition: "top",
+            filtersPosition: "bottom",
+            recentEmojis: false,
+            search: false
+
         });
     });
 </script>

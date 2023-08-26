@@ -1,6 +1,3 @@
-# PYTHON FILE WITH / FOR DATABASE MODELS
-
-# Imports
 from datetime import datetime
 from flaskblog import db, login_manager
 from flask_user import UserMixin

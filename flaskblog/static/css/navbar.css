@@ -52,7 +52,7 @@ nav li a:hover,
   background-size: contain;
   background-repeat: no-repeat;
   height: 50px;
-  width: 50px;
+  min-width: 50px;
   border: solid var(--primary-color) 2px;
   border-radius: 50%;
 }

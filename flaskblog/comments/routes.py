@@ -1,31 +1,39 @@
-from datetime import datetime
-from flask import Blueprint, redirect, render_template, flash, url_for, request, abort
+from flask import Blueprint, redirect, render_template, flash, url_for, request
 from flask.json import jsonify
 from flask_login import login_required
 from flask_user import roles_required
+from flaskblog.comments.database_manager import (
+    count_comments,
+    delete_all_users_comments,
+    delete_comment_by_id,
+    get_all_comments,
+)
+from flaskblog.comments.utils import get_comments_count
 from flaskblog.logs.request_logging import after_request, before_request
-from flaskblog.models import Post, Comment, User
-from flaskblog import db
 
+# Create a Blueprint for managing comments
 comments = Blueprint("comments", __name__)
 
+# Register before and after request handlers for logging
 comments.before_request(before_request)
 comments.after_request(after_request)
 
 
-# Dashoard - Table wih all posts with edit/delete buttons - New Design
+# Dashboard - Table with all comments with edit/delete buttons
 @comments.route("/admin/comments/all")
 @login_required
 @roles_required(["Admin", "Superadmin"])
 def all_comments():
-    title = "All Comments"
-    comments = (
-        Comment.query.join(User, Comment.user_id == User.id)
-        .join(Post, Comment.post_id == Post.id)
-        .all()
-    )
+    """
+    Display all comments in a table with edit/delete buttons.
 
-    context = {"pageTitle": title, "comments": comments}
+    Returns:
+        render_template: Renders the admin-comments.html template.
+    """
+    title = "All Comments"
+    comments_data = get_all_comments()
+
+    context = {"pageTitle": title, "comments": comments_data}
 
     return render_template("admin/admin-comments.html", **context)
 
@@ -35,9 +43,16 @@ def all_comments():
 @login_required
 @roles_required(["Admin", "Superadmin"])
 def delete_comment(comment_id):
-    comment = Comment.query.filter_by(id=comment_id).first_or_404()
-    db.session.delete(comment)
-    db.session.commit()
+    """
+    Delete a comment by its ID.
+
+    Args:
+        comment_id (int): The ID of the comment to be deleted.
+
+    Returns:
+        redirect: Redirects back to the referring page or a default page.
+    """
+    delete_comment_by_id(comment_id)
     flash("You have deleted the comment!", "success")
 
     # Get the referrer (URL that the request came from)
@@ -57,54 +72,45 @@ def delete_comment(comment_id):
 @login_required
 @roles_required(["Admin", "Superadmin"])
 def delete_all_comments_by_user(user_id):
-    try:
-        user = User.query.filter_by(id=user_id).first_or_404()
-        num_deleted = Comment.query.filter_by(user_id=user_id).delete()
+    """
+    Delete all comments by a specific user.
 
-        if num_deleted > 0:
-            db.session.commit()
-            flash(f"Deleted {num_deleted} comments by {user.username}.", "success")
-        else:
-            flash(f"No comments by {user.username} to delete.", "info")
+    Args:
+        user_id (int): The ID of the user whose comments should be deleted.
 
-    except Exception as e:
-        flash("An error occurred while deleting comments.", "error")
-        db.session.rollback()
-        abort(500)
+    Returns:
+        redirect: Redirects to the user details page after deleting comments.
+    """
+    delete_all_users_comments(user_id)
 
-    # Redirect back to the user details page
     return redirect(url_for("users.user_details", user_id=user_id))
 
 
-# Method that returns total number of comments
+# Method that returns the total number of comments
 @comments.route("/api/comments/number_of_comments", methods=["GET"])
 def number_of_comments():
-    number_of_comments = Comment.query.count()
-    return jsonify(number_of_comments=number_of_comments)
+    """
+    Return the total number of comments.
+
+    Returns:
+        jsonify: JSON response containing the number of comments.
+    """
+    number_of_comments_data = count_comments()
+    return jsonify(number_of_comments=number_of_comments_data)
 
 
+# Method that returns list of number of comments per month
 @comments.route("/api/comments/count_by_months", methods=["GET"])
 def comment_count():
-    commentCountList = []
+    """
+    Return the count of comments in each month.
+
+    Returns:
+        jsonify: JSON response containing comment counts for each month.
+    """
+    comment_count_list = []
 
     for x in range(1, 13):
-        commentCountList.append(get_comments_count(x))
+        comment_count_list.append(get_comments_count(x))
 
-    return jsonify(commentCountList=commentCountList)
-
-
-def get_comments_count(month):
-    current_year = datetime.utcnow().year
-    start_date = datetime(current_year, month, 1)
-    if month == 12:
-        end_date = datetime(current_year + 1, 1, 1)
-    else:
-        end_date = datetime(current_year, month + 1, 1)
-
-    comment_count = Comment.query.filter(
-        Comment.date_posted >= start_date, Comment.date_posted < end_date
-    ).count()
-
-    # response = {"month": month, "year": current_year, "comment_count": comment_count}
-    # return jsonify(response)
-    return comment_count
+    return jsonify(commentCountList=comment_count_list)

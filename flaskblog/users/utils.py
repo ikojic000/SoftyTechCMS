@@ -1,27 +1,31 @@
-from datetime import datetime
-from flask_login import current_user
-
-from flaskblog.models import User
+from flaskblog.users.database_manager import users_count_in_single_month
 
 
 # Utility method that checks if a user has a specific role
 def user_has_role(user, target_role):
+    """
+    Check if a user has a specific role.
+
+    Args:
+        user: The user object to check.
+        target_role (str): The role to check for.
+
+    Returns:
+        bool: True if the user has the target role, False otherwise.
+    """
     return any(role.name == target_role for role in user.roles)
 
 
 # Method for getting user count for a single month
 def get_users_count(month):
-    current_year = datetime.utcnow().year
-    start_date = datetime(current_year, month, 1)
-    if month == 12:
-        end_date = datetime(current_year + 1, 1, 1)
-    else:
-        end_date = datetime(current_year, month + 1, 1)
+    """
+    Get the count of users for a single month.
 
-    user_count = User.query.filter(
-        User.email_confirmed_at >= start_date, User.email_confirmed_at < end_date
-    ).count()
+    Args:
+        month (int): The month for which to get the user count.
 
-    # response = {"month": month, "year": current_year, "user_count": user_count}
-    # return jsonify(response)
+    Returns:
+        int: The count of users for the specified month.
+    """
+    user_count = users_count_in_single_month(month)
     return user_count

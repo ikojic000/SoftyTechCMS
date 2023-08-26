@@ -8,7 +8,6 @@ from wtforms import (
     PasswordField,
 )
 from wtforms.validators import DataRequired, Email, Length, EqualTo
-from flask_wtf.file import FileAllowed
 from flaskblog.auth.utils import (
     validate_email,
     validate_email_update,
@@ -16,8 +15,7 @@ from flaskblog.auth.utils import (
     validate_username,
     validate_username_update,
 )
-from flaskblog.models import User, Role
-from flask_login import current_user
+from flaskblog.models import Role
 
 
 # FORMS
@@ -68,14 +66,29 @@ class UserRoleForm(FlaskForm):
     submit = SubmitField("Change Role")
 
 
-# Form foe Addin New User
+# Form for Adding New User
 class CreateNewUserForm(FlaskForm):
     name = StringField("Name")
     username = StringField(
         "Username",
-        validators=[DataRequired(), Length(min=3, max=15), validate_username],
+        validators=[
+            DataRequired(message="Username is required."),
+            Length(
+                min=3,
+                max=15,
+                message="Username must be between 3 and 15 characters long. Please choose a different one!",
+            ),
+            validate_username,
+        ],
     )
-    email = StringField("Email", validators=[DataRequired(), Email(), validate_email])
+    email = StringField(
+        "Email",
+        validators=[
+            DataRequired(message="Email is required."),
+            Email(),
+            validate_email,
+        ],
+    )
     role = SelectMultipleField(
         "User Role",
         choices=[
@@ -93,17 +106,40 @@ class UserAccountSettingsForm(FlaskForm):
     name = StringField("Name")
     username = StringField(
         "Username",
-        validators=[DataRequired(), Length(min=3, max=15), validate_username_update],
+        validators=[
+            DataRequired(message="Username is required. Please enter your username!"),
+            Length(
+                min=3,
+                max=15,
+                message="Username must be between 3 and 15 characters long. Please choose a different one!",
+            ),
+            validate_username_update,
+        ],
     )
     email = StringField(
-        "Email", validators=[DataRequired(), Email(), validate_email_update]
+        "Email",
+        validators=[
+            DataRequired(message="Email is required. Please enter your email!"),
+            Email(),
+            validate_email_update,
+        ],
     )
     submitAccountSettings = SubmitField("Save")
 
 
 class UserChangePasswordForm(FlaskForm):
-    password = PasswordField("Password", validators=[DataRequired(), validate_password])
+    password = PasswordField(
+        "Password",
+        validators=[
+            DataRequired(message="Password is required. Please enter your password!"),
+            validate_password,
+        ],
+    )
     confirm_password = PasswordField(
-        "Confirm Password", validators=[EqualTo("password")]
+        "Confirm Password",
+        validators=[
+            DataRequired(message="Please retype your password!"),
+            EqualTo("password", message="Passwords must match!"),
+        ],
     )
     submitChangePassword = SubmitField("Change Password")

@@ -13,28 +13,80 @@ from wtforms.validators import (
 from flaskblog.auth.utils import validate_email, validate_password, validate_username
 
 
-# Form for loging in
+# Form for logging in
 class LoginForm(FlaskForm):
+    """
+    Form for user login.
+
+    Attributes:
+        email (StringField): The email field for username or email input.
+        password (PasswordField): The password field.
+        submit (SubmitField): The submission button for login.
+    """
+
     email = StringField(
         "Email",
         validators=[
-            DataRequired(),
+            DataRequired(
+                message="Username/Email is required. Please enter your username or email."
+            ),
         ],
     )
     password = PasswordField("Password", validators=[DataRequired()])
-    submit = SubmitField("Login")
+    submit = SubmitField("Login")  # Submit button
 
 
-# Form for registration
+# Form for user registration
 class RegisterForm(FlaskForm):
-    name = StringField("Name", validators=[Length(min=2, max=50)])
+    """
+    Form for user registration.
+
+    Attributes:
+        name (StringField): The name field (optional).
+        username (StringField): The username field with custom validation.
+        email (StringField): The email field with custom validation.
+        password (PasswordField): The password field with custom validation.
+        confirm_password (PasswordField): The confirmation password field.
+        submit (SubmitField): The submission button for registration.
+    """
+
+    name = StringField("Name", validators=[Length(max=50)])  # Name field (optional)
     username = StringField(
         "Username",
-        validators=[DataRequired(), Length(min=3, max=15), validate_username],
+        validators=[
+            validate_username,  # Custom username validation
+            DataRequired(message="Username is required. Please enter your username."),
+            Length(
+                min=3,
+                max=15,
+                message="Username must be between 3 and 15 characters long. Please choose a different one!",
+            ),
+        ],
     )
-    email = StringField("Email", validators=[DataRequired(), Email(), validate_email])
-    password = PasswordField("Password", validators=[DataRequired(), validate_password])
+    email = StringField(
+        "Email",
+        validators=[
+            validate_email,  # Custom email validation
+            DataRequired(message="Email is required. Please enter your email."),
+            Email(),
+        ],
+    )
+    password = PasswordField(
+        "Password",
+        validators=[
+            DataRequired(),
+            validate_password,  # Custom password validation
+        ],
+    )
     confirm_password = PasswordField(
-        "Confirm Password", validators=[DataRequired(), EqualTo("password")]
+        "Confirm Password",
+        validators=[
+            DataRequired(
+                message="Confirm Password is required. Please retype your password."
+            ),
+            EqualTo(
+                "password", message="Passwords must match!"
+            ),  # Check password confirmation
+        ],
     )
-    submit = SubmitField("Register")
+    submit = SubmitField("Register")  # Submit button for registration

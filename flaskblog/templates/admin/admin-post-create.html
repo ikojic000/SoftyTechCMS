@@ -109,7 +109,17 @@
 
                     <div class="col-md-12">
                         <label for="{{ form.category.id }}" class="form-label">{{ form.category.label.text }}</label>
+                        {% if form.category.errors %}
+                        {{ form.category(class="form-select bg-dark text-light is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.category.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        {% else %}
                         {{ form.category(class="form-select bg-dark text-light") }}
+                        {% endif %}
+
                     </div>
 
                     <div class="col-md-12">
