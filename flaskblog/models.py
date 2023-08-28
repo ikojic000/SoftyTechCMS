@@ -14,6 +14,7 @@ def load_user(user_id):
 # User table
 class User(db.Model, UserMixin):
     __tablename__ = "users"
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(25), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -39,6 +40,7 @@ class Role(db.Model):
 
 class UserRoles(db.Model):
     __tablename__ = "user_roles"
+
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(db.Integer(), db.ForeignKey("users.id", ondelete="CASCADE"))
     role_id = db.Column(db.Integer(), db.ForeignKey("roles.id", ondelete="CASCADE"))
@@ -46,8 +48,6 @@ class UserRoles(db.Model):
 
 # Post table
 class Post(db.Model):
-    __searchable__ = ["title", "content"]
-
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     subtitle = db.Column(db.String(100), nullable=False)

@@ -82,23 +82,33 @@
 {% block scripts %}
 
 <script>
+    // When the document is ready (page is fully loaded)
     $(document).ready(function () {
+        // Initialize DataTable for the table with ID 'datatable-posts'
         $('#datatable-posts').DataTable({
-            "order": [[2, "desc"]]
+            "order": [[2, "desc"]] // Set initial sorting order by the third column (index 2) in descending order
         });
 
         // Show modal and set delete URL when delete button is clicked
         $('.btn-confirm-delete').click(function () {
-            const commentId = $(this).data('comment-id');
-            const deleteUrl = $(this).data('delete-url');
-            const commentContent = $(this).closest('tr').find('.comment-content').text();
-            const commentAuthor = $(this).closest('tr').find('.comment-author').text();
+            // Get data attributes from the clicked element
+            const commentId = $(this).data('comment-id'); // Comment ID
+            const deleteUrl = $(this).data('delete-url'); // Delete URL
+            const commentContent = $(this).closest('tr').find('.comment-content').text(); // Comment content from table row
+            const commentAuthor = $(this).closest('tr').find('.comment-author').text(); // Comment author from table row
+
+            // Populate modal with comment information
             $('#modalCommentContent').text("Comment: " + commentContent);
             $('#modalCommentAuthor').text("Written by: " + commentAuthor);
+
+            // Set the 'href' attribute of the delete button in the modal
             $('#modalDeleteButton').attr('href', deleteUrl);
+
+            // Show the delete confirmation modal
             $('#deleteModal').modal('show');
         });
     });
+
 </script>
 
 {% endblock scripts %}

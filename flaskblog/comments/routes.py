@@ -9,6 +9,7 @@ from flaskblog.comments.database_manager import (
     get_all_comments,
 )
 from flaskblog.comments.utils import get_comments_count
+from flaskblog.decorators import owner_of_comment_required
 from flaskblog.logs.request_logging import after_request, before_request
 
 # Create a Blueprint for managing comments
@@ -64,6 +65,39 @@ def delete_comment(comment_id):
         return redirect(url_for("posts.allComments"))
 
     # Otherwise, redirect back to the referrer
+    return redirect(referrer)
+
+
+# Deleting a comment on a post page
+@comments.route("/comments/delete/<int:comment_id>", methods=["POST"])
+@login_required  # Ensure the user is logged in to access this route
+@owner_of_comment_required  # Ensure the user is the owner of the comment
+def delete_comment_by_owner(comment_id):
+    """
+    Route for deleting a comment by its owner.
+
+    This route allows the owner of a comment to delete it. It requires the user to be logged in and also checks
+    if the user is the owner of the comment using the @owner_of_comment_required decorator.
+
+    Args:
+        comment_id (int): The ID of the comment to be deleted.
+
+    Returns:
+        redirect: Redirects the user back to the referrer URL or the home page after deletion.
+    """
+
+    # Delete the comment using the database manager function
+    delete_comment_by_id(comment_id)
+
+    # Get the referrer (URL that the request came from)
+    referrer = request.referrer
+
+    # If the referrer is None (e.g., direct access to the delete URL),
+    # then redirect to a home page
+    if referrer is None:
+        return redirect(url_for("main.home"))
+
+    # Otherwise, redirect back to the referrer (the page from where the delete request originated)
     return redirect(referrer)
 
 

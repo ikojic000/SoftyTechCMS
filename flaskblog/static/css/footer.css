@@ -72,14 +72,6 @@ footer {
   color: var(--primary-color);
 }
 
-#aboutBtn {
-  float: left;
-}
-
-#contactBtn {
-  float: right;
-}
-
 @media only screen and (max-width: 800px) {
   #topBtn:hover i {
     transform: scale(1);

@@ -18,12 +18,19 @@ from flaskblog.auth.utils import (
 from flaskblog.models import Role
 
 
-# FORMS
-# USER SIDE FORMS
-
-
 # Form for updating user account
 class UpdateAccountForm(FlaskForm):
+    """
+    A FlaskForm class for updating a user's account information.
+
+    Attributes:
+        username (StringField): Field to display and edit the username.
+        email (StringField): Field to display and edit the email.
+        role (RadioField): Radio button field for selecting a user's role.
+        active (BooleanField): Checkbox field for user's active status.
+        submit (SubmitField): Button to submit the form.
+    """
+
     username = StringField(
         "Username",
         render_kw={"readonly": True},  # Make the field readonly
@@ -44,14 +51,19 @@ class UpdateAccountForm(FlaskForm):
     submit = SubmitField("Update")
 
 
-# Form for Roles - Admin
-class UpdateAccountRoleForm(FlaskForm):
-    role = StringField("Role", validators=[DataRequired()])
-    submit = SubmitField("Update")
-
-
-# Form for Changing user settings - Role & Active - New
+# Form for Changing user settings - Role & Active
 class UserRoleForm(FlaskForm):
+    """
+    A FlaskForm class for changing a user's role and active status.
+
+    Attributes:
+        username (StringField): Field to display the username.
+        email (StringField): Field to display the email.
+        role (SelectMultipleField): Multi-select field for changing user roles.
+        active (BooleanField): Checkbox field for user's active status.
+        submit (SubmitField): Button to submit the form.
+    """
+
     username = StringField("Username", render_kw={"readonly": True})
     email = StringField("Email", render_kw={"readonly": True})
     role = SelectMultipleField(
@@ -68,6 +80,18 @@ class UserRoleForm(FlaskForm):
 
 # Form for Adding New User
 class CreateNewUserForm(FlaskForm):
+    """
+    A FlaskForm class for creating a new user.
+
+    Attributes:
+        name (StringField): Field to input the user's name.
+        username (StringField): Field to input the username.
+        email (StringField): Field to input the email.
+        role (SelectMultipleField): Multi-select field for selecting user roles.
+        active (BooleanField): Checkbox field for user's active status.
+        submit (SubmitField): Button to submit the form.
+    """
+
     name = StringField("Name")
     username = StringField(
         "Username",
@@ -103,6 +127,16 @@ class CreateNewUserForm(FlaskForm):
 
 # User Account Settings
 class UserAccountSettingsForm(FlaskForm):
+    """
+    A FlaskForm class for editing user account settings.
+
+    Attributes:
+        name (StringField): Field to input the user's name.
+        username (StringField): Field to input the username.
+        email (StringField): Field to input the email.
+        submitAccountSettings (SubmitField): Button to submit account settings changes.
+    """
+
     name = StringField("Name")
     username = StringField(
         "Username",
@@ -127,7 +161,17 @@ class UserAccountSettingsForm(FlaskForm):
     submitAccountSettings = SubmitField("Save")
 
 
+# Form for changing user password
 class UserChangePasswordForm(FlaskForm):
+    """
+    A FlaskForm class for changing a user's password.
+
+    Attributes:
+        password (PasswordField): Field to input the new password.
+        confirm_password (PasswordField): Field to confirm the new password.
+        submitChangePassword (SubmitField): Button to submit password change.
+    """
+
     password = PasswordField(
         "Password",
         validators=[

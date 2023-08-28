@@ -1,4 +1,5 @@
 from flaskblog import mail
+from flask import flash, abort
 from flask_mail import Message
 
 
@@ -16,17 +17,21 @@ def send_mail(subject, name, email, email_message):
     Returns:
         None
     """
-    # Create a Message object with the specified subject, sender, and recipients
-    message = Message(
-        subject,
-        sender="softythetechguy@gmail.com",
-        recipients=["softythetechguy@gmail.com"],
-    )
+    try:
+        # Create a Message object with the specified subject, sender, and recipients
+        message = Message(
+            subject,
+            sender="softythetechguy@gmail.com",
+            recipients=["softythetechguy@gmail.com"],
+        )
 
-    message.body = f"""
-    From: {name} <{email}>
-    {email_message}
-    """
+        message.body = f"""
+        From: {name} <{email}>
+        {email_message}
+        """
 
-    # Send the email
-    mail.send(message)
+        # Send the email
+        mail.send(message)
+    except Exception as e:
+        flash("An error occurred while sending the email.", "error")
+        abort(500, "An error occurred while sending the email. Please try again later.")

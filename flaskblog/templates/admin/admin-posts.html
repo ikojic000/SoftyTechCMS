@@ -80,10 +80,13 @@
 {% block scripts %}
 <script>
     // DataTable - Tablica
+    // When the document is ready (page is fully loaded)
     $(document).ready(function () {
+        // Initialize DataTable for the table with ID "datatable-posts"
         $("#datatable-posts").DataTable({
-            "order": [[1, "desc"]]
+            "order": [[1, "desc"]] // Specify default sorting order for columns
         });
     });
+
 </script>
 {% endblock scripts %}

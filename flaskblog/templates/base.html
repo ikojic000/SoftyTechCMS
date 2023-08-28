@@ -85,18 +85,24 @@
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 
     <script>
+        // When the document is ready (page is fully loaded)
         $(document).ready(function () {
-            // Find all elements with ".alert" class
+            // Find all elements with the class ".alert"
             $('.alert').each(function () {
-                var timeout = $(this).data('timeout'); // Read "data-timeout" attribute
-                var alert = $(this); // Store the alert element reference
+                // Read the "data-timeout" attribute from the current alert element
+                var timeout = $(this).data('timeout');
 
-                // Use setTimeout to close the alert after the specified time
+                // Store a reference to the current alert element
+                var alert = $(this);
+
+                // Use setTimeout to schedule the closure of the alert after the specified timeout
                 setTimeout(function () {
-                    alert.alert('close'); // Close the alert using Bootstrap's close method
+                    // Close the alert using Bootstrap's 'close' method
+                    alert.alert('close');
                 }, timeout);
             });
         });
+
     </script>
 
 

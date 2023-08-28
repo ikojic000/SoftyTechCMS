@@ -106,21 +106,29 @@
 {% block scripts %}
 
 <script>
+    // When the document is ready (page is fully loaded)
     $(document).ready(function () {
+        // Initialize DataTable for the table with ID 'datatable-posts'
         $('#datatable-posts').DataTable({
-            "order": [[0, "desc"]]
+            "order": [[0, "desc"]] // Set initial sorting order by the first column (index 0) in descending order
         });
 
         // Show modal and set delete URL when delete button is clicked
         $('.btn-confirm-delete').click(function () {
+            // Get the 'data-delete-url' attribute from the clicked element (delete button)
             const deleteUrl = $(this).data('delete-url');
+
+            // Set the 'href' attribute of the delete button in the modal
             $('#modalDeleteButton').attr('href', deleteUrl);
+
+            // Show the delete confirmation modal
             $('#deleteModal').modal('show');
         });
 
+        // Show the "Add Category" modal when the "Add Category" button is clicked
         $("#addCategoryBtn").click(function () {
             $("#addCategoryModal").modal('show');
-        })
+        });
     });
 </script>
 

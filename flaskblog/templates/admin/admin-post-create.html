@@ -170,30 +170,50 @@
 {% block scripts %}
 
 <script>
+    // Initialize CKEditor on the element with the ID 'editor'
     CKEDITOR.replace('editor', {
+        // Configure the image upload URL
         filebrowserImageUploadUrl: '/ckupload/',
+
+        // Configure the upload method for file browser (form-based)
         filebrowserUploadMethod: 'form',
+
+        // Configure the browse URL for the file browser dialog
         filebrowserBrowseUrl: '/fm/index.html'
     });
+
 </script>
 
 <script>
-    const headImgInput = document.getElementById('headImgInput');
-    const headImgPreview = document.getElementById('headImgPreview');
-    const currentHeadImageLabel = document.querySelector('.current-head-image-label');
+    // Get references to HTML elements
+    const headImgInput = document.getElementById('headImgInput'); // Input element for selecting an image file
+    const headImgPreview = document.getElementById('headImgPreview'); // Image element for previewing the selected image
+    const currentHeadImageLabel = document.querySelector('.current-head-image-label'); // Label for displaying the image status
 
+    // Add an event listener to the headImgInput element for the "change" event
     headImgInput.addEventListener('change', (event) => {
-        const file = event.target.files[0];
+        // Get the selected file from the input
+
+        // Check if a file is selected
         if (file) {
+            // Create a FileReader to read the selected file
             const reader = new FileReader();
+
+            // Define an event handler for when the FileReader finishes loading the file
             reader.onload = (e) => {
+                // Set the source of the headImgPreview to the data URL of the selected image
                 headImgPreview.src = e.target.result;
+
+                // Update the label to indicate that a new head image is selected
                 currentHeadImageLabel.textContent = 'New Head Image';
             };
+
+            // Read the selected file as a data URL, which can be used as the image source
             reader.readAsDataURL(file);
         } else {
-            headImgPreview.src = ''; // Clear the image preview if no file is selected
-            currentHeadImageLabel.textContent = 'Current Head Image';
+            // If no file is selected, clear the image preview and update the label
+            headImgPreview.src = ''; // Clear the image preview
+            currentHeadImageLabel.textContent = 'Current Head Image'; // Update the label
         }
     });
 </script>

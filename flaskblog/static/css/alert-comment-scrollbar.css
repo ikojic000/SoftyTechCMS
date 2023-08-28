@@ -101,18 +101,6 @@
   padding: 10px 20px;
   margin: 10px 0;
 }
-.commentListLeft {
-  width: 30%;
-  margin: 0;
-  float: left;
-  text-align: center;
-}
-.commentListRight {
-  width: 65%;
-  margin: 0;
-  float: right;
-  text-align: left;
-}
 
 .commentUser {
   margin-top: 5px;
@@ -131,20 +119,16 @@
   font-size: 10px;
 }
 
-/* ABOUT */
-.admins {
-  margin: 50px auto;
+.comment-delete-button {
+  color: var(--light-color);
+  font-size: 15px;
+  transition: 0.3s ease-in;
 }
 
-/* CONTACT */
-.contact {
-  color: white;
-  margin: 0 auto;
-}
-
-.contact p {
-  font-size: 20px;
-  text-align: center;
+.comment-delete-button:hover {
+  cursor: pointer;
+  color: var(--warning-color);
+  font-size: 16px;
 }
 
 @media only screen and (min-width: 950px) {

@@ -257,27 +257,41 @@
 {% block scripts %}
 
 <script>
+    // When the document is ready (page is fully loaded)
     $(document).ready(function () {
-        // Show modal and set delete URL when delete button is clicked
+        // Show modal and set delete URL when the delete button is clicked
         $('.btn-confirm-delete').click(function () {
+            // Get the comment ID and delete URL from data attributes
             const commentId = $(this).data('comment-id');
             const deleteUrl = $(this).data('delete-url');
+
+            // Get the text content of the comment associated with the delete button
             const commentContent = $(this).closest('tr').find('.comment-content').text();
+
+            // Set the text inside the modal with an ID of 'modalCommentContent'
             $('#modalCommentContent').text("Comment: " + commentContent);
+
+            // Set the 'href' attribute of the delete button inside the modal
             $('#modalDeleteButton').attr('href', deleteUrl);
+
+            // Show the modal with an ID of 'deleteModal'
             $('#deleteModal').modal('show');
         });
     });
 
     // DataTable - Tablica
     $(document).ready(function () {
+        // Initialize DataTable for the table with ID "datatable-posts"
         $("#datatable-posts").DataTable({
-            "order": [[1, "desc"]]
+            "order": [[1, "desc"]] // Specify default sorting order for columns
         });
+
+        // Initialize DataTable for the table with ID "datatable-comments"
         $("#datatable-comments").DataTable({
-            "order": [[1, "desc"]]
+            "order": [[1, "desc"]] // Specify default sorting order for columns
         });
     });
+
 </script>
 
 {% endblock scripts %}

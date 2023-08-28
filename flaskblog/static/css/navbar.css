@@ -57,14 +57,6 @@ nav li a:hover,
   border-radius: 50%;
 }
 
-.test {
-  background-color: rebeccapurple;
-}
-
-.test-2 {
-  background-color: aqua;
-}
-
 @media only screen and (min-width: 480px) {
   .menu-text {
     display: block;

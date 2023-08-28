@@ -1,5 +1,7 @@
+from flaskblog import app
 from flask import render_template, url_for, redirect, flash, request, Blueprint, abort
 from flaskblog.comments.database_manager import add_comment, comments_by_post_id
+from flaskblog.comments.utils import comment_user_matches_current_user
 from flaskblog.logs.request_logging import after_request, before_request
 from flaskblog.main.utils import send_mail
 from flaskblog.main.forms import SearchForm, ContactForm
@@ -18,6 +20,12 @@ main = Blueprint("main", __name__)
 # Register before and after request handlers for logging
 main.before_request(before_request)
 main.after_request(after_request)
+
+
+# Add 'comment_user_matches_current_user' function to the Jinja templates, making it available for rendering
+app.jinja_env.globals.update(
+    comment_user_matches_current_user=comment_user_matches_current_user
+)
 
 
 @main.route("/test_error")

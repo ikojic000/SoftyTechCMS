@@ -50,8 +50,14 @@
                 <div class="commentUser">{{ comment.user.username }}</div>
                 <small class="commentDate">{{ comment.date_posted.strftime('%d-%b-%Y') }}</small>
             </div>
-            <div class="col">
+            <div class="col d-flex justify-content-between align-items-center">
+                {% if current_user.is_authenticated and comment_user_matches_current_user(comment, current_user) %}
                 <div class="comment">{{ comment.content }}</div>
+                <a class="comment-delete-button" data-comment-id="{{ comment.id }}"><i
+                        class="fa-solid fa-trash"></i></a>
+                {% else %}
+                <div class="comment">{{ comment.content }}</div>
+                {% endif %}
             </div>
         </div>
         {% endfor %}
@@ -65,18 +71,40 @@
 {% block scripts %}
 
 <script>
+    // When the document is ready (page is fully loaded)
     $(document).ready(function () {
+        // Find all images within paragraphs with the class "post-content"
         $(".post-content p img").each(function () {
+            // Remove any inline styles applied to these images
             $(this).removeAttr("style");
         });
 
+        // Initialize the "emojioneArea" plugin on the element with the ID "comment"
         $("#comment").emojioneArea({
-            pickerPosition: "top",
-            filtersPosition: "bottom",
-            recentEmojis: false,
-            search: false
+            pickerPosition: "top",      // Set the position of the emoji picker
+            filtersPosition: "bottom",  // Set the position of emoji filters
+            recentEmojis: false,        // Disable recent emojis
+            search: false               // Disable emoji search
+        });
 
+        // Attach a click event handler to elements with the class "comment-delete-button"
+        $(".comment-delete-button").click(function (e) {
+            e.preventDefault();
+
+            // Get the data attribute "comment-id" from the clicked element
+            var commentId = $(this).data("comment-id");
+
+            // If a commentId is found
+            if (commentId) {
+                // Send a POST request to delete the comment with the specified ID
+                $.post("/comments/delete/" + commentId, function (data) {
+                    // After successfully deleting the comment, reload the page
+                    location.reload();
+                });
+            }
         });
     });
+
 </script>
+
 {% endblock scripts %}

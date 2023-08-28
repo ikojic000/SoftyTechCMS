@@ -17,3 +17,18 @@ def get_comments_count(month):
 
     # Return the count of comments
     return comment_count
+
+
+# Utility method that checks if the username of a comment's user matches the current user's username
+def comment_user_matches_current_user(comment, current_user):
+    """
+    Check if the username of a comment's user matches the current user's username.
+
+    Args:
+        comment: The comment object to check.
+        current_user: The current user object.
+
+    Returns:
+        bool: True if the usernames match, False otherwise.
+    """
+    return comment.user.username == current_user.username

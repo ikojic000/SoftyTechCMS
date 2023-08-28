@@ -136,20 +136,33 @@
 {% block scripts %}
 
 <script>
+    // When an element with the class "togglePassword" is clicked
     $(".togglePassword").click(function (e) {
-        e.preventDefault();
-        var form = $(this).closest("form"); // Find the closest form element
-        var passwordInput = form.find(".password"); // Find the password input within the form
+        e.preventDefault(); // Prevent the default behavior of the clicked element
+
+        // Find the closest form element to the clicked element
+        var form = $(this).closest("form");
+
+        // Find the password input field within the form
+        var passwordInput = form.find(".password");
+
+        // Get the current type (password or text) of the password input
         var type = passwordInput.attr("type");
-        console.log(type);
+
+        console.log(type); // Log the current input type to the console for debugging
+
+        // Check the current input type
         if (type == "password") {
-            $(this).html(feather.icons["eye-off"].toSvg()); // Update the icon
+            // If it's currently a password field, change it to a text field
+            $(this).html(feather.icons["eye-off"].toSvg()); // Update the icon to indicate hidden password
             passwordInput.attr("type", "text"); // Change input type to text
         } else if (type == "text") {
-            $(this).html(feather.icons["eye"].toSvg()); // Update the icon
+            // If it's currently a text field, change it back to a password field
+            $(this).html(feather.icons["eye"].toSvg()); // Update the icon to indicate visible password
             passwordInput.attr("type", "password"); // Change input type to password
         }
     });
+
 </script>
 
 {% endblock scripts %}

@@ -1,7 +1,8 @@
 from datetime import datetime
 from flask import flash, abort
+from sqlalchemy import or_
 from flaskblog import db
-from flaskblog.models import Post
+from flaskblog.models import Category, Post
 from flaskblog.users.database_manager import get_user_by_id
 
 
@@ -50,9 +51,24 @@ def get_posts_searched_pagination(request, per_page, search_term):
         Pagination: A Pagination object containing the search results.
     """
     page = request.args.get("page", 1, type=int)
-    query = Post.query.filter_by(isPublished=True).order_by(Post.date_posted.desc())
-    search_results = query.whoosh_search(search_term)
-    return search_results.paginate(page=page, per_page=per_page)
+
+    # Construct a query that searches multiple columns using 'LIKE' operator
+    query = Post.query.filter(
+        Post.isPublished == True,  # Filter for published posts
+        or_(
+            Post.title.like(f"%{search_term}%"),
+            Post.subtitle.like(f"%{search_term}%"),
+            Post.description.like(f"%{search_term}%"),
+            Post.content.like(f"%{search_term}%"),
+            Post.category.has(Category.name.like(f"%{search_term}%")),
+            Post.author.like(f"%{search_term}%"),
+        ),
+    ).order_by(Post.date_posted.desc())
+
+    # Paginate the results
+    search_results = query.paginate(page=page, per_page=per_page)
+
+    return search_results
 
 
 # Get all posts

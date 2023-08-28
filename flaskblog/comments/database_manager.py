@@ -21,6 +21,20 @@ def get_all_comments():
     )
 
 
+# Retrieve a comment by its ID.
+def get_comment_by_id(comment_id):
+    """
+    Retrieve a comment by its unique identifier.
+
+    Args:
+        comment_id (int): The unique identifier (ID) of the comment to retrieve.
+
+    Returns:
+        Comment or None: The Comment object with the specified ID if found, or None if not found.
+    """
+    return Comment.query.get(comment_id)
+
+
 # Get comments for a specific post ID, ordered by date posted
 def comments_by_post_id(post_id):
     """

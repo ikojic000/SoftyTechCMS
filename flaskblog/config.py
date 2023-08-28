@@ -32,7 +32,7 @@ class Config:
     USER_APP_NAME = "SoftyTech"
     USER_LOGIN_TEMPLATE = "/admin_Login.html"
     USER_FORGOT_PASSWORD_TEMPLATE = "/form-templates/resetPassword.html"
-    USER_CHANGE_PASSWORD_TEMPLATE = "/form-templates//changePassword.html"
+    USER_CHANGE_PASSWORD_TEMPLATE = "/form-templates/changePassword.html"
     USER_RESET_PASSWORD_TEMPLATE = "/form-templates/changeResetPassword.html"
     USER_LOGIN_URL = "/login"
     USER_CHANGE_PASSWORD_URL = "/user/change-password"
