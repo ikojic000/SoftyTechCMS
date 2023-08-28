@@ -7,13 +7,9 @@ filemanager_route = os.path.join(app.root_path, "static/upload")
 
 class Config:
     SECRET_KEY = os.environ.get("SoftyTechCMS_SECRET_KEY")
-    # Lenovo Legion Database Config
-    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:administrator@localhost/softy_empty?charset=utf8mb4'
 
     # Lenovo Yoga Database Config
-    SQLALCHEMY_DATABASE_URI = (
-        "mysql+pymysql://root:root@localhost/softy_empty?charset=utf8mb4"
-    )
+    SQLALCHEMY_DATABASE_URI = os.environ.get("SoftyTechCMS_SQLALCHEMY_DATABASE_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # Mail setting
     MAIL_SERVER = "smtp.gmail.com"

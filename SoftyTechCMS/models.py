@@ -107,58 +107,60 @@ class ErrorLog(db.Model):
 
 
 """
+# Initialize the database
 print("------------------DB START------------------")
 db.create_all()
 print("------------------DB CREATE DONE------------------")
 
+# Define roles
 role_reader = Role(name="Reader")
 role_admin = Role(name="Admin")
 role_superadmin = Role(name="Superadmin")
-db.session.add(role_reader)
-db.session.add(role_admin)
-db.session.add(role_superadmin)
+
+# Add roles to the session and commit in one step
+db.session.add_all([role_reader, role_admin, role_superadmin])
 db.session.commit()
 
 print("------------------DB ROLES INSERT DONE------------------")
 
-# Create 'test@test.com' user with no roles
-if not User.query.filter(User.email == "test@test.com").first():
+# Create 'reader@softytech.com' user with 'Reader' role if it doesn't exist
+if not User.query.filter(User.email == "reader@softytech.com").first():
     user = User(
-        username="test",
-        email="test@test.com",
+        username="reader",
+        email="reader@softytech.com",
         email_confirmed_at=datetime.utcnow(),
-        password=bcrypt.hash("test"),
+        password=bcrypt.hash("SoftyTest123"),
     )
     user.roles.append(role_reader)
     db.session.add(user)
     db.session.commit()
 
-# Create 'ikojic000@gmail.com' user with 'Admin' role
-if not User.query.filter(User.email == "admin@admin.com").first():
+# Create 'superadmin@softytech.com' user with 'Admin' and 'Superadmin' roles if it doesn't exist
+if not User.query.filter(User.email == "superadmin@softytech.com").first():
     user = User(
-        username="ikojic000",
-        email="ikojic000@gmail.com",
+        username="superadmin",
+        email="superadmin@softytech.com",
         email_confirmed_at=datetime.utcnow(),
-        password=bcrypt.hash("VreliPenis25"),
+        password=bcrypt.hash("SoftyTest123"),
     )
     user.roles.append(role_admin)
     user.roles.append(role_superadmin)
     db.session.add(user)
     db.session.commit()
 
-# Admin user
-if not User.query.filter(User.email == "admin@admin.com").first():
+# Create 'admin@softytech.com' user with 'Admin' role if it doesn't exist
+if not User.query.filter(User.email == "admin@softytech.com").first():
     user = User(
         username="admin",
-        email="admin@admin.com",
+        email="admin@softytech.com",
         email_confirmed_at=datetime.utcnow(),
-        password=bcrypt.hash("admin"),
+        password=bcrypt.hash("SoftyTest123"),
     )
     user.roles.append(role_admin)
     db.session.add(user)
     db.session.commit()
 
-
 print("------------------DB USER INSERT DONE------------------")
+
 
 """

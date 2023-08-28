@@ -116,3 +116,19 @@ dmypy.json
 .pyre/
 activateVenvScript.bat
 .vscode/*
+
+# Image files
+# Ignore specific images in static/upload
+SoftyTechCMS/static/upload/*.jpg
+SoftyTechCMS/static/upload/*.png
+SoftyTechCMS/static/upload/*.gif
+
+# Ignore specific images in media/images
+SoftyTechCMS/static/upload/media/images/*.jpg
+SoftyTechCMS/static/upload/media/images/*.png
+SoftyTechCMS/static/upload/media/images/*.gif
+
+# Ignore specific images in media/images/head_Images
+SoftyTechCMS/static/upload/media/images/head_Images/*.jpg
+SoftyTechCMS/static/upload/media/images/head_Images/*.png
+SoftyTechCMS/static/upload/media/images/head_Images/*.gif
