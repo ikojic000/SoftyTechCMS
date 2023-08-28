@@ -1,0 +1,105 @@
+:root {
+  --primary-color: #7fccf7;
+  --light-color: #e4f1fe;
+  --dark-secondary-color: rgba(34, 49, 63);
+  --dark-color: rgba(35, 38, 41, 0.8);
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: var(--dark-color);
+  width: 100%;
+  height: 50px;
+  z-index: 1000;
+}
+
+#topBtn {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.5);
+  margin: 0;
+  border-radius: 50%;
+  border-color: black;
+  color: #7fccf7;
+  overflow: hidden;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  font-size: 35px;
+  cursor: pointer;
+}
+
+.topBtn i {
+  transition: 0.2s linear;
+}
+
+#topBtn:hover i {
+  transform: scale(1.1);
+  color: #f1f1f1;
+  text-shadow: 0px 0px 5px #000;
+}
+
+#topBtn::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: #7fccf7;
+  transform: rotate(45deg);
+  left: -110%;
+  top: 90%;
+}
+
+#topBtn:hover::before {
+  animation: aaa 0.7s 1;
+  top: -10%;
+  left: -10%;
+}
+
+.footerBtn {
+  color: white;
+  text-decoration: none;
+  font-family: "Orbitron";
+  font-weight: bold;
+  line-height: 30px;
+  letter-spacing: 5px;
+}
+
+.footerBtn:hover {
+  color: var(--primary-color);
+}
+
+@media only screen and (max-width: 800px) {
+  #topBtn:hover i {
+    transform: scale(1);
+    color: #f1f1f1;
+    text-shadow: 0px 0px 5px #000;
+  }
+
+  #topBtn::before {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 490px) {
+  .footerBtn {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .footerBtn {
+    line-height: 2.5;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .footerBtn {
+    line-height: 3;
+    font-size: 10px;
+  }
+}
