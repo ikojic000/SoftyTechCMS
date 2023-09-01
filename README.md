@@ -60,5 +60,3 @@ Osim toga, upotrebljeni su i drugi alati i tehnologije navedeni u `requirements.
 - zipp==3.15.0
 
 Za sve dodatne informacije i pitanja, kontaktirajte me na ikojic000@gmail.com.
-
-Test
