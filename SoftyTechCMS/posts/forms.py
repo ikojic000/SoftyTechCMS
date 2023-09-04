@@ -78,7 +78,10 @@ class PostForm(FlaskForm):
     headImg = FileField(
         "Post Header Image",
         validators=[
-            FileAllowed(["jpg", "png"], message="Only .jpg and .png files are allowed!")
+            FileAllowed(
+                ["jpg", "jpeg", "png"],
+                message="Only .jpg, .jpeg and .png files are allowed!",
+            )
         ],
     )
     category = QuerySelectField(

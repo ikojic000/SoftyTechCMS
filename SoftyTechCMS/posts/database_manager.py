@@ -82,11 +82,7 @@ def get_all_posts():
     return Post.query.all()
 
 
-from flask import flash, abort
-
-# ...
-
-
+# Method for creating new post
 def create_post(
     title,
     subtitle,
@@ -123,7 +119,7 @@ def create_post(
             subtitle=subtitle,
             description=description,
             headImg=headImg,
-            slug=slug,
+            slug=slug.lower().replace(" ", "-"),
             language=language,
             author=author,
             content=content,

@@ -130,7 +130,7 @@ def update_post(post_id):
         post.title = form.title.data
         post.subtitle = form.subtitle.data
         post.description = form.description.data
-        post.slug = form.slug.data
+        post.slug = form.slug.data.lower().replace(" ", "-")
         post.language = form.language.data
         post.author = form.author.data
         post.content = form.content.data
