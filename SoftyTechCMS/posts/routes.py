@@ -18,6 +18,7 @@ from SoftyTechCMS.posts.database_manager import (
     get_all_posts,
     get_post_by_id,
     post_delete,
+    post_update,
     publish_unpublish_post,
 )
 from SoftyTechCMS.posts.forms import PostForm
@@ -126,30 +127,30 @@ def update_post(post_id):
 
     # Check if the form has been submitted and is valid
     if form.validate_on_submit():
-        # Update the post object with the form data
-        post.title = form.title.data
-        post.subtitle = form.subtitle.data
-        post.description = form.description.data
-        post.slug = form.slug.data.lower().replace(" ", "-")
-        post.language = form.language.data
-        post.author = form.author.data
-        post.content = form.content.data
-        post.isPublished = form.isPublished.data
-        post.category = form.category.data
-
         # Check if a new image file has been provided
         if form.headImg.data:
             # Save the uploaded head image and update post's headImg attribute
             headImg = save_head_image(form.headImg.data, form.title.data)
             post.headImg = headImg
+            headImgData = headImg
         else:
             post.headImg = current_headImg
+            headImgData = current_headImg
 
-        # Commit the changes to the database
-        db.session.commit()
-
-        # Display a success message
-        flash("Post Updated", "success")
+        # Update post in the database
+        post_update(
+            post,
+            form.title.data,
+            form.subtitle.data,
+            form.description.data,
+            form.slug.data,
+            form.language.data,
+            form.author.data,
+            form.content.data,
+            form.isPublished.data,
+            form.category.data,
+            headImgData,
+        )
 
         source = request.args.get("source")
         if source == "all_posts":

@@ -139,6 +139,67 @@ def create_post(
         )
 
 
+# Method for updating post in the database
+def post_update(
+    post,
+    title,
+    subtitle,
+    description,
+    slug,
+    language,
+    author,
+    content,
+    isPublished,
+    category,
+    headImgData,
+):
+    """
+    Update an existing post in the database.
+
+    Args:
+        post (Post): The Post object to be updated in the database.
+        title (str): The updated title for the post.
+        subtitle (str): The updated subtitle for the post.
+        description (str): The updated description for the post.
+        slug (str): The updated slug for the post.
+        language (str): The updated language for the post.
+        author (str): The updated author for the post.
+        content (str): The updated content for the post.
+        isPublished (bool): Whether the post is published or not.
+        category: The updated category associated with the post.
+        headImgData (str): The updated URL for the post's header image.
+
+    Returns:
+        None
+    """
+    try:
+        # Update the post object with the provided data
+        post.title = title
+        post.subtitle = subtitle
+        post.description = description
+        post.slug = slug.lower().replace(
+            " ", "-"
+        )  # Remove whitespaces and lowercase all characters
+        post.language = language
+        post.author = author
+        post.content = content
+        post.isPublished = isPublished
+        post.category = category
+        post.headImg = headImgData
+
+        # Commit the changes to the database
+        db.session.commit()
+
+        # Display a success flash message
+        flash("Post Updated Successfully", "success")
+
+    except Exception as e:
+        db.session.rollback()
+        flash("An error occurred while updating the post.", "error")
+        abort(500, "An error occurred while updating the post. Please try again later.")
+
+
+# Method for publishing or unpublishing a post
 def publish_unpublish_post(post_id):
     """
     Publish or unpublish a post by toggling its "isPublished" attribute.
