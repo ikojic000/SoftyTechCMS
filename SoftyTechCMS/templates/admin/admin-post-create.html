@@ -193,6 +193,7 @@
     // Add an event listener to the headImgInput element for the "change" event
     headImgInput.addEventListener('change', (event) => {
         // Get the selected file from the input
+        const file = event.target.files[0]; // Access the first selected file
 
         // Check if a file is selected
         if (file) {
