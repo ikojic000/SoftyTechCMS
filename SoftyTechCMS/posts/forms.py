@@ -37,7 +37,9 @@ class PostForm(FlaskForm):
         validators=[
             DataRequired(message="Title is required."),
             Length(
-                min=5, max=30, message="Title must be between 5 and 30 characters long!"
+                min=5,
+                max=100,
+                message="Title must be between 5 and 100 characters long!",
             ),
             # validate_title,
         ],
@@ -48,8 +50,8 @@ class PostForm(FlaskForm):
             DataRequired(message="Subtitle is required."),
             Length(
                 min=5,
-                max=30,
-                message="Subtitle must be between 5 and 30 characters long!",
+                max=100,
+                message="Subtitle must be between 5 and 100 characters long!",
             ),
             # validate_subtitle,
         ],
@@ -60,8 +62,8 @@ class PostForm(FlaskForm):
             DataRequired(message="Description is required."),
             Length(
                 min=5,
-                max=100,
-                message="Description must be between 5 and 100 characters long!",
+                max=350,
+                message="Description must be between 5 and 350 characters long!",
             ),
         ],
     )
@@ -70,7 +72,9 @@ class PostForm(FlaskForm):
         validators=[
             DataRequired(message="Slug is required."),
             Length(
-                min=3, max=50, message="Slug must be between 3 and 50 characters long!"
+                min=3,
+                max=100,
+                message="Slug must be between 3 and 100 characters long!",
             ),
             # validate_slug,
         ],

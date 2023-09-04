@@ -22,7 +22,9 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(100), nullable=False)
     roles = db.relationship("Role", secondary="user_roles")
     name = db.Column(db.String(50), nullable=True)
-    comments = db.relationship("Comment", backref="user", lazy="dynamic")
+    comments = db.relationship(
+        "Comment", backref="user", lazy="dynamic", cascade="all, delete-orphan"
+    )
     active = db.Column(db.Boolean(), default=True)
     request_logs = db.relationship("RequestLog", backref="user", lazy="dynamic")
     error_logs = db.relationship("ErrorLog", backref="user", lazy="dynamic")
@@ -61,7 +63,9 @@ class Post(db.Model):
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     isPublished = db.Column(db.Boolean(), nullable=False, default=False)
-    comments = db.relationship("Comment", backref="post", lazy="dynamic")
+    comments = db.relationship(
+        "Comment", backref="post", lazy="dynamic", cascade="all, delete-orphan"
+    )
 
     def __repr__(self):
         formatted_date_posted = self.date_posted.strftime("%d-%m-%Y %H:%M:%S")
