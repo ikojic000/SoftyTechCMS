@@ -60,15 +60,23 @@ def save_head_image(image_data, title):
         filename = image_data.filename
         extension = os.path.splitext(filename)[1].lower()
 
+        # Build the complete path to save the image
+        save_folder = os.path.join(
+            app.root_path, "static/upload/media/images/head_Images"
+        )
+
+        # Check if an image with the same filename already exists
+        existing_path = os.path.join(save_folder, filename)
+        if os.path.isfile(existing_path):
+            # If it exists, return the existing filename
+            print("Found existing image with the same filename")
+            return filename
+
         # Generate a unique filename using the title and a random hex string
         unique_filename = title + "_" + os.urandom(16).hex() + extension
 
-        # Build the complete path to save the image
-        save_path = os.path.join(
-            app.root_path,
-            "static/upload/media/images/head_Images",
-            unique_filename,
-        )
+        # Build the complete path to save the image with the unique filename
+        save_path = os.path.join(save_folder, unique_filename)
 
         # Save the image to the specified path
         image_data.save(save_path)
