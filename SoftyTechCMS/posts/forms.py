@@ -83,8 +83,8 @@ class PostForm(FlaskForm):
         "Post Header Image",
         validators=[
             FileAllowed(
-                ["jpg", "jpeg", "png"],
-                message="Only .jpg, .jpeg and .png files are allowed!",
+                ["jpg", "jpeg"],
+                message="Only .jpg, and .jpeg files are allowed!",
             )
         ],
     )

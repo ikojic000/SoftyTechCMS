@@ -46,7 +46,7 @@ def save_picture(form_picture, title):
     return f"{title}_{filename}{extension}"
 
 
-# Method for saving pictures to a folder on a server and returning a unique picture name
+# Method for saving images to a folder on a server and returning a unique filename
 def save_head_image(image_data, title):
     """
     Save an image to a folder on the server with a unique filename and return the unique filename.
@@ -56,68 +56,88 @@ def save_head_image(image_data, title):
         title (str): The title used for naming the image.
 
     Returns:
-        str: The unique filename of the saved image.
+        str: The unique filename of the saved image or None if the image_data is empty.
     """
-    if image_data:
-        filename = image_data.filename
-        extension = os.path.splitext(filename)[1].lower()
-
-        # Build the complete path to save the image
-        save_folder = os.path.join(
-            app.root_path, "static/upload/media/images/head_Images"
-        )
-
-        # # Check if an image with the same filename already exists
-        # existing_path = os.path.join(save_folder, filename)
-        # if os.path.isfile(existing_path):
-        #     # If it exists, return the existing filename
-        #     print(f"Found existing image with the same filename: {filename}")
-        #     return filename
-
-        if file_exists_in_folder(save_folder, filename):
-            return filename
-
-        # Read the uploaded image
-        uploaded_image = io.imread(image_data)
-
-        # SSIM threshold - how much images should be similiar - 90%
-        ssim_threshold = 0.9
-
-        # Check if an image with similar content already exists using SSIM
-        for existing_filename in os.listdir(save_folder):
-            existing_path = os.path.join(save_folder, existing_filename)
-            existing_image = io.imread(existing_path)
-
-            # Calculate the Structural Similarity Index (SSIM) between the uploaded image and the existing image
-            ssim_score = metrics.structural_similarity(
-                uploaded_image, existing_image)
-
-            if ssim_score >= ssim_threshold:
-                # If SSIM is above or equal to the threshold, return the existing filename
-                print(f"Found similar image with SSIM: {ssim_score}")
-                return existing_filename
-
-        # Generate a unique filename using the title and a random hex string
-        unique_filename = generate_unique_filename(title, extension)
-
-        # Build the complete path to save the image with the unique filename
-        save_path = os.path.join(save_folder, unique_filename)
-
-        # Save the image to the specified path
-        image_data.save(save_path)
-
-        return unique_filename
-    else:
+    if not image_data:
         return None
 
+    filename = image_data.filename
+    extension = os.path.splitext(filename)[1].lower()
 
-# Function to generate a unique filename
+    # Build the complete path to save the image
+    save_folder = os.path.join(app.root_path, "static/upload/media/images/head_Images")
+
+    if file_exists_in_folder(save_folder, filename):
+        print(f"Found an existing image with the same filename: {filename}")
+        return filename
+
+    # Read the uploaded image
+    uploaded_image = io.imread(image_data)
+
+    # SSIM threshold - how similar images should be - 90%
+    ssim_threshold = 0.9
+
+    # Check if an image with similar content already exists using SSIM
+    for existing_filename in os.listdir(save_folder):
+        print(f"Testing an image with similar content: {existing_filename}")
+        existing_path = os.path.join(save_folder, existing_filename)
+        existing_image = io.imread(existing_path)
+
+        # Check if the dimensions of the two images are the same
+        if uploaded_image.shape != existing_image.shape:
+            continue  # Skip this image and continue with the next one
+
+        # Calculate the Structural Similarity Index (SSIM) between the uploaded image and the existing image
+        ssim_score = metrics.structural_similarity(
+            uploaded_image, existing_image, multichannel=True
+        )
+
+        if ssim_score >= ssim_threshold:
+            # If SSIM is above or equal to the threshold, return the existing filename
+            print(f"Found a similar image with SSIM: {ssim_score}")
+            return existing_filename
+
+    # Generate a unique filename using the title and a random hex string
+    unique_filename = generate_unique_filename(title, extension)
+
+    # Build the complete path to save the image with the unique filename
+    save_path = os.path.join(save_folder, unique_filename)
+
+    # Save the image to the specified path
+    # Open the image and save it to the specified path
+    image = Image.open(image_data)
+    image.save(save_path)
+
+    return unique_filename
+
+
+# Method to generate a unique filename
 def generate_unique_filename(title, extension):
+    """
+    Generate a unique filename based on the provided title and extension.
+
+    Args:
+        title (str): The title used for naming the image.
+        extension (str): The file extension (e.g., '.jpg', '.png').
+
+    Returns:
+        str: The unique filename.
+    """
     return title + "_" + os.urandom(16).hex() + extension
 
 
-# Function to check if a file with the given filename exists in the folder
+# Method to check if a file with the given filename exists in the folder
 def file_exists_in_folder(folder, filename):
+    """
+    Check if a file with the given filename exists in the specified folder.
+
+    Args:
+        folder (str): The folder to check for the file.
+        filename (str): The filename to check for.
+
+    Returns:
+        bool: True if the file exists, False otherwise.
+    """
     return os.path.isfile(os.path.join(folder, filename))
 
 
