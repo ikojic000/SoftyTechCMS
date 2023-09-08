@@ -87,17 +87,17 @@
 }
 
 .post-content ul li,
-ol li {
+.post-content ol li {
   font-family: "Work Sans", sans-serif;
   line-height: 2;
   margin-left: 20px;
 }
 
 .post-content h1,
-h2,
-h3,
-h4,
-h5 {
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5 {
   font-family: "Orbitron", sans-serif;
   line-height: 3;
 }
