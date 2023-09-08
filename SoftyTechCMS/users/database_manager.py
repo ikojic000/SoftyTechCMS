@@ -294,6 +294,45 @@ def update_user_password(user, new_password):
         )
 
 
+# Method for OAuth2 authentication - finding the user by email or creating a new one
+def create_or_get_user(email, username, name=None):
+    """
+    Create a new user or retrieve an existing user with the provided email.
+
+    Args:
+        email (str): The email address of the user.
+        username (str): The username of the user.
+        name (str, optional): The name of the user. Defaults to None.
+
+    Returns:
+        User: The User object representing the created or retrieved user.
+    """
+    try:
+        # Check if a user with the provided email already exists in the database
+        existing_user = User.query.filter_by(email=email).first()
+
+        if existing_user:
+            return existing_user
+        else:
+            # Create a new user with the provided email, username, and name
+            new_user = User(
+                email=email,
+                username=username,
+                name=name,
+                password=bcrypt.hash("SoftyTest123"),
+            )
+            # Get the 'Reader' role from the database
+            role_reader = get_role_by_name("Reader")
+            # Assign the 'Reader' role to the user
+            new_user.roles.append(role_reader)
+            db.session.add(new_user)
+            db.session.commit()
+            return new_user
+    except Exception as e:
+        flash("An error occurred while creating or retrieving the user.", "error")
+        db.session.rollback()
+
+
 # Get the total number of users in the database
 def count_users():
     """

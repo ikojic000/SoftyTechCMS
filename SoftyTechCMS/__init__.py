@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
 import flaskfilemanager
+from flask_oauthlib.client import OAuth
 
 
 # App Configuration
@@ -13,6 +14,7 @@ app = Flask(__name__)  # Create a Flask application instance
 db = SQLAlchemy(app)  # Initialize a SQLAlchemy database instance
 mail = Mail()  # Create a Mail instance for sending emails
 mail.init_app(app)  # Initialize the Mail instance with the Flask app
+oauth = OAuth(app)  # Initialize the OAuth instance with the Flask app
 
 
 # Import configuration settings from Config class

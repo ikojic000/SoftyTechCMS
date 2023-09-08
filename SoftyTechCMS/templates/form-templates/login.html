@@ -30,6 +30,14 @@
     {% endif %}
 
     {{ form.submit(class="form-submit-button") }}
+
+    <a href="{{ url_for('auth.google_login') }}" class="socialLoginBtn socialLoginBtn-google">Login with Google</a>
+
+    <a href="{{ url_for('auth.facebook_login') }}" class="socialLoginBtn socialLoginBtn-facebook">Login with
+        Facebook</a>
+
+    <br>
+
     <small class="form-link-text">You forgot your password? <a href="{{ url_for('user.forgot_password') }}"
             class="form-link-button">Reset Password</a></small>
     <br>
