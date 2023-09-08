@@ -3,6 +3,8 @@ import random
 from SoftyTechCMS import app
 import os
 from PIL import Image
+from skimage import io, metrics
+import numpy as np
 from wtforms.validators import ValidationError
 from SoftyTechCMS.models import Post
 
@@ -65,15 +67,38 @@ def save_head_image(image_data, title):
             app.root_path, "static/upload/media/images/head_Images"
         )
 
-        # Check if an image with the same filename already exists
-        existing_path = os.path.join(save_folder, filename)
-        if os.path.isfile(existing_path):
-            # If it exists, return the existing filename
-            print("Found existing image with the same filename")
+        # # Check if an image with the same filename already exists
+        # existing_path = os.path.join(save_folder, filename)
+        # if os.path.isfile(existing_path):
+        #     # If it exists, return the existing filename
+        #     print(f"Found existing image with the same filename: {filename}")
+        #     return filename
+
+        if file_exists_in_folder(save_folder, filename):
             return filename
 
+        # Read the uploaded image
+        uploaded_image = io.imread(image_data)
+
+        # SSIM threshold - how much images should be similiar - 90%
+        ssim_threshold = 0.9
+
+        # Check if an image with similar content already exists using SSIM
+        for existing_filename in os.listdir(save_folder):
+            existing_path = os.path.join(save_folder, existing_filename)
+            existing_image = io.imread(existing_path)
+
+            # Calculate the Structural Similarity Index (SSIM) between the uploaded image and the existing image
+            ssim_score = metrics.structural_similarity(
+                uploaded_image, existing_image)
+
+            if ssim_score >= ssim_threshold:
+                # If SSIM is above or equal to the threshold, return the existing filename
+                print(f"Found similar image with SSIM: {ssim_score}")
+                return existing_filename
+
         # Generate a unique filename using the title and a random hex string
-        unique_filename = title + "_" + os.urandom(16).hex() + extension
+        unique_filename = generate_unique_filename(title, extension)
 
         # Build the complete path to save the image with the unique filename
         save_path = os.path.join(save_folder, unique_filename)
@@ -84,6 +109,16 @@ def save_head_image(image_data, title):
         return unique_filename
     else:
         return None
+
+
+# Function to generate a unique filename
+def generate_unique_filename(title, extension):
+    return title + "_" + os.urandom(16).hex() + extension
+
+
+# Function to check if a file with the given filename exists in the folder
+def file_exists_in_folder(folder, filename):
+    return os.path.isfile(os.path.join(folder, filename))
 
 
 # Method for generating a random filename prefix
