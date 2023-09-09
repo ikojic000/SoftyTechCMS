@@ -1,9 +1,12 @@
-from flask import flash, abort
 from datetime import datetime
-from SoftyTechCMS import db
-from SoftyTechCMS.models import Role, User
+
+from flask import flash, abort
 from passlib.hash import bcrypt
 from sqlalchemy import or_
+
+from SoftyTechCMS import db
+from SoftyTechCMS.models import Role, User
+from SoftyTechCMS.users.mail_utils import send_register_mail, send_oauth_register_mail
 
 
 # Get a user by their username
@@ -166,6 +169,8 @@ def register_user(name, username, email, password):
         # Add the user to the database and commit the changes
         db.session.add(user)
         db.session.commit()
+        # Sending welcome mail to newly registered user
+        send_register_mail(user)
     except Exception as e:
         flash("An error occurred while registering the user.", "error")
         db.session.rollback()
@@ -319,7 +324,7 @@ def create_or_get_user(email, username, name=None):
                 email=email,
                 username=username,
                 name=name,
-                password=bcrypt.hash("SoftyTest123"),
+                password=bcrypt.hash("SoftyTech123"),
             )
             # Get the 'Reader' role from the database
             role_reader = get_role_by_name("Reader")
@@ -327,6 +332,8 @@ def create_or_get_user(email, username, name=None):
             new_user.roles.append(role_reader)
             db.session.add(new_user)
             db.session.commit()
+            # Sending welcome mail to newly registered user
+            send_oauth_register_mail(new_user)
             return new_user
     except Exception as e:
         flash("An error occurred while creating or retrieving the user.", "error")
