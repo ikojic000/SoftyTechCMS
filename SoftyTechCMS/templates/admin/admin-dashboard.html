@@ -2,126 +2,126 @@
 
 {% block content %}
 
-<!-- Ono sto se vidi na page-u -->
-<div class="row mb-3">
-    <div class="col">
-        <h1 class="h3 text-light">{{ pageTitle }}</h1>
+    <!-- Ono sto se vidi na page-u -->
+    <div class="row mb-3">
+        <div class="col">
+            <h1 class="h3 text-light">{{ pageTitle }}</h1>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <!-- Button trigger modal
+            <button type="button" class="btn btn-dark rounded-3 p-md-3" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                Launch demo modal
+            </button> -->
+        </div>
     </div>
-    <div class="col d-flex justify-content-end">
-        <!-- Button trigger modal 
-        <button type="button" class="btn btn-dark rounded-3 p-md-3" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
-            Launch demo modal
-        </button> -->
-    </div>
-</div>
 
-<!-- Broj korisnika kartica -->
-<div class="row">
-    <div class="col-12 col-md-4">
-        <div class="card bg-dark">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col mt-0">
-                        <a class="card-title text-primary text-decoration-none"
-                            href="{{ url_for('users.all_users') }}">Users</a>
-                    </div>
-                    <div class="col-auto">
-                        <div class="stat bg-black bg-opacity-50">
-                            <i class="align-middle" data-feather="users"></i>
+    <!-- Broj korisnika kartica -->
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col mt-0">
+                            <a class="card-title text-primary text-decoration-none"
+                               href="{{ url_for('users.all_users') }}">Users</a>
+                        </div>
+                        <div class="col-auto">
+                            <div class="stat bg-black bg-opacity-50">
+                                <i class="align-middle" data-feather="users"></i>
+                            </div>
                         </div>
                     </div>
+                    <h1 class="mt-1 mb-3 text-white" id="numberOfUsers"></h1>
                 </div>
-                <h1 class="mt-1 mb-3 text-white" id="numberOfUsers"></h1>
             </div>
         </div>
-    </div>
 
-    <!-- Broj članaka kartica -->
-    <div class="col-12 col-md-4">
-        <div class="card bg-dark">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col mt-0">
-                        <a class="card-title text-primary text-decoration-none"
-                            href="{{ url_for('posts.all_posts') }}">Posts</a>
-                    </div>
-                    <div class="col-auto">
-                        <div class="stat bg-black bg-opacity-50">
-                            <i class="align-middle" data-feather="file-text"></i>
+        <!-- Broj članaka kartica -->
+        <div class="col-12 col-md-4">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col mt-0">
+                            <a class="card-title text-primary text-decoration-none"
+                               href="{{ url_for('posts.all_posts') }}">Posts</a>
+                        </div>
+                        <div class="col-auto">
+                            <div class="stat bg-black bg-opacity-50">
+                                <i class="align-middle" data-feather="file-text"></i>
+                            </div>
                         </div>
                     </div>
+                    <h1 class="mt-1 mb-3 text-white" id="numberOfPosts"></h1>
                 </div>
-                <h1 class="mt-1 mb-3 text-white" id="numberOfPosts"></h1>
             </div>
         </div>
-    </div>
 
-    <!-- Broj komentara kartica -->
-    <div class="col-12 col-md-4">
-        <div class="card bg-dark">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col mt-0">
-                        <a class="card-title text-primary text-decoration-none"
-                            href="{{ url_for('comments.all_comments') }}">Comments</a>
-                    </div>
-                    <div class="col-auto">
-                        <div class="stat bg-black bg-opacity-50">
-                            <i class="align-middle" data-feather="message-square"></i>
+        <!-- Broj komentara kartica -->
+        <div class="col-12 col-md-4">
+            <div class="card bg-dark">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col mt-0">
+                            <a class="card-title text-primary text-decoration-none"
+                               href="{{ url_for('comments.all_comments') }}">Comments</a>
+                        </div>
+                        <div class="col-auto">
+                            <div class="stat bg-black bg-opacity-50">
+                                <i class="align-middle" data-feather="message-square"></i>
+                            </div>
                         </div>
                     </div>
+                    <h1 class="mt-1 mb-3 text-white" id="numberOfComments"></h1>
                 </div>
-                <h1 class="mt-1 mb-3 text-white" id="numberOfComments"></h1>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Grafovi -->
-<!-- Korisnici graf -->
-<div class="row">
-    <div class="col-12">
-        <div class="card bg-dark">
-            <div class="card-header bg-dark">
-                <h5 class="card-title">Users</h5>
-            </div>
-            <div class="card-body">
-                <div class="chart chart-sm">
-                    <canvas id="dashboard-users"></canvas>
+    <!-- Grafovi -->
+    <!-- Korisnici graf -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark">
+                <div class="card-header bg-dark">
+                    <h5 class="card-title">Users</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart chart-sm">
+                        <canvas id="dashboard-users"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <!-- Članci - graf -->
-    <div class="col-md-6">
-        <div class="card text-white bg-dark flex-fill w-100">
-            <div class="card-header text-white bg-dark">
-                <h5 class="card-title">Posts</h5>
+    <div class="row">
+        <!-- Članci - graf -->
+        <div class="col-md-6">
+            <div class="card text-white bg-dark flex-fill w-100">
+                <div class="card-header text-white bg-dark">
+                    <h5 class="card-title">Posts</h5>
+                </div>
+                <div class="card-body py-md-3">
+                    <div class="chart chart-sm">
+                        <canvas id="dashboard-articles"></canvas>
+                    </div>
+                </div>
             </div>
-            <div class="card-body py-md-3">
-                <div class="chart chart-sm">
-                    <canvas id="dashboard-articles"></canvas>
+        </div>
+        <!-- Komentari - graf -->
+        <div class="col-md-6">
+            <div class="card text-white bg-dark flex-fill w-100">
+                <div class="card-header text-white bg-dark">
+                    <h5 class="card-title">Comments</h5>
+                </div>
+                <div class="card-body py-3">
+                    <div class="chart chart-sm">
+                        <canvas id="dashboard-comments"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Komentari - graf -->
-    <div class="col-md-6">
-        <div class="card text-white bg-dark flex-fill w-100">
-            <div class="card-header text-white bg-dark">
-                <h5 class="card-title">Comments</h5>
-            </div>
-            <div class="card-body py-3">
-                <div class="chart chart-sm">
-                    <canvas id="dashboard-comments"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -129,195 +129,195 @@
 
 {% block scripts %}
 
-<script>
-    // When the document is ready (page is fully loaded)
-    $(document).ready(function () {
-        // Make an AJAX request to get the number of users
-        $.ajax({
-            url: "/user/number_of_users", // URL for the user endpoint
-            method: "GET", // HTTP method (GET in this case)
-            success: function (data) {
-                // On success, extract the number of users from the response data
-                var numberOfUsers = data.number_of_users;
+    <script>
+        // When the document is ready (page is fully loaded)
+        $(document).ready(function () {
+            // Make an AJAX request to get the number of users
+            $.ajax({
+                url: "/user/number_of_users", // URL for the user endpoint
+                method: "GET", // HTTP method (GET in this case)
+                success: function (data) {
+                    // On success, extract the number of users from the response data
+                    var numberOfUsers = data.number_of_users;
 
-                // Update the content of the element with the ID "numberOfUsers"
-                $("#numberOfUsers").text(numberOfUsers);
-            }
+                    // Update the content of the element with the ID "numberOfUsers"
+                    $("#numberOfUsers").text(numberOfUsers);
+                }
+            });
+
+            // Make an AJAX request to get the number of posts
+            $.ajax({
+                url: "/post/number_of_posts", // URL for the post endpoint
+                method: "GET", // HTTP method (GET in this case)
+                success: function (data) {
+                    // On success, extract the number of posts from the response data
+                    var numberOfPosts = data.number_of_posts;
+
+                    // Update the content of the element with the ID "numberOfPosts"
+                    $("#numberOfPosts").text(numberOfPosts);
+                }
+            });
+
+            // Make an AJAX request to get the number of comments
+            $.ajax({
+                url: "/api/comments/number_of_comments", // URL for the comments endpoint
+                method: "GET", // HTTP method (GET in this case)
+                success: function (data) {
+                    // On success, extract the number of comments from the response data
+                    var numberOfComments = data.number_of_comments;
+
+                    // Update the content of the element with the ID "numberOfComments"
+                    $("#numberOfComments").text(numberOfComments);
+                }
+            });
         });
+    </script>
 
-        // Make an AJAX request to get the number of posts
+    <!-- <script src="{{ url_for('static', filename='adminKit/test.js') }}"></script> -->
+
+    <script>
+        // Define an array of months
+        var months = [
+            "January", "February", "March", "April", "May", "June", "July", "August",
+            "September", "October", "November", "December"
+        ];
+
+        // AJAX request to fetch user count data and create a bar chart
         $.ajax({
-            url: "/post/number_of_posts", // URL for the post endpoint
-            method: "GET", // HTTP method (GET in this case)
+            url: "/api/users/count_by_months",
+            type: "GET",
             success: function (data) {
-                // On success, extract the number of posts from the response data
-                var numberOfPosts = data.number_of_posts;
-
-                // Update the content of the element with the ID "numberOfPosts"
-                $("#numberOfPosts").text(numberOfPosts);
-            }
-        });
-
-        // Make an AJAX request to get the number of comments
-        $.ajax({
-            url: "/api/comments/number_of_comments", // URL for the comments endpoint
-            method: "GET", // HTTP method (GET in this case)
-            success: function (data) {
-                // On success, extract the number of comments from the response data
-                var numberOfComments = data.number_of_comments;
-
-                // Update the content of the element with the ID "numberOfComments"
-                $("#numberOfComments").text(numberOfComments);
-            }
-        });
-    });
-</script>
-
-<!-- <script src="{{ url_for('static', filename='adminKit/test.js') }}"></script> -->
-
-<script>
-    // Define an array of months
-    var months = [
-        "January", "February", "March", "April", "May", "June", "July", "August",
-        "September", "October", "November", "December"
-    ];
-
-    // AJAX request to fetch user count data and create a bar chart
-    $.ajax({
-        url: "/api/users/count_by_months",
-        type: "GET",
-        success: function (data) {
-            new Chart(document.getElementById("dashboard-users"), {
-                type: "bar", // Bar chart type
-                data: {
-                    labels: months, // X-axis labels
-                    datasets: [
-                        {
-                            label: "2023",
-                            backgroundColor: window.theme.primary,
-                            borderColor: window.theme.primary,
-                            hoverBackgroundColor: window.theme.primary,
-                            hoverBorderColor: window.theme.primary,
-                            data: data.usersCountList, // User count data for each month
-                            barPercentage: 0.75,
-                            categoryPercentage: 0.5,
-                        },
-                    ],
-                },
-                options: {
-                    scales: {
-                        yAxes: [
+                new Chart(document.getElementById("dashboard-users"), {
+                    type: "bar", // Bar chart type
+                    data: {
+                        labels: months, // X-axis labels
+                        datasets: [
                             {
-                                gridLines: {
-                                    display: false,
-                                },
-                                stacked: false,
-                            },
-                        ],
-                        xAxes: [
-                            {
-                                stacked: false,
-                                gridLines: {
-                                    color: "transparent",
-                                },
+                                label: "2023",
+                                backgroundColor: window.theme.primary,
+                                borderColor: window.theme.primary,
+                                hoverBackgroundColor: window.theme.primary,
+                                hoverBorderColor: window.theme.primary,
+                                data: data.usersCountList, // User count data for each month
+                                barPercentage: 0.75,
+                                categoryPercentage: 0.5,
                             },
                         ],
                     },
-                },
-            });
-        },
-    });
-
-    // AJAX request to fetch post count data and create a bar chart
-    $.ajax({
-        url: "/api/posts/count_by_months",
-        type: "GET",
-        success: function (data) {
-            new Chart(document.getElementById("dashboard-articles"), {
-                type: "bar", // Bar chart type
-                data: {
-                    labels: months, // X-axis labels
-                    datasets: [
-                        {
-                            label: "2023",
-                            backgroundColor: window.theme.primary,
-                            borderColor: window.theme.primary,
-                            hoverBackgroundColor: window.theme.primary,
-                            hoverBorderColor: window.theme.primary,
-                            data: data.postsCountList, // Post count data for each month
-                            barPercentage: 0.75,
-                            categoryPercentage: 0.5,
+                    options: {
+                        scales: {
+                            yAxes: [
+                                {
+                                    gridLines: {
+                                        display: false,
+                                    },
+                                    stacked: false,
+                                },
+                            ],
+                            xAxes: [
+                                {
+                                    stacked: false,
+                                    gridLines: {
+                                        color: "transparent",
+                                    },
+                                },
+                            ],
                         },
-                    ],
-                },
-                options: {
-                    scales: {
-                        yAxes: [
+                    },
+                });
+            },
+        });
+
+        // AJAX request to fetch post count data and create a bar chart
+        $.ajax({
+            url: "/api/posts/count_by_months",
+            type: "GET",
+            success: function (data) {
+                new Chart(document.getElementById("dashboard-articles"), {
+                    type: "bar", // Bar chart type
+                    data: {
+                        labels: months, // X-axis labels
+                        datasets: [
                             {
-                                gridLines: {
-                                    display: false,
-                                },
-                                stacked: false,
-                            },
-                        ],
-                        xAxes: [
-                            {
-                                stacked: false,
-                                gridLines: {
-                                    color: "transparent",
-                                },
+                                label: "2023",
+                                backgroundColor: window.theme.primary,
+                                borderColor: window.theme.primary,
+                                hoverBackgroundColor: window.theme.primary,
+                                hoverBorderColor: window.theme.primary,
+                                data: data.postsCountList, // Post count data for each month
+                                barPercentage: 0.75,
+                                categoryPercentage: 0.5,
                             },
                         ],
                     },
-                },
-            });
-        },
-    });
-
-    // AJAX request to fetch comment count data and create a line chart
-    $.ajax({
-        url: "/api/comments/count_by_months",
-        type: "GET",
-        success: function (data) {
-            new Chart(document.getElementById("dashboard-comments"), {
-                type: "line", // Line chart type
-                data: {
-                    labels: months, // X-axis labels
-                    datasets: [
-                        {
-                            label: "2023",
-                            fill: true,
-                            backgroundColor: "transparent",
-                            borderColor: window.theme.primary,
-                            data: data.commentCountList, // Comment count data for each month
+                    options: {
+                        scales: {
+                            yAxes: [
+                                {
+                                    gridLines: {
+                                        display: false,
+                                    },
+                                    stacked: false,
+                                },
+                            ],
+                            xAxes: [
+                                {
+                                    stacked: false,
+                                    gridLines: {
+                                        color: "transparent",
+                                    },
+                                },
+                            ],
                         },
-                    ],
-                },
-                options: {
-                    scales: {
-                        xAxes: [
+                    },
+                });
+            },
+        });
+
+        // AJAX request to fetch comment count data and create a line chart
+        $.ajax({
+            url: "/api/comments/count_by_months",
+            type: "GET",
+            success: function (data) {
+                new Chart(document.getElementById("dashboard-comments"), {
+                    type: "line", // Line chart type
+                    data: {
+                        labels: months, // X-axis labels
+                        datasets: [
                             {
-                                reverse: true,
-                                gridLines: {
-                                    color: "rgba(0,0,0,0.05)",
-                                },
-                            },
-                        ],
-                        yAxes: [
-                            {
-                                borderDash: [5, 5],
-                                gridLines: {
-                                    color: "rgba(0,0,0,0)",
-                                    fontColor: "#fff",
-                                },
+                                label: "2023",
+                                fill: true,
+                                backgroundColor: "transparent",
+                                borderColor: window.theme.primary,
+                                data: data.commentCountList, // Comment count data for each month
                             },
                         ],
                     },
-                },
-            });
-        },
-    });
+                    options: {
+                        scales: {
+                            xAxes: [
+                                {
+                                    reverse: true,
+                                    gridLines: {
+                                        color: "rgba(0,0,0,0.05)",
+                                    },
+                                },
+                            ],
+                            yAxes: [
+                                {
+                                    borderDash: [5, 5],
+                                    gridLines: {
+                                        color: "rgba(0,0,0,0)",
+                                        fontColor: "#fff",
+                                    },
+                                },
+                            ],
+                        },
+                    },
+                });
+            },
+        });
 
-</script>
+    </script>
 
 {% endblock scripts %}

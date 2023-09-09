@@ -1,5 +1,5 @@
+from flask import abort, request, flash
 from flask_user import UserManager
-from flask import abort, request, flash, redirect
 
 
 class CustomUserManager(UserManager):

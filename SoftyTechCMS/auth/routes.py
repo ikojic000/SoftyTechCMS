@@ -1,8 +1,9 @@
 from flask import Blueprint, redirect, url_for, flash, render_template, request, session
 from flask_login import current_user, login_user, logout_user
 from passlib.hash import bcrypt
-from SoftyTechCMS.auth.oauth_utils import facebook, google
+
 from SoftyTechCMS.auth.forms import LoginForm, RegisterForm
+from SoftyTechCMS.auth.oauth_utils import facebook, google
 from SoftyTechCMS.logs.request_logging import after_request, before_request
 from SoftyTechCMS.users.database_manager import (
     create_or_get_user,
@@ -44,7 +45,7 @@ def register():
         return redirect(url_for("auth.login"))
 
     # Render the registration form
-    return render_template("/form-templates/register.html", title="Register", form=form)
+    return render_template("form-templates/register.html", title="Register", form=form)
 
 
 # Logging into a website - Admin and User side Route
@@ -79,7 +80,7 @@ def login():
             flash("Login Failed! Please check your email and password", "danger")
 
     # Render the login form
-    return render_template("/form-templates/login.html", title="Login", form=form)
+    return render_template("form-templates/login.html", title="Login", form=form)
 
 
 @auth.route("/login/google")

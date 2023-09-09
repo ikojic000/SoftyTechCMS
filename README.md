@@ -22,17 +22,20 @@ SoFtYTechCMS je Content Management System (CMS) za istoimeni portal.
 - Grafički prikaz broja korisnika, članaka i komentara
 - Tablični prikaz svih članaka, korisnika i komentara
 - Mogućnost kreiranja novih članaka te ažuriranja ili brisanja postojećih
-  - Provjera po imenu i po SSIM sličnosti prilikom upload-a naslovne slike
+    - Provjera po imenu i po SSIM sličnosti prilikom upload-a naslovne slike
 - Mogućnost kreiranja novih kategorija te ažuriranja ili brisanja postojećih
 - Ručno dodavanje korisnika
 - Ažuriranje dozvola (uloga) svakog korisnika
-- Prikaz detalja korisnika (prikaz podataka, prikaz napisanih članaka ako postoje i prikaz ostavljenih komentara ako postoje)
+- Prikaz detalja korisnika (prikaz podataka, prikaz napisanih članaka ako postoje i prikaz ostavljenih komentara ako
+  postoje)
 - Brisanje komentara
-- FileManager povezan s datotekama na serveru (slike i ostali sadržaji se ne spremaju u bazu radi uštede na prostoru) - RichFileManager
+- FileManager povezan s datotekama na serveru (slike i ostali sadržaji se ne spremaju u bazu radi uštede na prostoru) -
+  RichFileManager
 - Pregled svih Request logova (samo Superadmin korisnici). Svaki request se sprema u bazu podataka
 - Pregled svih Error logova (samo Superadmin korisnici). Svaka greška se sprema u bazu podataka
 
-Admin i Superadmin korisnici imaju mogućnost kontrole i pregleda svega što se događa na javnom portalu i u cijeloj web aplikaciji.
+Admin i Superadmin korisnici imaju mogućnost kontrole i pregleda svega što se događa na javnom portalu i u cijeloj web
+aplikaciji.
 
 ## Tehnologije korištene
 

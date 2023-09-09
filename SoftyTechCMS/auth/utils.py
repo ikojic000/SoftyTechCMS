@@ -1,6 +1,8 @@
 import re
-from wtforms.validators import ValidationError
+
 from flask_login import current_user
+from wtforms.validators import ValidationError
+
 from SoftyTechCMS.users.database_manager import get_user_by_email, get_user_by_username
 from SoftyTechCMS.users.utils import user_has_role
 
@@ -105,7 +107,7 @@ def validate_password(form, field):
 
 
 # Utility function for FileManager access control
-def accessControl_function():
+def access_control_function():
     """
     Determine if the current user has access to the FileManager.
 
@@ -114,7 +116,7 @@ def accessControl_function():
     """
     if current_user.is_authenticated:
         if user_has_role(current_user, "Admin") or user_has_role(
-            current_user, "Superuser"
+                current_user, "Superuser"
         ):
             return True
         else:

@@ -1,8 +1,8 @@
-<div class="blog-card" onclick="window.location.href='{{url_for('main.post', slug=post.slug)}}'">
+<div class="blog-card" onclick="window.location.href='{{ url_for('main.post', slug=post.slug) }}'">
     <div class="meta">
         <div class="photo"
-            style="
-                    background-image: url({{ url_for('static', filename='upload/media/images/head_Images/' + post.headImg) }})"></div>
+             style="
+                     background-image: url({{ url_for('static', filename='upload/media/images/head_Images/' + post.headImg) }})"></div>
         <ul class="details">
             <li class="author">{{ post.author }}</li>
             <li class="date">{{ post.date_posted.strftime('%d-%b-%Y') }}</li>

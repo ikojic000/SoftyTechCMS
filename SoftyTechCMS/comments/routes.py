@@ -2,6 +2,7 @@ from flask import Blueprint, redirect, render_template, flash, url_for, request
 from flask.json import jsonify
 from flask_login import login_required
 from flask_user import roles_required
+
 from SoftyTechCMS.comments.database_manager import (
     count_comments,
     delete_all_users_comments,

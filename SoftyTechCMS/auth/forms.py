@@ -10,6 +10,7 @@ from wtforms.validators import (
     Length,
     EqualTo,
 )
+
 from SoftyTechCMS.auth.utils import validate_email, validate_password, validate_username
 
 

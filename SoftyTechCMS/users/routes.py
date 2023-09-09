@@ -7,8 +7,10 @@ from flask import (
     Blueprint,
     jsonify,
 )
+from flask_login import current_user, login_required
+from flask_user import roles_required
 
-from SoftyTechCMS import app
+from SoftyTechCMS import app, user_email_manager
 from SoftyTechCMS.comments.database_manager import get_comments_by_user_id
 from SoftyTechCMS.decorators import own_account_required
 from SoftyTechCMS.logs.request_logging import after_request, before_request
@@ -29,10 +31,7 @@ from SoftyTechCMS.users.forms import (
     UserChangePasswordForm,
     UserRoleForm,
 )
-from flask_login import current_user, login_required
-from flask_user import roles_required
 from SoftyTechCMS.users.utils import get_users_count, user_has_role
-
 
 # Create a Blueprint for user-related routes
 users = Blueprint("users", __name__)
@@ -277,12 +276,14 @@ def update_user_account_settings(user_id):
             userSettingsForm.username.data,
             userSettingsForm.email.data,
         )
+        user_email_manager.send_username_changed_email(current_user)
         flash("User settings updated successfully", "success")
         return redirect(url_for("users.update_user_account_settings", user_id=user.id))
 
     # Handle form submission for changing the user's password
     if changePasswordForm.submitChangePassword.data and changePasswordForm.validate():
         update_user_password(user, changePasswordForm.password.data)
+        user_email_manager.send_password_changed_email(current_user)
         flash("Password updated successfully", "success")
         return redirect(url_for("users.update_user_account_settings", user_id=user.id))
 
@@ -296,7 +297,7 @@ def update_user_account_settings(user_id):
 
     # Check if the current user has 'Admin' or 'Superadmin' roles and render the appropriate template
     if user_has_role(current_user, "Admin") or user_has_role(
-        current_user, "Superadmin"
+            current_user, "Superadmin"
     ):
         return render_template("admin/admin-user-settings.html", **context)
 

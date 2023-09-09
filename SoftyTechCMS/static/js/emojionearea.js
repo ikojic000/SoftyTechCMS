@@ -69,7 +69,7 @@ document = window.document || {};
         $.each(events, function (event, link) {
             event = $.isArray(events) ? link : event;
             (possibleEvents[self.id][link] || (possibleEvents[self.id][link] = []))
-            .push([element, event, target]);
+                .push([element, event, target]);
         });
     }
 
@@ -650,7 +650,8 @@ document = window.document || {};
                         "cc gg im yt nf pn bl pm gs tk bv hm sj um ic ea cp dg as aq vg ck cw eu gf tf gp mq mp sx ss tc "
                 }
             };
-        };
+        }
+        ;
 
         return defaultOptions;
     };
@@ -904,6 +905,7 @@ document = window.document || {};
 
         updateRecent(self);
     };
+
     // see https://github.com/Modernizr/Modernizr/blob/master/feature-detects/storage/localstorage.js
     function supportsLocalStorage() {
         var test = 'test';
@@ -938,19 +940,20 @@ document = window.document || {};
         }
 
         var sourceValFunc = source.is("TEXTAREA") || source.is("INPUT") ? "val" : "text",
-            editor, button, picker, filters, filtersBtns, searchPanel, emojisList, categories, categoryBlocks, scrollArea,
+            editor, button, picker, filters, filtersBtns, searchPanel, emojisList, categories, categoryBlocks,
+            scrollArea,
             tones = div('tones',
                 options.tones ?
-                function () {
-                    this.addClass(selector('tones-' + options.tonesStyle, true));
-                    for (var i = 0; i <= 5; i++) {
-                        this.append($("<i/>", {
-                            "class": "btn-tone btn-tone-" + i + (!i ? " active" : ""),
-                            "data-skin": i,
-                            role: "button"
-                        }));
-                    }
-                } : null
+                    function () {
+                        this.addClass(selector('tones-' + options.tonesStyle, true));
+                        for (var i = 0; i <= 5; i++) {
+                            this.append($("<i/>", {
+                                "class": "btn-tone btn-tone-" + i + (!i ? " active" : ""),
+                                "data-skin": i,
+                                role: "button"
+                            }));
+                        }
+                    } : null
             ),
             app = div({
                     "class": css_class + ((self.standalone) ? " " + css_class + "-standalone " : " ") + (source.attr("class") || ""),
@@ -969,20 +972,20 @@ document = window.document || {};
                     div('wrapper',
                         filters = div('filters'),
                         (options.search ?
-                            searchPanel = div('search-panel',
-                                div('search',
-                                    options.search ?
-                                    function () {
-                                        self.search = $("<input/>", {
-                                            "placeholder": options.searchPlaceholder || "",
-                                            "type": "text",
-                                            "class": "search"
-                                        });
-                                        this.append(self.search);
-                                    } : null
-                                ),
-                                tones
-                            ) : null
+                                searchPanel = div('search-panel',
+                                    div('search',
+                                        options.search ?
+                                            function () {
+                                                self.search = $("<input/>", {
+                                                    "placeholder": options.searchPlaceholder || "",
+                                                    "type": "text",
+                                                    "class": "search"
+                                                });
+                                                this.append(self.search);
+                                            } : null
+                                    ),
+                                    tones
+                                ) : null
                         ),
                         scrollArea = div('scroll-area',
                             options.tones && !options.search ? div('tones-panel',
@@ -992,9 +995,9 @@ document = window.document || {};
                         )
                     )
                 ).addClass(selector('picker-position-' + options.pickerPosition, true))
-                .addClass(selector('filters-position-' + options.filtersPosition, true))
-                .addClass(selector('search-position-' + options.searchPosition, true))
-                .addClass('hidden')
+                    .addClass(selector('filters-position-' + options.filtersPosition, true))
+                    .addClass(selector('search-position-' + options.searchPosition, true))
+                    .addClass('hidden')
             );
 
         if (options.search) {
@@ -1020,10 +1023,10 @@ document = window.document || {};
             }
             if (filter !== 'tones') {
                 $("<i/>", {
-                        "class": selector("filter", true) + " " + selector("filter-" + filter, true),
-                        "data-filter": filter,
-                        title: params.title
-                    })
+                    "class": selector("filter", true) + " " + selector("filter-" + filter, true),
+                    "data-filter": filter,
+                    title: params.title
+                })
                     .wrapInner(shortnameTo(params.icon, self.emojiTemplateAlt))
                     .appendTo(filters);
             } else if (options.tones) {
@@ -1059,8 +1062,8 @@ document = window.document || {};
 
                 items = shortnameTo(items,
                     self.sprite ?
-                    '<i class="emojibtn" role="button" data-name="{name}" title="{friendlyName}"><i class="emojione-{uni}"></i></i>' :
-                    '<i class="emojibtn" role="button" data-name="{name}" title="{friendlyName}"><img class="emojioneemoji lazy-emoji" data-src="{img}"/></i>',
+                        '<i class="emojibtn" role="button" data-name="{name}" title="{friendlyName}"><i class="emojione-{uni}"></i></i>' :
+                        '<i class="emojibtn" role="button" data-name="{name}" title="{friendlyName}"><img class="emojioneemoji lazy-emoji" data-src="{img}"/></i>',
                     true).split('|').join('');
 
                 category.html(items);
@@ -1179,27 +1182,27 @@ document = window.document || {};
         });
 
         self.on("@filter.click", function (filter) {
-                var isActive = filter.is(".active");
-                if (scrollArea.is(".skinnable")) {
-                    if (isActive) return;
-                    tones.children().eq(0).click();
-                }
-                noListenScroll = true;
-                if (!isActive) {
-                    filtersBtns.filter(".active").removeClass("active");
-                    filter.addClass("active");
-                }
-                var headerOffset = categories.filter('[name="' + filter.data('filter') + '"]').offset().top,
-                    scroll = scrollArea.scrollTop(),
-                    offsetTop = scrollArea.offset().top;
+            var isActive = filter.is(".active");
+            if (scrollArea.is(".skinnable")) {
+                if (isActive) return;
+                tones.children().eq(0).click();
+            }
+            noListenScroll = true;
+            if (!isActive) {
+                filtersBtns.filter(".active").removeClass("active");
+                filter.addClass("active");
+            }
+            var headerOffset = categories.filter('[name="' + filter.data('filter') + '"]').offset().top,
+                scroll = scrollArea.scrollTop(),
+                offsetTop = scrollArea.offset().top;
 
-                scrollArea.stop().animate({
-                    scrollTop: headerOffset + scroll - offsetTop - 2
-                }, 200, 'swing', function () {
-                    lazyLoading.call(self);
-                    noListenScroll = false;
-                });
-            })
+            scrollArea.stop().animate({
+                scrollTop: headerOffset + scroll - offsetTop - 2
+            }, 200, 'swing', function () {
+                lazyLoading.call(self);
+                noListenScroll = false;
+            });
+        })
 
             .on("@picker.show", function () {
                 if (self.recentEmojis) {
@@ -1279,16 +1282,16 @@ document = window.document || {};
                     clipboard = $("<div/>", {
                         contenteditable: true
                     })
-                    .css({
-                        position: "fixed",
-                        left: "-999px",
-                        width: "1px",
-                        height: "1px",
-                        top: "20px",
-                        overflow: "hidden"
-                    })
-                    .appendTo($("BODY"))
-                    .focus();
+                        .css({
+                            position: "fixed",
+                            left: "-999px",
+                            width: "1px",
+                            height: "1px",
+                            top: "20px",
+                            overflow: "hidden"
+                        })
+                        .appendTo($("BODY"))
+                        .focus();
 
                 window.setTimeout(function () {
                     editor.focus();
@@ -1384,9 +1387,9 @@ document = window.document || {};
 
         if (options.search) {
             self.on("@search.focus", function () {
-                    self.stayFocused = true;
-                    self.search.addClass("focused");
-                })
+                self.stayFocused = true;
+                self.search.addClass("focused");
+            })
 
                 .on("@search.keypress", function (hide) {
                     var filterBtns = picker.find(".emojionearea-filter");

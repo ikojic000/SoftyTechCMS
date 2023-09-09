@@ -2,167 +2,167 @@
 
 {% block content %}
 
-<div class="row mb-3">
-    <div class="col">
-        <h3 class="h3 text-light">{{ pageTitle }} - {{ user.username }}</h3>
+    <div class="row mb-3">
+        <div class="col">
+            <h3 class="h3 text-light">{{ pageTitle }} - {{ user.username }}</h3>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-lg-6">
-        <div class="card rounded-3 bg-dark text-light">
-            <div class="card-body">
-                <form method="POST" action="" class="row g-3">
-                    {{ userSettingsForm.hidden_tag() }}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card rounded-3 bg-dark text-light">
+                <div class="card-body">
+                    <form method="POST" action="" class="row g-3">
+                        {{ userSettingsForm.hidden_tag() }}
 
-                    <div class="col-md-12">
-                        <label for="{{ userSettingsForm.name.id }}" class="form-label">{{
-                            userSettingsForm.name.label.text }}</label>
-                        {% if userSettingsForm.name.errors %}
-                        <label for="{{ userSettingsForm.name.id }}" class="form-label">{{
-                            userSettingsForm.name.label.text }}</label>
-                        {{ userSettingsForm.name(class="form-control bg-dark text-light is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in userSettingsForm.name.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="col-md-12">
+                            <label for="{{ userSettingsForm.name.id }}"
+                                   class="form-label">{{ userSettingsForm.name.label.text }}</label>
+                            {% if userSettingsForm.name.errors %}
+                                <label for="{{ userSettingsForm.name.id }}"
+                                       class="form-label">{{ userSettingsForm.name.label.text }}</label>
+                                {{ userSettingsForm.name(class="form-control bg-dark text-light is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in userSettingsForm.name.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ userSettingsForm.name(class="form-control bg-dark text-light") }}
+                            {% endif %}
                         </div>
-                        {% else %}
-                        {{ userSettingsForm.name(class="form-control bg-dark text-light") }}
-                        {% endif %}
-                    </div>
 
-                    <div class="col-md-12">
-                        <label for="{{ userSettingsForm.username.id }}" class="form-label">{{
-                            userSettingsForm.username.label.text }}</label>
-                        {% if userSettingsForm.username.errors %}
-                        {{ userSettingsForm.username(class="form-control bg-dark text-light is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in userSettingsForm.username.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="col-md-12">
+                            <label for="{{ userSettingsForm.username.id }}"
+                                   class="form-label">{{ userSettingsForm.username.label.text }}</label>
+                            {% if userSettingsForm.username.errors %}
+                                {{ userSettingsForm.username(class="form-control bg-dark text-light is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in userSettingsForm.username.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ userSettingsForm.username(class="form-control bg-dark text-light") }}
+                            {% endif %}
                         </div>
-                        {% else %}
-                        {{ userSettingsForm.username(class="form-control bg-dark text-light") }}
-                        {% endif %}
-                    </div>
 
-                    <div class="col-md-12">
-                        <label for="{{ userSettingsForm.email.id }}" class="form-label">{{
-                            userSettingsForm.email.label.text
-                            }}</label>
-                        {% if userSettingsForm.email.errors %}
-                        {{ userSettingsForm.email(class="form-control bg-dark text-light is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in userSettingsForm.email.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="col-md-12">
+                            <label for="{{ userSettingsForm.email.id }}"
+                                   class="form-label">{{ userSettingsForm.email.label.text }}</label>
+                            {% if userSettingsForm.email.errors %}
+                                {{ userSettingsForm.email(class="form-control bg-dark text-light is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in userSettingsForm.email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ userSettingsForm.email(class="form-control bg-dark text-light") }}
+                            {% endif %}
                         </div>
-                        {% else %}
-                        {{ userSettingsForm.email(class="form-control bg-dark text-light") }}
-                        {% endif %}
-                    </div>
 
-                    <div class="col-12 d-flex justify-content-end">
-                        {{ userSettingsForm.submitAccountSettings(class="btn btn-primary btn-lg px-5") }}
-                    </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            {{ userSettingsForm.submitAccountSettings(class="btn btn-primary btn-lg px-5") }}
+                        </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="row">
-    <div class="col-lg-6">
-        <div class="card rounded-3 bg-dark text-light">
-            <div class="card-body">
-                <form method="POST" action="" class="row g-3">
-                    {{ changePasswordForm.hidden_tag() }}
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card rounded-3 bg-dark text-light">
+                <div class="card-body">
+                    <form method="POST" action="" class="row g-3">
+                        {{ changePasswordForm.hidden_tag() }}
 
-                    <div class="col-md-12">
-                        {% if changePasswordForm.password.errors %}
-                        <label for="{{ changePasswordForm.password.id }}" class="form-label">{{
-                            changePasswordForm.password.label.text }}</label>
-                        {{ changePasswordForm.password(class="form-control bg-dark text-light is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in changePasswordForm.password.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                        {% else %}
-                        <label for="{{ changePasswordForm.password.id }}" class="form-label">{{
-                            changePasswordForm.password.label.text }}</label>
-                        <!-- {{ changePasswordForm.password(class="form-control bg-dark text-light") }} -->
-                        <div class="input-group mb-3">
-                            <input class="form-control bg-dark text-light password" id="password" type="password"
-                                name="password" />
-                            <span class="input-group-text togglePassword" id="">
+                        <div class="col-md-12">
+                            {% if changePasswordForm.password.errors %}
+                                <label for="{{ changePasswordForm.password.id }}"
+                                       class="form-label">{{ changePasswordForm.password.label.text }}</label>
+                                {{ changePasswordForm.password(class="form-control bg-dark text-light is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in changePasswordForm.password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <label for="{{ changePasswordForm.password.id }}"
+                                       class="form-label">{{ changePasswordForm.password.label.text }}</label>
+                                <!-- {{ changePasswordForm.password(class="form-control bg-dark text-light") }} -->
+                                <div class="input-group mb-3">
+                                    <input class="form-control bg-dark text-light password" id="password"
+                                           type="password"
+                                           name="password"/>
+                                    <span class="input-group-text togglePassword" id="">
                                 <i data-feather="eye" style="cursor: pointer"></i>
                             </span>
+                                </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
-                    </div>
 
-                    <div class="col-md-12">
-                        <label for="{{ changePasswordForm.confirm_password.id }}" class="form-label">{{
-                            changePasswordForm.confirm_password.label.text }}</label>
-                        {% if changePasswordForm.confirm_password.errors %}
-                        {{ changePasswordForm.confirm_password(class="form-control bg-dark text-light is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in changePasswordForm.confirm_password.errors %}
-                            <span>{{ error }}</span>
-                            {% endfor %}
+                        <div class="col-md-12">
+                            <label for="{{ changePasswordForm.confirm_password.id }}"
+                                   class="form-label">{{ changePasswordForm.confirm_password.label.text }}</label>
+                            {% if changePasswordForm.confirm_password.errors %}
+                                {{ changePasswordForm.confirm_password(class="form-control bg-dark text-light is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in changePasswordForm.confirm_password.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ changePasswordForm.confirm_password(class="form-control bg-dark text-light password") }}
+                            {% endif %}
                         </div>
-                        {% else %}
-                        {{ changePasswordForm.confirm_password(class="form-control bg-dark text-light password") }}
-                        {% endif %}
-                    </div>
 
-                    <div class="col-12 d-flex justify-content-end">
-                        {{ changePasswordForm.submitChangePassword(class="btn btn-primary btn-lg px-5") }}
-                    </div>
+                        <div class="col-12 d-flex justify-content-end">
+                            {{ changePasswordForm.submitChangePassword(class="btn btn-primary btn-lg px-5") }}
+                        </div>
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 {% endblock content %}
 
 {% block scripts %}
 
-<script>
-    // When an element with the class "togglePassword" is clicked
-    $(".togglePassword").click(function (e) {
-        e.preventDefault(); // Prevent the default behavior of the clicked element
+    <script>
+        // When an element with the class "togglePassword" is clicked
+        $(".togglePassword").click(function (e) {
+            e.preventDefault(); // Prevent the default behavior of the clicked element
 
-        // Find the closest form element to the clicked element
-        var form = $(this).closest("form");
+            // Find the closest form element to the clicked element
+            var form = $(this).closest("form");
 
-        // Find the password input field within the form
-        var passwordInput = form.find(".password");
+            // Find the password input field within the form
+            var passwordInput = form.find(".password");
 
-        // Get the current type (password or text) of the password input
-        var type = passwordInput.attr("type");
+            // Get the current type (password or text) of the password input
+            var type = passwordInput.attr("type");
 
-        console.log(type); // Log the current input type to the console for debugging
+            console.log(type); // Log the current input type to the console for debugging
 
-        // Check the current input type
-        if (type == "password") {
-            // If it's currently a password field, change it to a text field
-            $(this).html(feather.icons["eye-off"].toSvg()); // Update the icon to indicate hidden password
-            passwordInput.attr("type", "text"); // Change input type to text
-        } else if (type == "text") {
-            // If it's currently a text field, change it back to a password field
-            $(this).html(feather.icons["eye"].toSvg()); // Update the icon to indicate visible password
-            passwordInput.attr("type", "password"); // Change input type to password
-        }
-    });
+            // Check the current input type
+            if (type == "password") {
+                // If it's currently a password field, change it to a text field
+                $(this).html(feather.icons["eye-off"].toSvg()); // Update the icon to indicate hidden password
+                passwordInput.attr("type", "text"); // Change input type to text
+            } else if (type == "text") {
+                // If it's currently a text field, change it back to a password field
+                $(this).html(feather.icons["eye"].toSvg()); // Update the icon to indicate visible password
+                passwordInput.attr("type", "password"); // Change input type to password
+            }
+        });
 
-</script>
+    </script>
 
 {% endblock scripts %}

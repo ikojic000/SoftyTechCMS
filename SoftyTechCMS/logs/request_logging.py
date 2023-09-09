@@ -1,6 +1,8 @@
-from flask import g, request
 from datetime import datetime
+
+from flask import g, request
 from flask_login import current_user
+
 from SoftyTechCMS.logs.database_manager import save_request_log
 
 

@@ -1,162 +1,163 @@
 ::-webkit-scrollbar {
-  width: 10px;
-  background-color: black;
+    width: 10px;
+    background-color: black;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background-color: rgba(127, 204, 247, 0.3);
+    border-radius: 5px;
+    background-color: rgba(127, 204, 247, 0.3);
 }
 
 .alert {
-  text-align: center;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 75px;
-  position: relative;
-  padding: 0.75rem 1.25rem;
-  border-radius: 4px;
-  border-style: solid;
-  border-width: 1px 1px 1px 5px !important;
-  z-index: 1000;
-  font-family: sans-serif;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 75px;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px 1px 1px 5px !important;
+    z-index: 1000;
+    font-family: sans-serif;
 }
 
 .alert-success {
-  background-color: rgba(227, 253, 235, 1);
-  border-color: rgba(38, 179, 3, 1);
-  color: rgba(60, 118, 61, 1);
+    background-color: rgba(227, 253, 235, 1);
+    border-color: rgba(38, 179, 3, 1);
+    color: rgba(60, 118, 61, 1);
 }
 
 .alert-danger,
 .alert-error {
-  background-color: rgba(248, 215, 218, 1);
-  border-color: rgba(220, 53, 69, 1);
-  color: rgba(114, 28, 36, 1);
+    background-color: rgba(248, 215, 218, 1);
+    border-color: rgba(220, 53, 69, 1);
+    color: rgba(114, 28, 36, 1);
 }
 
 .alert-info,
 .alert-message {
-  background-color: rgba(217, 237, 247, 1);
-  color: rgba(49, 112, 143, 1);
-  border-color: rgba(126, 182, 193, 1);
+    background-color: rgba(217, 237, 247, 1);
+    color: rgba(49, 112, 143, 1);
+    border-color: rgba(126, 182, 193, 1);
 }
 
 .pagination {
-  margin: 0 auto;
-  padding: 5px;
-  border: none;
-  border-radius: 15px;
-  color: white;
-  text-align: center;
-  box-sizing: content-box;
+    margin: 0 auto;
+    padding: 5px;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    text-align: center;
+    box-sizing: content-box;
 }
 
 .pageBtn {
-  display: inline-block;
-  font-family: "Orbitron";
-  color: white;
-  font-size: 16px;
-  text-decoration: none;
-  font-weight: bold;
-  text-align: center;
-  padding: 5px;
-  width: 35px;
-  background-color: transparent;
-  border: solid 1px #bbb;
-  border-radius: 5px;
+    display: inline-block;
+    font-family: "Orbitron";
+    color: white;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    padding: 5px;
+    width: 35px;
+    background-color: transparent;
+    border: solid 1px #bbb;
+    border-radius: 5px;
 }
 
 .currentPageBtn {
-  color: #7fccf7;
-  border: solid 1.3px #7fccf7;
-  border-radius: 5px;
+    color: #7fccf7;
+    border: solid 1.3px #7fccf7;
+    border-radius: 5px;
 }
 
 .pageBtn:first-child {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 .pageBtn:last-child {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 /* COMMENTS */
 
 .commentList {
-  width: 80%;
-  margin: 50px auto;
-  padding: 10px;
-  border-radius: 15px;
-  color: white;
-  font-family: "Work Sans", sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  position: relative;
+    width: 80%;
+    margin: 50px auto;
+    padding: 10px;
+    border-radius: 15px;
+    color: white;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    position: relative;
 }
 
 .commentDisplay {
-  background-color: var(--dark-color);
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin: 10px 0;
+    background-color: var(--dark-color);
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px 0;
 }
 
 .commentUser {
-  margin-top: 5px;
-  font-family: "Orbitron";
-  color: #7fccf7;
-  font-size: 18px;
+    margin-top: 5px;
+    font-family: "Orbitron";
+    color: #7fccf7;
+    font-size: 18px;
 }
+
 .comment {
-  white-space: normal;
-  padding: 10px;
+    white-space: normal;
+    padding: 10px;
 }
 
 .commentDate {
-  color: dimgray;
-  font-family: "Orbitron";
-  font-size: 10px;
+    color: dimgray;
+    font-family: "Orbitron";
+    font-size: 10px;
 }
 
 .comment-delete-button {
-  color: var(--light-color);
-  font-size: 15px;
-  transition: 0.3s ease-in;
+    color: var(--light-color);
+    font-size: 15px;
+    transition: 0.3s ease-in;
 }
 
 .comment-delete-button:hover {
-  cursor: pointer;
-  color: var(--warning-color);
-  font-size: 16px;
+    cursor: pointer;
+    color: var(--warning-color);
+    font-size: 16px;
 }
 
 @media only screen and (min-width: 950px) {
-  .aboutText {
-    color: white;
-    font-family: "Work Sans", sans-serif;
-    font-size: 20px;
-    text-align: center;
-    line-height: 35px;
-  }
+    .aboutText {
+        color: white;
+        font-family: "Work Sans", sans-serif;
+        font-size: 20px;
+        text-align: center;
+        line-height: 35px;
+    }
 }
 
 @media only screen and (max-width: 600px) {
-  .commentList {
-    width: 90%;
-  }
+    .commentList {
+        width: 90%;
+    }
 }
 
 @media only screen and (max-width: 360px) {
-  .alert {
-    margin-top: 0;
-    padding: 0.35rem 1.25rem;
-  }
+    .alert {
+        margin-top: 0;
+        padding: 0.35rem 1.25rem;
+    }
 }
 
 @media only screen and (max-width: 320px) {
-  .alert {
-    margin-top: -23px;
-    padding: 0.35rem 1.25rem;
-  }
+    .alert {
+        margin-top: -23px;
+        padding: 0.35rem 1.25rem;
+    }
 }

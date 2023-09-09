@@ -1,4 +1,5 @@
 from flask import flash, abort
+
 from SoftyTechCMS import db
 from SoftyTechCMS.models import Category
 

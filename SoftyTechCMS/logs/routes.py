@@ -1,8 +1,10 @@
+import json
+
 from flask import Blueprint, render_template
+from flask import Response
 from flask_login import login_required
 from flask_user import roles_required
-import json
-from flask import Response
+
 from SoftyTechCMS.logs.database_manager import (
     delete_logs,
     get_all_error_logs,

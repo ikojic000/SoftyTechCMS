@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_required
 from flask_user import roles_required
+
 from SoftyTechCMS.categories.database_manager import (
     create_category,
     delete_category_by_id,

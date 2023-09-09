@@ -2,31 +2,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords"
-        content="Tech, SoFtY, Gaming, Blog, PC, News, Review, Games, GPU, CPU, RAM, nVidia, Intel, AMD, Gigabyte, MSI, Asus, Acer, Razer, Logitech, Roccat, R.A.T., Samsung, AsTech">
+          content="Tech, SoFtY, Gaming, Blog, PC, News, Review, Games, GPU, CPU, RAM, nVidia, Intel, AMD, Gigabyte, MSI, Asus, Acer, Razer, Logitech, Roccat, R.A.T., Samsung, AsTech">
     <meta name="description"
-        content="This website is for Gaming and PC enthusiasts bringing you fresh news, reviews and etc.">
+          content="This website is for Gaming and PC enthusiasts bringing you fresh news, reviews and etc.">
     <meta name="author" content="Ivan Kojic">
-    <link rel="icon" href="{{ url_for('static', filename='css/images/SoFtYTechIcon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ url_for('static', filename='css/images/SoFtYTechIcon.ico') }}" type="image/x-icon"/>
 
     {% if title %}
-    <title>Softy Tech | {{ title }}</title>
+        <title>Softy Tech | {{ title }}</title>
     {% else %}
-    <title>Softy Tech</title>
+        <title>Softy Tech</title>
     {% endif %}
 
     <!-- Bootstrap Grid CSS -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap-grid.css') }}">
     <link rel="stylesheet" type="text/css"
-        href="{{ url_for('static', filename='css/bootstrap/bootstrap-grid.min.css') }}">
+          href="{{ url_for('static', filename='css/bootstrap/bootstrap-grid.min.css') }}">
 
     <!-- Google Fonts - Orbitron -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet" />
+          rel="stylesheet"/>
 
 
     <!-- My CSS -->
@@ -44,68 +44,68 @@
 
 <body>
 
-    {% include 'includes/navbar.html' %}
+{% include 'includes/navbar.html' %}
 
-    <main>
-        <div class="wrapper container">
+<main>
+    <div class="wrapper container">
 
-            {% include "includes/messages.html" %}
+        {% include "includes/messages.html" %}
 
-            {% block content %}
+        {% block content %}
 
-            {% endblock %}
-        </div>
-    </main>
+        {% endblock %}
+    </div>
+</main>
 
-    {% include "includes/footer.html" %}
+{% include "includes/footer.html" %}
 
-    <!--- SCRIPTS --->
+<!--- SCRIPTS --->
 
-    <!--- JQuery Scripts --->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--- JQuery Scripts --->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <!-- Emoji Plugin -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/emojionearea.css') }}">
-    <script src="{{ url_for('static', filename='js/emojionearea.js') }}"></script>
+<!-- Emoji Plugin -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/emojionearea.css') }}">
+<script src="{{ url_for('static', filename='js/emojionearea.js') }}"></script>
 
-    <!--- Popper Scripts --->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+<!--- Popper Scripts --->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
 
-    <!--- Bootstrap Scripts --->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+<!--- Bootstrap Scripts --->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-    <!-- FontAwesomeIcons Kit v6 js -->
-    <script src="https://kit.fontawesome.com/c684ba2383.js" crossorigin="anonymous"></script>
+<!-- FontAwesomeIcons Kit v6 js -->
+<script src="https://kit.fontawesome.com/c684ba2383.js" crossorigin="anonymous"></script>
 
-    <script>
-        // When the document is ready (page is fully loaded)
-        $(document).ready(function () {
-            // Find all elements with the class ".alert"
-            $('.alert').each(function () {
-                // Read the "data-timeout" attribute from the current alert element
-                var timeout = $(this).data('timeout');
+<script>
+    // When the document is ready (page is fully loaded)
+    $(document).ready(function () {
+        // Find all elements with the class ".alert"
+        $('.alert').each(function () {
+            // Read the "data-timeout" attribute from the current alert element
+            var timeout = $(this).data('timeout');
 
-                // Store a reference to the current alert element
-                var alert = $(this);
+            // Store a reference to the current alert element
+            var alert = $(this);
 
-                // Use setTimeout to schedule the closure of the alert after the specified timeout
-                setTimeout(function () {
-                    // Close the alert using Bootstrap's 'close' method
-                    alert.alert('close');
-                }, timeout);
-            });
+            // Use setTimeout to schedule the closure of the alert after the specified timeout
+            setTimeout(function () {
+                // Close the alert using Bootstrap's 'close' method
+                alert.alert('close');
+            }, timeout);
         });
+    });
 
-    </script>
+</script>
 
 
-    {% block scripts %}
+{% block scripts %}
 
-    {% endblock scripts %}
+{% endblock scripts %}
 </body>
 
 </html>

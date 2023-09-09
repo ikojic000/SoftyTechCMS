@@ -1,13 +1,13 @@
-from SoftyTechCMS import app
 from flask import render_template, url_for, redirect, flash, request, Blueprint, abort
-from SoftyTechCMS.comments.database_manager import add_comment, comments_by_post_id
-from SoftyTechCMS.comments.utils import comment_user_matches_current_user
-from SoftyTechCMS.logs.request_logging import after_request, before_request
-from SoftyTechCMS.main.utils import send_mail
-from SoftyTechCMS.main.forms import SearchForm, ContactForm
-from SoftyTechCMS.comments.forms import CommentForm
 from flask_login import current_user
 
+from SoftyTechCMS import app
+from SoftyTechCMS.comments.database_manager import add_comment, comments_by_post_id
+from SoftyTechCMS.comments.forms import CommentForm
+from SoftyTechCMS.comments.utils import comment_user_matches_current_user
+from SoftyTechCMS.logs.request_logging import after_request, before_request
+from SoftyTechCMS.main.forms import SearchForm, ContactForm
+from SoftyTechCMS.main.utils import send_mail
 from SoftyTechCMS.posts.database_manager import (
     get_post_by_slug,
     get_posts_pagination,

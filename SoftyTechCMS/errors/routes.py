@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template
 from flask_login import current_user
+
 from SoftyTechCMS.errors.database_manager import save_error_log
 
 # Create a Blueprint for error handling named 'errors'

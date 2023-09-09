@@ -1,7 +1,8 @@
 from datetime import datetime
-from SoftyTechCMS import db, login_manager
+
 from flask_user import UserMixin
-from passlib.hash import bcrypt
+
+from SoftyTechCMS import db, login_manager
 
 
 # Function for fetching user

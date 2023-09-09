@@ -1,7 +1,9 @@
 from datetime import datetime
+
 from flask import flash, abort
-from SoftyTechCMS.models import Post, User, Comment
+
 from SoftyTechCMS import db
+from SoftyTechCMS.models import Post, User, Comment
 
 
 # Get all comments along with associated user and post

@@ -1,3 +1,5 @@
+import os
+
 from flask import (
     render_template,
     url_for,
@@ -8,6 +10,9 @@ from flask import (
     make_response,
 )
 from flask.json import jsonify
+from flask_login import current_user, login_required
+from flask_user import roles_required
+
 from SoftyTechCMS import app
 from SoftyTechCMS.logs.request_logging import after_request, before_request
 from SoftyTechCMS.posts.database_manager import (
@@ -21,9 +26,6 @@ from SoftyTechCMS.posts.database_manager import (
     publish_unpublish_post,
 )
 from SoftyTechCMS.posts.forms import PostForm
-from flask_login import current_user, login_required
-from flask_user import roles_required
-import os
 from SoftyTechCMS.posts.utils import gen_rnd_filename, get_posts_count, save_head_image
 
 # Create a Blueprint for the 'posts' module

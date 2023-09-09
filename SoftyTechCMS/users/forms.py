@@ -8,6 +8,7 @@ from wtforms import (
     PasswordField,
 )
 from wtforms.validators import DataRequired, Email, Length, EqualTo
+
 from SoftyTechCMS.auth.utils import (
     validate_email,
     validate_email_update,

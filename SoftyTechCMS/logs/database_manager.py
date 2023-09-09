@@ -1,4 +1,5 @@
 from flask import flash, abort, redirect, url_for
+
 from SoftyTechCMS import db
 from SoftyTechCMS.models import ErrorLog, RequestLog
 

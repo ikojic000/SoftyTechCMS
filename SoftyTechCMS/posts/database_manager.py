@@ -1,6 +1,8 @@
 from datetime import datetime
+
 from flask import flash, abort
 from sqlalchemy import or_
+
 from SoftyTechCMS import db
 from SoftyTechCMS.models import Category, Post
 from SoftyTechCMS.users.database_manager import get_user_by_id
@@ -84,16 +86,16 @@ def get_all_posts():
 
 # Method for creating new post
 def create_post(
-    title,
-    subtitle,
-    description,
-    headImg,
-    slug,
-    language,
-    author,
-    content,
-    isPublished,
-    category,
+        title,
+        subtitle,
+        description,
+        headImg,
+        slug,
+        language,
+        author,
+        content,
+        isPublished,
+        category,
 ):
     """
     Create a new post and add it to the database.
@@ -141,17 +143,17 @@ def create_post(
 
 # Method for updating post in the database
 def post_update(
-    post,
-    title,
-    subtitle,
-    description,
-    slug,
-    language,
-    author,
-    content,
-    isPublished,
-    category,
-    headImgData,
+        post,
+        title,
+        subtitle,
+        description,
+        slug,
+        language,
+        author,
+        content,
+        isPublished,
+        category,
+        headImgData,
 ):
     """
     Update an existing post in the database.

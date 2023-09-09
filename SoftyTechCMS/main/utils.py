@@ -1,7 +1,9 @@
 import os
-from SoftyTechCMS import mail
+
 from flask import flash, abort
 from flask_mail import Message
+
+from SoftyTechCMS import mail
 
 
 # Function to send an email

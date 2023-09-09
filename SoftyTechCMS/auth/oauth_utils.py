@@ -1,6 +1,7 @@
 import os
+
 from flask import session
-from SoftyTechCMS import oauth
+
 from SoftyTechCMS import oauth
 
 # Google OAuth2 configuration

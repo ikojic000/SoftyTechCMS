@@ -1,6 +1,6 @@
-from SoftyTechCMS import app
 import os
 
+from SoftyTechCMS import app
 
 filemanager_route = os.path.join(app.root_path, "static/upload")
 
@@ -17,6 +17,7 @@ class Config:
     MAIL_USE_SSL = True
     MAIL_USERNAME = os.environ.get("SoftyTechCMS_MAIL_USER")
     MAIL_PASSWORD = os.environ.get("SoftyTechCMS_MAIL_PASSWORD")
+    MAIL_DEFAULT_SENDER = ('SoftyTech', os.environ.get("SoftyTechCMS_MAIL_USER"))
     USER_EMAIL_SENDER_EMAIL = os.environ.get("SoftyTechCMS_MAIL_USER")
 
     # Filemanager settings

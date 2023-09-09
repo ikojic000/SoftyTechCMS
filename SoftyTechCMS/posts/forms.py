@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileAllowed
 from wtforms import (
     StringField,
     BooleanField,
@@ -7,11 +8,10 @@ from wtforms import (
     FileField,
     SelectField,
 )
-from wtforms.validators import DataRequired, Length
-from flask_wtf.file import FileAllowed
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms.validators import DataRequired, Length
+
 from SoftyTechCMS.models import Category
-from SoftyTechCMS.posts.utils import validate_slug, validate_subtitle, validate_title
 
 
 class PostForm(FlaskForm):

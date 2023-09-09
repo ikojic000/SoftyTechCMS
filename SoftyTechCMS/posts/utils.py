@@ -1,11 +1,12 @@
-from datetime import datetime
-import random
-from SoftyTechCMS import app
 import os
+import random
+from datetime import datetime
+
 from PIL import Image
 from skimage import io, metrics
 from wtforms.validators import ValidationError
 
+from SoftyTechCMS import app
 from SoftyTechCMS.posts.database_manager import (
     get_post_by_slug_validation,
     get_post_by_subtitle_validation,

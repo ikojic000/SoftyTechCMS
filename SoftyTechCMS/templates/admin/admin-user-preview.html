@@ -1,297 +1,303 @@
 {% extends "admin/admin-base.html" %}
 
 {% block content %}
-<div class="row mb-3">
-    <div class="col">
-        <h3 class="h3 text-light">{{ pageTitle }} - {{ user.username }}</h3>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12 col-xxl-9">
-        <div class="card rounded-3 bg-dark text-light">
-            <div class="card-header bg-dark">
-
-                <div class="row d-flex justify-content-between">
-                    <div class="col-auto">
-                        <h5 class="card-title mb-0">Details</h5>
-                    </div>
-                    <div class="col-auto">
-                        <div class="col-auto">
-                            <a class="btn btn-dark"
-                                href="{{ url_for('users.change_user_role', user_id=user.id, source='user_details') }}">
-                                <i class="align-middle me-2" data-feather="edit-2"></i> Edit User
-                            </a>
-                            <a class="btn btn-danger" href="{{ url_for('users.delete_user', user_id=user.id) }}">
-                                <i class="align-middle me-2" data-feather="trash"></i> Delete User
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row mb-3">
-                    <label class="form-label d-flex justify-content-start">
-                        <div class="col-auto">
-                            <i class="align-middle me-3" data-feather="user"></i>
-                            Name:
-                        </div>
-                        <div class="col-auto">
-                            <p class="text-primary ms-3">{{ user.name }} </p>
-                        </div>
-                    </label>
-                </div>
-                <div class="row mb-3">
-                    <label class="form-label d-flex justify-content-start">
-                        <div class="col-auto">
-                            <i class="align-middle me-3" data-feather="user"></i>
-                            Username:
-                        </div>
-                        <div class="col-auto">
-                            <p class="text-primary ms-3">{{ user.username }} </p>
-                        </div>
-                    </label>
-                </div>
-                <div class="row mb-3">
-                    <label class="form-label d-flex justify-content-start">
-                        <div class="col-auto">
-                            <i class="align-middle me-3" data-feather="mail"></i>
-                            Email:
-                        </div>
-                        <div class="col-auto">
-                            <p class="text-primary ms-3">{{ user.email }} </p>
-                        </div>
-                    </label>
-                </div>
-                <div class="row mb-3">
-                    <label class="form-label d-flex justify-content-start">
-                        <div class="col-auto">
-                            <i class="align-middle me-3" data-feather="calendar"></i>
-                            Email confirmed at:
-                        </div>
-                        <div class="col-auto">
-                            <p class="text-primary ms-3">{{ user.email_confirmed_at.strftime('%d-%m-%Y %H:%M:%S') }}</p>
-                        </div>
-                    </label>
-                </div>
-                <div class="row mb-3">
-                    <label class="form-label d-flex justify-content-start">
-                        <div class="col-auto">
-                            <i class="align-middle me-3" data-feather="shield"></i>
-                            Role:
-                        </div>
-                        <div class="col-auto">
-                            <p class="text-primary ms-3">
-                                {% for role in user.roles %}
-                                {{ role.name }}{% if not loop.last %}, {% endif %}
-                                {% endfor %}
-                            </p>
-                        </div>
-                    </label>
-                </div>
-                <div class="row mb-3">
-                    <label class="form-label d-flex justify-content-start">
-                        {% if user.active %}
-                        <div class="col-auto">
-                            <i class="align-middle me-3" data-feather="user-check"></i>
-                            User is:
-                        </div>
-                        <div class="col-auto">
-                            <p class="text-primary ms-3"> Active </p>
-                        </div>
-                        {% else %}
-                        <div class="col-auto">
-                            <i class="align-middle me-3" data-feather="user-x"></i>
-                            User is:
-                        </div>
-                        <div class="col-auto">
-                            <p class="text-danger ms-3">Not Active </p>
-                        </div>
-                        {% endif %}
-                    </label>
-                </div>
-            </div>
+    <div class="row mb-3">
+        <div class="col">
+            <h3 class="h3 text-light">{{ pageTitle }} - {{ user.username }}</h3>
         </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-12 col-xxl-9">
+            <div class="card rounded-3 bg-dark text-light">
+                <div class="card-header bg-dark">
 
-{% if posts is defined and posts|length > 0 %}
-<div class="row">
-    <div class="col-12 col-xxl-9">
-        <div class="card rounded-3 bg-dark text-light">
-            <div class="card-header bg-dark d-flex justify-content-between">
-                <h5 class="card-title mb-0">Posts written by {{ user.username }}</h5>
-                <a class="btn btn-danger" href="{{ url_for('posts.delete_all_posts_by_user', user_id=user.id) }}">
-                    <i class="align-middle me-2" data-feather="trash"></i> Delete All Posts by {{ user.username }}
-                </a>
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-hover my-0" id="datatable-posts">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th class="d-none d-xl-table-cell">Written At</th>
-                            <th class="d-none d-xl-table-cell">Published At</th>
-                            <th class="d-none d-md-table-cell">Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for post in posts %}
-                        <tr>
-                            <td>{{ post.title }}</td>
-                            <td class="d-none d-xl-table-cell">{{ post.date_posted.strftime('%d-%m-%Y %H:%M:%S') }}</td>
-                            <td class="d-none d-xl-table-cell">{{ post.date_posted.strftime('%d-%m-%Y %H:%M:%S') }}</td>
-
-                            {% if post.isPublished %}
-                            <td><span class="badge bg-success">Posted</span></td>
+                    <div class="row d-flex justify-content-between">
+                        <div class="col-auto">
+                            <h5 class="card-title mb-0">Details</h5>
+                        </div>
+                        <div class="col-auto">
+                            <div class="col-auto">
+                                <a class="btn btn-dark"
+                                   href="{{ url_for('users.change_user_role', user_id=user.id, source='user_details') }}">
+                                    <i class="align-middle me-2" data-feather="edit-2"></i> Edit User
+                                </a>
+                                <a class="btn btn-danger" href="{{ url_for('users.delete_user', user_id=user.id) }}">
+                                    <i class="align-middle me-2" data-feather="trash"></i> Delete User
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <label class="form-label d-flex justify-content-start">
+                            <div class="col-auto">
+                                <i class="align-middle me-3" data-feather="user"></i>
+                                Name:
+                            </div>
+                            <div class="col-auto">
+                                <p class="text-primary ms-3">{{ user.name }} </p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label d-flex justify-content-start">
+                            <div class="col-auto">
+                                <i class="align-middle me-3" data-feather="user"></i>
+                                Username:
+                            </div>
+                            <div class="col-auto">
+                                <p class="text-primary ms-3">{{ user.username }} </p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label d-flex justify-content-start">
+                            <div class="col-auto">
+                                <i class="align-middle me-3" data-feather="mail"></i>
+                                Email:
+                            </div>
+                            <div class="col-auto">
+                                <p class="text-primary ms-3">{{ user.email }} </p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label d-flex justify-content-start">
+                            <div class="col-auto">
+                                <i class="align-middle me-3" data-feather="calendar"></i>
+                                Email confirmed at:
+                            </div>
+                            <div class="col-auto">
+                                <p class="text-primary ms-3">{{ user.email_confirmed_at.strftime('%d-%m-%Y %H:%M:%S') }}</p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label d-flex justify-content-start">
+                            <div class="col-auto">
+                                <i class="align-middle me-3" data-feather="shield"></i>
+                                Role:
+                            </div>
+                            <div class="col-auto">
+                                <p class="text-primary ms-3">
+                                    {% for role in user.roles %}
+                                        {{ role.name }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </p>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="row mb-3">
+                        <label class="form-label d-flex justify-content-start">
+                            {% if user.active %}
+                                <div class="col-auto">
+                                    <i class="align-middle me-3" data-feather="user-check"></i>
+                                    User is:
+                                </div>
+                                <div class="col-auto">
+                                    <p class="text-primary ms-3"> Active </p>
+                                </div>
                             {% else %}
-                            <td><span class="badge bg-warning">Drafted</span></td>
+                                <div class="col-auto">
+                                    <i class="align-middle me-3" data-feather="user-x"></i>
+                                    User is:
+                                </div>
+                                <div class="col-auto">
+                                    <p class="text-danger ms-3">Not Active </p>
+                                </div>
                             {% endif %}
-
-                            <td class="table-action d-flex justify-content-between">
-                                <a href="{{ url_for('main.post', slug=post.slug) }}">
-                                    <i class="align-middle" data-feather="eye"></i>
-                                </a>
-                                {% if post.isPublished %}
-                                <a
-                                    href="{{ url_for('posts.publish_post', post_id=post.id, source='user_details', user_id=user.id) }}">
-                                    <i class="align-middle" data-feather="cloud-off"></i>
-                                </a>
-                                {% else %}
-                                <a
-                                    href="{{ url_for('posts.publish_post', post_id=post.id, source='user_details', user_id=user.id) }}">
-                                    <i class="align-middle" data-feather="cloud"></i>
-                                </a>
-                                {% endif %}
-                                <a
-                                    href="{{ url_for('posts.update_post', post_id=post.id, source='user_details', user_id=user.id) }}">
-                                    <i class="align-middle" data-feather="edit-2"></i>
-                                </a>
-                                <a
-                                    href="{{ url_for('posts.delete_post', post_id=post.id, source='user_details', user_id=user.id) }}">
-                                    <i class="align-middle" data-feather="trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endif %}
 
-{% if comments is defined and comments|length > 0 %}
-<div class="row">
-    <div class="col-12 col-xxl-9">
-        <div class="card rounded-3 bg-dark text-light">
-            <div class="card-header bg-dark d-flex justify-content-between">
-                <h5 class="card-title mb-0">Comments written by {{ user.username }}</h5>
-                <a class="btn btn-danger" href="{{ url_for('comments.delete_all_comments_by_user', user_id=user.id) }}">
-                    <i class="align-middle me-2" data-feather="trash"></i> Delete All Comments by {{ user.username }}
-                </a>
-            </div>
-            <div class="card-body">
-                <table class="table table-dark table-hover my-0" id="datatable-comments">
-                    <thead>
-                        <tr>
-                            <th class="">Post Title</th>
-                            <th class="d-none d-xl-table-cell">Commented At</th>
-                            <th class="">Content</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for comment in comments %}
-                        <tr>
-                            <td class="">{{ comment.post.title }}</td>
-                            <td class="d-none d-xl-table-cell">{{ comment.date_posted.strftime('%d-%m-%Y %H:%M:%S') }}
-                            </td>
-                            <td class="comment-content">{{ comment.content }}</td>
-                            <td class="table-action">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-link btn-confirm-delete" data-toggle="modal"
-                                    data-target="#deleteModal" data-comment-id="{{ comment.id }}"
-                                    data-delete-url="{{ url_for('comments.delete_comment', comment_id=comment.id )}}">
-                                    <i class="align-middle" data-feather="trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+    {% if posts is defined and posts|length > 0 %}
+        <div class="row">
+            <div class="col-12 col-xxl-9">
+                <div class="card rounded-3 bg-dark text-light">
+                    <div class="card-header bg-dark d-flex justify-content-between">
+                        <h5 class="card-title mb-0">Posts written by {{ user.username }}</h5>
+                        <a class="btn btn-danger"
+                           href="{{ url_for('posts.delete_all_posts_by_user', user_id=user.id) }}">
+                            <i class="align-middle me-2" data-feather="trash"></i> Delete All Posts
+                            by {{ user.username }}
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-dark table-hover my-0" id="datatable-posts">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th class="d-none d-xl-table-cell">Written At</th>
+                                <th class="d-none d-xl-table-cell">Published At</th>
+                                <th class="d-none d-md-table-cell">Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for post in posts %}
+                                <tr>
+                                    <td>{{ post.title }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ post.date_posted.strftime('%d-%m-%Y %H:%M:%S') }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ post.date_posted.strftime('%d-%m-%Y %H:%M:%S') }}</td>
+
+                                    {% if post.isPublished %}
+                                        <td><span class="badge bg-success">Posted</span></td>
+                                    {% else %}
+                                        <td><span class="badge bg-warning">Drafted</span></td>
+                                    {% endif %}
+
+                                    <td class="table-action d-flex justify-content-between">
+                                        <a href="{{ url_for('main.post', slug=post.slug) }}">
+                                            <i class="align-middle" data-feather="eye"></i>
+                                        </a>
+                                        {% if post.isPublished %}
+                                            <a
+                                                    href="{{ url_for('posts.publish_post', post_id=post.id, source='user_details', user_id=user.id) }}">
+                                                <i class="align-middle" data-feather="cloud-off"></i>
+                                            </a>
+                                        {% else %}
+                                            <a
+                                                    href="{{ url_for('posts.publish_post', post_id=post.id, source='user_details', user_id=user.id) }}">
+                                                <i class="align-middle" data-feather="cloud"></i>
+                                            </a>
+                                        {% endif %}
+                                        <a
+                                                href="{{ url_for('posts.update_post', post_id=post.id, source='user_details', user_id=user.id) }}">
+                                            <i class="align-middle" data-feather="edit-2"></i>
+                                        </a>
+                                        <a
+                                                href="{{ url_for('posts.delete_post', post_id=post.id, source='user_details', user_id=user.id) }}">
+                                            <i class="align-middle" data-feather="trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    {% endif %}
 
-
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header border-bottom-0 text-light">
-                <h5 class="modal-title text-light" id="exampleModalCenterTitle">
-                    Deleting Comment Permanently
-                </h5>
-                <button type="button" class="btn-close text-light" data-bs-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body text-light">
-                <h4 class="text-light" id="modalCommentContent"></h4>
-                <p>Are you sure you want to delete this comment?</p>
-            </div>
-            <div class="modal-footer border-top-0">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a class="btn btn-danger" id="modalDeleteButton" href="#">Delete</a>
+    {% if comments is defined and comments|length > 0 %}
+        <div class="row">
+            <div class="col-12 col-xxl-9">
+                <div class="card rounded-3 bg-dark text-light">
+                    <div class="card-header bg-dark d-flex justify-content-between">
+                        <h5 class="card-title mb-0">Comments written by {{ user.username }}</h5>
+                        <a class="btn btn-danger"
+                           href="{{ url_for('comments.delete_all_comments_by_user', user_id=user.id) }}">
+                            <i class="align-middle me-2" data-feather="trash"></i> Delete All Comments
+                            by {{ user.username }}
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-dark table-hover my-0" id="datatable-comments">
+                            <thead>
+                            <tr>
+                                <th class="">Post Title</th>
+                                <th class="d-none d-xl-table-cell">Commented At</th>
+                                <th class="">Content</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for comment in comments %}
+                                <tr>
+                                    <td class="">{{ comment.post.title }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ comment.date_posted.strftime('%d-%m-%Y %H:%M:%S') }}
+                                    </td>
+                                    <td class="comment-content">{{ comment.content }}</td>
+                                    <td class="table-action">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-link btn-confirm-delete"
+                                                data-toggle="modal"
+                                                data-target="#deleteModal" data-comment-id="{{ comment.id }}"
+                                                data-delete-url="{{ url_for('comments.delete_comment', comment_id=comment.id ) }}">
+                                            <i class="align-middle" data-feather="trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-{% endif %}
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content bg-dark">
+                    <div class="modal-header border-bottom-0 text-light">
+                        <h5 class="modal-title text-light" id="exampleModalCenterTitle">
+                            Deleting Comment Permanently
+                        </h5>
+                        <button type="button" class="btn-close text-light" data-bs-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body text-light">
+                        <h4 class="text-light" id="modalCommentContent"></h4>
+                        <p>Are you sure you want to delete this comment?</p>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a class="btn btn-danger" id="modalDeleteButton" href="#">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
 
 {% endblock %}
 
 {% block scripts %}
 
-<script>
-    // When the document is ready (page is fully loaded)
-    $(document).ready(function () {
-        // Show modal and set delete URL when the delete button is clicked
-        $('.btn-confirm-delete').click(function () {
-            // Get the comment ID and delete URL from data attributes
-            const commentId = $(this).data('comment-id');
-            const deleteUrl = $(this).data('delete-url');
+    <script>
+        // When the document is ready (page is fully loaded)
+        $(document).ready(function () {
+            // Show modal and set delete URL when the delete button is clicked
+            $('.btn-confirm-delete').click(function () {
+                // Get the comment ID and delete URL from data attributes
+                const commentId = $(this).data('comment-id');
+                const deleteUrl = $(this).data('delete-url');
 
-            // Get the text content of the comment associated with the delete button
-            const commentContent = $(this).closest('tr').find('.comment-content').text();
+                // Get the text content of the comment associated with the delete button
+                const commentContent = $(this).closest('tr').find('.comment-content').text();
 
-            // Set the text inside the modal with an ID of 'modalCommentContent'
-            $('#modalCommentContent').text("Comment: " + commentContent);
+                // Set the text inside the modal with an ID of 'modalCommentContent'
+                $('#modalCommentContent').text("Comment: " + commentContent);
 
-            // Set the 'href' attribute of the delete button inside the modal
-            $('#modalDeleteButton').attr('href', deleteUrl);
+                // Set the 'href' attribute of the delete button inside the modal
+                $('#modalDeleteButton').attr('href', deleteUrl);
 
-            // Show the modal with an ID of 'deleteModal'
-            $('#deleteModal').modal('show');
-        });
-    });
-
-    // DataTable - Tablica
-    $(document).ready(function () {
-        // Initialize DataTable for the table with ID "datatable-posts"
-        $("#datatable-posts").DataTable({
-            "order": [[1, "desc"]] // Specify default sorting order for columns
+                // Show the modal with an ID of 'deleteModal'
+                $('#deleteModal').modal('show');
+            });
         });
 
-        // Initialize DataTable for the table with ID "datatable-comments"
-        $("#datatable-comments").DataTable({
-            "order": [[1, "desc"]] // Specify default sorting order for columns
-        });
-    });
+        // DataTable - Tablica
+        $(document).ready(function () {
+            // Initialize DataTable for the table with ID "datatable-posts"
+            $("#datatable-posts").DataTable({
+                "order": [[1, "desc"]] // Specify default sorting order for columns
+            });
 
-</script>
+            // Initialize DataTable for the table with ID "datatable-comments"
+            $("#datatable-comments").DataTable({
+                "order": [[1, "desc"]] // Specify default sorting order for columns
+            });
+        });
+
+    </script>
 
 {% endblock scripts %}

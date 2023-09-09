@@ -2,30 +2,30 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5" />
-    <meta name="author" content="Ivan Kojic - MPDTech" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5"/>
+    <meta name="author" content="Ivan Kojic - MPDTech"/>
     <meta name="keywords"
-        content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web" />
+          content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web"/>
 
-    <link rel="icon" href="{{ url_for('static', filename='css/images/SoFtYTechIcon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ url_for('static', filename='css/images/SoFtYTechIcon.ico') }}" type="image/x-icon"/>
 
     {% if title %}
-    <title>Softy Tech CMS | {{ title }}</title>
+        <title>Softy Tech CMS | {{ title }}</title>
     {% else %}
-    <title>Softy Tech CMS</title>
+        <title>Softy Tech CMS</title>
     {% endif %}
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
 
-    <link href="{{ url_for('static', filename='adminKit/app.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='adminKit/app.css') }}" rel="stylesheet"/>
 
-    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
@@ -34,56 +34,56 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <!-- Side bar -->
-        {% include "admin/admin-includes/admin-sidebar.html" %}
+<div class="wrapper">
+    <!-- Side bar -->
+    {% include "admin/admin-includes/admin-sidebar.html" %}
 
-        <div class="main">
-            <!-- Top navbar -->
-            {% include "admin/admin-includes/admin-header.html" %}
+    <div class="main">
+        <!-- Top navbar -->
+        {% include "admin/admin-includes/admin-header.html" %}
 
-            <!-- Main Content -->
-            <main class="content bg-black">
-                <div class="container-fluid p-0">
-                    <!-- Ono sto se vidi na page-u -->
-                    {% include "includes/messages.html" %}
+        <!-- Main Content -->
+        <main class="content bg-black">
+            <div class="container-fluid p-0">
+                <!-- Ono sto se vidi na page-u -->
+                {% include "includes/messages.html" %}
 
-                    {% block content%}
-                    {% endblock %}
-                </div>
-            </main>
+                {% block content %}
+                {% endblock %}
+            </div>
+        </main>
 
-            <!-- Footer -->
-            {% include "admin/admin-includes/admin-footer.html" %}
+        <!-- Footer -->
+        {% include "admin/admin-includes/admin-footer.html" %}
 
 
-        </div>
     </div>
+</div>
 
-    {% block scripts %}
+{% block scripts %}
 
-    {% endblock scripts %}
+{% endblock scripts %}
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="{{ url_for('static', filename='adminKit/app.js') }}"></script>
+<script src="{{ url_for('static', filename='adminKit/app.js') }}"></script>
 
-    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
+<script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // Find all elements with ".alert" class
-            $('.alert').each(function () {
-                var timeout = $(this).data('timeout'); // Read "data-timeout" attribute
-                var alert = $(this); // Store the alert element reference
+<script>
+    $(document).ready(function () {
+        // Find all elements with ".alert" class
+        $('.alert').each(function () {
+            var timeout = $(this).data('timeout'); // Read "data-timeout" attribute
+            var alert = $(this); // Store the alert element reference
 
-                // Use setTimeout to close the alert after the specified time
-                setTimeout(function () {
-                    alert.alert('close'); // Close the alert using Bootstrap's close method
-                }, timeout);
-            });
+            // Use setTimeout to close the alert after the specified time
+            setTimeout(function () {
+                alert.alert('close'); // Close the alert using Bootstrap's close method
+            }, timeout);
         });
-    </script>
+    });
+</script>
 
 </body>
 
