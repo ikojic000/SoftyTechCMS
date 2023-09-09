@@ -1,79 +1,79 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row mb-5">
-        <form class="form" method="POST" action="">
-            {{ userSettingsForm.hidden_tag() }}
-            <h1>User Details</h1>
+	<div class="row mb-5">
+		<form class="form" method="POST" action="">
+			{{ userSettingsForm.hidden_tag() }}
+			<h1>User Details</h1>
 
-            {% if userSettingsForm.name.errors %}
-                {{ userSettingsForm.name(class="form-control form-input is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in userSettingsForm.name.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ userSettingsForm.name(class="form-input", placeholder="Enter your name...") }}
-            {% endif %}
+			{% if userSettingsForm.name.errors %}
+				{{ userSettingsForm.name(class="form-control form-input is-invalid") }}
+				<div class="invalid-feedback">
+					{% for error in userSettingsForm.name.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ userSettingsForm.name(class="form-input", placeholder="Enter your name...") }}
+			{% endif %}
 
-            {% if userSettingsForm.username.errors %}
-                {{ userSettingsForm.username(class="form-control form-input is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in userSettingsForm.username.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ userSettingsForm.username(class="form-input", placeholder="Enter your username..") }}
-            {% endif %}
+			{% if userSettingsForm.username.errors %}
+				{{ userSettingsForm.username(class="form-control form-input is-invalid") }}
+				<div class="invalid-feedback">
+					{% for error in userSettingsForm.username.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ userSettingsForm.username(class="form-input", placeholder="Enter your username..") }}
+			{% endif %}
 
-            {% if userSettingsForm.email.errors %}
-                {{ userSettingsForm.email(class="form-control form-input is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in userSettingsForm.email.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ userSettingsForm.email(class="form-input", placeholder="Enter your email..") }}
-            {% endif %}
+			{% if userSettingsForm.email.errors %}
+				{{ userSettingsForm.email(class="form-control form-input is-invalid") }}
+				<div class="invalid-feedback">
+					{% for error in userSettingsForm.email.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ userSettingsForm.email(class="form-input", placeholder="Enter your email..") }}
+			{% endif %}
 
-            {{ userSettingsForm.submitAccountSettings(class="form-submit-button") }}
-        </form>
-    </div>
+			{{ userSettingsForm.submitAccountSettings(class="form-submit-button") }}
+		</form>
+	</div>
 
-    <div class="row mt-5">
-        <form class="form" method="POST" action="">
-            {{ changePasswordForm.hidden_tag() }}
-            <h1>Change Password</h1>
+	<div class="row mt-5">
+		<form class="form" method="POST" action="">
+			{{ changePasswordForm.hidden_tag() }}
+			<h1>Change Password</h1>
 
-            {% if changePasswordForm.password.errors %}
-                {{ changePasswordForm.password(class="form-control form-input is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in changePasswordForm.password.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ changePasswordForm.password(class="form-input", placeholder="New Password") }}
-            {% endif %}
-            <br>
+			{% if changePasswordForm.password.errors %}
+				{{ changePasswordForm.password(class="form-control form-input is-invalid") }}
+				<div class="invalid-feedback">
+					{% for error in changePasswordForm.password.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ changePasswordForm.password(class="form-input", placeholder="New Password") }}
+			{% endif %}
+			<br>
 
-            {% if changePasswordForm.confirm_password.errors %}
-                {{ changePasswordForm.confirm_password(class="form-control form-input is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in changePasswordForm.confirm_password.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ changePasswordForm.confirm_password(class="form-input", placeholder="Retype Password") }}
-            {% endif %}
-            <br>
+			{% if changePasswordForm.confirm_password.errors %}
+				{{ changePasswordForm.confirm_password(class="form-control form-input is-invalid") }}
+				<div class="invalid-feedback">
+					{% for error in changePasswordForm.confirm_password.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ changePasswordForm.confirm_password(class="form-input", placeholder="Retype Password") }}
+			{% endif %}
+			<br>
 
-            {{ changePasswordForm.submitChangePassword(class="form-submit-button") }}
-        </form>
-    </div>
+			{{ changePasswordForm.submitChangePassword(class="form-submit-button") }}
+		</form>
+	</div>
 
 {% endblock %}

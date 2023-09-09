@@ -2,89 +2,89 @@
 
 {% block content %}
 
-    <!-- Ono sto se vidi na page-u -->
-    <div class="row mb-3">
-        <div class="col">
-            <h1 class="h3 text-light">{{ pageTitle }}</h1>
-        </div>
-    </div>
+	<!-- Ono sto se vidi na page-u -->
+	<div class="row mb-3">
+		<div class="col">
+			<h1 class="h3 text-light">{{ pageTitle }}</h1>
+		</div>
+	</div>
 
-    <div class="row">
-        <!-- <div class="col-12 col-lg-8 col-xxl-9 d-flex"> -->
-        <div class="col-12">
-            <div class="card rounded-3 bg-dark">
-                <div class="card-header bg-dark d-flex justify-content-between">
-                    <h5 class="card-title mb-0">List of all Users</h5>
-                    <a class="btn btn-dark" href="{{ url_for('users.create_user') }}">
-                        <i class="align-middle me-2" data-feather="user-plus"></i> New User
-                    </a>
-                </div>
-                <div class="card-body">
-                    <table class="table table-dark table-hover my-0" id="datatable-posts">
-                        <thead>
-                        <tr>
-                            <th>User ID</th>
-                            <th class="">Username</th>
-                            <th>Email</th>
-                            <th class="d-none d-xl-table-cell">Email Confirmed At</th>
-                            <th class="">Roles</th>
-                            <th>Active</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for user in users %}
-                            <tr>
-                                <th>{{ user.id }}</th>
-                                <th>{{ user.username }}</th>
-                                <th>{{ user.email }}</th>
-                                <th class="d-none d-xl-table-cell">{{ user.email_confirmed_at.strftime('%d-%m-%Y %H:%M:%S') }}
-                                </th>
-                                <th class="">
-                                    {% for role in user.roles %}
-                                        {{ role.name }}{% if not loop.last %}, {% endif %}
-                                    {% endfor %}
-                                </th>
-                                <th>
-                                    {% if user.active %}
-                                        <span class="badge bg-success">Active</span>
-                                    {% else %}
-                                        <span class="badge bg-danger">Not Active</span>
-                                    {% endif %}
-                                </th>
-                                <td class="table-action d-flex justify-content-between">
-                                    <a href="{{ url_for('users.user_details', user_id=user.id) }}">
-                                        <i class="align-middle" data-feather="eye"></i>
-                                    </a>
-                                    <a href="{{ url_for('users.change_user_role', user_id=user.id, source='all_users') }}">
-                                        <i class="align-middle" data-feather="edit"></i>
-                                    </a>
-                                    <a href="{{ url_for('users.delete_user', user_id=user.id) }}">
-                                        <i class="align-middle" data-feather="trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<!-- <div class="col-12 col-lg-8 col-xxl-9 d-flex"> -->
+		<div class="col-12">
+			<div class="card rounded-3 bg-dark">
+				<div class="card-header bg-dark d-flex justify-content-between">
+					<h5 class="card-title mb-0">List of all Users</h5>
+					<a class="btn btn-dark" href="{{ url_for('users.create_user') }}">
+						<i class="align-middle me-2" data-feather="user-plus"></i> New User
+					</a>
+				</div>
+				<div class="card-body">
+					<table class="table table-dark table-hover my-0" id="datatable-posts">
+						<thead>
+						<tr>
+							<th>User ID</th>
+							<th class="">Username</th>
+							<th>Email</th>
+							<th class="d-none d-xl-table-cell">Email Confirmed At</th>
+							<th class="">Roles</th>
+							<th>Active</th>
+							<th>Actions</th>
+						</tr>
+						</thead>
+						<tbody>
+						{% for user in users %}
+							<tr>
+								<th>{{ user.id }}</th>
+								<th>{{ user.username }}</th>
+								<th>{{ user.email }}</th>
+								<th class="d-none d-xl-table-cell">{{ user.email_confirmed_at.strftime('%d-%m-%Y %H:%M:%S') }}
+								</th>
+								<th class="">
+									{% for role in user.roles %}
+										{{ role.name }}{% if not loop.last %}, {% endif %}
+									{% endfor %}
+								</th>
+								<th>
+									{% if user.active %}
+										<span class="badge bg-success">Active</span>
+									{% else %}
+										<span class="badge bg-danger">Not Active</span>
+									{% endif %}
+								</th>
+								<td class="table-action d-flex justify-content-between">
+									<a href="{{ url_for('users.user_details', user_id=user.id) }}">
+										<i class="align-middle" data-feather="eye"></i>
+									</a>
+									<a href="{{ url_for('users.change_user_role', user_id=user.id, source='all_users') }}">
+										<i class="align-middle" data-feather="edit"></i>
+									</a>
+									<a href="{{ url_for('users.delete_user', user_id=user.id) }}">
+										<i class="align-middle" data-feather="trash"></i>
+									</a>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        // DataTable - Tablica
-        // When the document is ready (page is fully loaded)
-        $(document).ready(function () {
-            // Initialize DataTable for the table with the ID "datatable-posts"
-            $('#datatable-posts').DataTable({
-                // Specify default sorting order for columns
-                "order": [[1, "asc"]] // Sorting by the second column (index 1) in ascending order ("asc")
-            });
-        });
+	<script>
+		// DataTable - Tablica
+		// When the document is ready (page is fully loaded)
+		$(document).ready(function () {
+			// Initialize DataTable for the table with the ID "datatable-posts"
+			$('#datatable-posts').DataTable({
+				// Specify default sorting order for columns
+				"order": [[1, "asc"]] // Sorting by the second column (index 1) in ascending order ("asc")
+			});
+		});
 
-    </script>
+	</script>
 {% endblock scripts %}

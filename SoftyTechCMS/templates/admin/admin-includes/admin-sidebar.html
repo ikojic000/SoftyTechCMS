@@ -1,96 +1,96 @@
 <nav id="sidebar" class="bg-dark sidebar js-sidebar ">
-    <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="{{ url_for('main.home') }}">
-            <span class="align-middle">SoftyTech CMS</span>
-        </a>
+	<div class="sidebar-content js-simplebar">
+		<a class="sidebar-brand" href="{{ url_for('main.home') }}">
+			<span class="align-middle">SoftyTech CMS</span>
+		</a>
 
-        <ul class="sidebar-nav">
-            <li class="sidebar-header">Dashboard</li>
+		<ul class="sidebar-nav">
+			<li class="sidebar-header">Dashboard</li>
 
-            <!-- Linkovi u navigaciji -->
-            <li class="sidebar-item active">
-                <a class="sidebar-link" href="{{ url_for('users.admin') }}">
-                    <i class="align-middle" data-feather="book"></i>
-                    <span class="align-middle">Admin Dashboard</span>
-                </a>
-            </li>
+			<!-- Linkovi u navigaciji -->
+			<li class="sidebar-item active">
+				<a class="sidebar-link" href="{{ url_for('users.admin') }}">
+					<i class="align-middle" data-feather="book"></i>
+					<span class="align-middle">Admin Dashboard</span>
+				</a>
+			</li>
 
-            <li class="sidebar-header">Users</li>
+			<li class="sidebar-header">Users</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('users.all_users') }}">
-                    <i class="align-middle" data-feather="users"></i>
-                    <span class="align-middle">All Users</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('users.all_users') }}">
+					<i class="align-middle" data-feather="users"></i>
+					<span class="align-middle">All Users</span>
+				</a>
+			</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('users.create_user') }}">
-                    <i class="align-middle" data-feather="user-plus"></i>
-                    <span class="align-middle">Add New User</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('users.create_user') }}">
+					<i class="align-middle" data-feather="user-plus"></i>
+					<span class="align-middle">Add New User</span>
+				</a>
+			</li>
 
-            <li class="sidebar-header">Posts</li>
+			<li class="sidebar-header">Posts</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('posts.all_posts') }}">
-                    <i class="align-middle" data-feather="file-text"></i>
-                    <span class="align-middle">All Posts</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('posts.all_posts') }}">
+					<i class="align-middle" data-feather="file-text"></i>
+					<span class="align-middle">All Posts</span>
+				</a>
+			</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('posts.add_post') }}">
-                    <i class="align-middle" data-feather="file-plus"></i>
-                    <span class="align-middle">Add New Post</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('posts.add_post') }}">
+					<i class="align-middle" data-feather="file-plus"></i>
+					<span class="align-middle">Add New Post</span>
+				</a>
+			</li>
 
-            <li class="sidebar-header">Categories</li>
+			<li class="sidebar-header">Categories</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('categories.all_categories') }}">
-                    <i class="align-middle" data-feather="square"></i>
-                    <span class="align-middle">All Categories
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('categories.all_categories') }}">
+					<i class="align-middle" data-feather="square"></i>
+					<span class="align-middle">All Categories
                     </span>
-                </a>
-            </li>
+				</a>
+			</li>
 
-            <li class="sidebar-header">Comments</li>
+			<li class="sidebar-header">Comments</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('comments.all_comments') }}">
-                    <i class="align-middle" data-feather="message-square"></i>
-                    <span class="align-middle">All Comments</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('comments.all_comments') }}">
+					<i class="align-middle" data-feather="message-square"></i>
+					<span class="align-middle">All Comments</span>
+				</a>
+			</li>
 
-            <li class="sidebar-header">Media</li>
+			<li class="sidebar-header">Media</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('flaskfilemanager.index') }}">
-                    <i class="align-middle" data-feather="image"></i>
-                    <span class="align-middle">File Manager</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('flaskfilemanager.index') }}">
+					<i class="align-middle" data-feather="image"></i>
+					<span class="align-middle">File Manager</span>
+				</a>
+			</li>
 
-            <li class="sidebar-header">Logs</li>
+			<li class="sidebar-header">Logs</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('logs.request_logs') }}">
-                    <i class="align-middle" data-feather="monitor"></i>
-                    <span class="align-middle">Request Logs</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('logs.request_logs') }}">
+					<i class="align-middle" data-feather="monitor"></i>
+					<span class="align-middle">Request Logs</span>
+				</a>
+			</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ url_for('logs.error_logs') }}">
-                    <i class="align-middle" data-feather="monitor"></i>
-                    <span class="align-middle">Error Logs</span>
-                </a>
-            </li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{{ url_for('logs.error_logs') }}">
+					<i class="align-middle" data-feather="monitor"></i>
+					<span class="align-middle">Error Logs</span>
+				</a>
+			</li>
 
-        </ul>
-    </div>
+		</ul>
+	</div>
 </nav>

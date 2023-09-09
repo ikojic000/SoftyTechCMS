@@ -2,224 +2,224 @@
 
 {% block content %}
 
-    <div class="row mb-3">
-        <div class="col">
-            <h1 class="h3 text-light">{{ pageTitle }}</h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card rounded-3 bg-dark text-light">
-                <div class="card-body">
-                    <form method="POST" action="" enctype="multipart/form-data" class="row g-3" novalidate>
-                        {{ form.hidden_tag() }}
+	<div class="row mb-3">
+		<div class="col">
+			<h1 class="h3 text-light">{{ pageTitle }}</h1>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card rounded-3 bg-dark text-light">
+				<div class="card-body">
+					<form method="POST" action="" enctype="multipart/form-data" class="row g-3" novalidate>
+						{{ form.hidden_tag() }}
 
-                        <div class="col-md-12">
-                            {% if form.title.errors %}
-                                <label for="{{ form.title.id }}" class="form-label">{{ form.title.label.text }}</label>
-                                {{ form.title(class="form-control bg-dark text-light is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.title.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                <label for="{{ form.title.id }}" class="form-label">{{ form.title.label.text }}</label>
-                                {{ form.title(class="form-control bg-dark text-light") }}
-                            {% endif %}
-                        </div>
+						<div class="col-md-12">
+							{% if form.title.errors %}
+								<label for="{{ form.title.id }}" class="form-label">{{ form.title.label.text }}</label>
+								{{ form.title(class="form-control bg-dark text-light is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.title.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								<label for="{{ form.title.id }}" class="form-label">{{ form.title.label.text }}</label>
+								{{ form.title(class="form-control bg-dark text-light") }}
+							{% endif %}
+						</div>
 
-                        <div class="col-md-12">
-                            <label for="{{ form.subtitle.id }}"
-                                   class="form-label">{{ form.subtitle.label.text }}</label>
-                            {% if form.subtitle.errors %}
-                                {{ form.subtitle(class="form-control bg-dark text-light is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.subtitle.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.subtitle(class="form-control bg-dark text-light") }}
-                            {% endif %}
-                        </div>
+						<div class="col-md-12">
+							<label for="{{ form.subtitle.id }}"
+							       class="form-label">{{ form.subtitle.label.text }}</label>
+							{% if form.subtitle.errors %}
+								{{ form.subtitle(class="form-control bg-dark text-light is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.subtitle.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.subtitle(class="form-control bg-dark text-light") }}
+							{% endif %}
+						</div>
 
-                        <div class="col-md-12">
-                            <label for="{{ form.description.id }}"
-                                   class="form-label">{{ form.description.label.text }}</label>
-                            {% if form.description.errors %}
-                                {{ form.description(class="form-control bg-dark text-light is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.description.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.description(class="form-control bg-dark text-light") }}
-                            {% endif %}
-                        </div>
+						<div class="col-md-12">
+							<label for="{{ form.description.id }}"
+							       class="form-label">{{ form.description.label.text }}</label>
+							{% if form.description.errors %}
+								{{ form.description(class="form-control bg-dark text-light is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.description.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.description(class="form-control bg-dark text-light") }}
+							{% endif %}
+						</div>
 
-                        <div class="col-md-12">
-                            <label for="{{ form.slug.id }}" class="form-label">{{ form.slug.label.text }}</label>
-                            {% if form.slug.errors %}
-                                {{ form.slug(class="form-control bg-dark text-light is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.slug.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.slug(class="form-control bg-dark text-light") }}
-                            {% endif %}
-                        </div>
+						<div class="col-md-12">
+							<label for="{{ form.slug.id }}" class="form-label">{{ form.slug.label.text }}</label>
+							{% if form.slug.errors %}
+								{{ form.slug(class="form-control bg-dark text-light is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.slug.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.slug(class="form-control bg-dark text-light") }}
+							{% endif %}
+						</div>
 
-                        <div class="col-md-12">
-                            <label for="{{ form.headImg.id }}" class="form-label">{{ form.headImg.label.text }}</label>
-                            {% if form.headImg.errors %}
-                                {{ form.headImg(class="form-control bg-dark text-light is-invalid", id="headImgInput") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.headImg.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.headImg(class="form-control bg-dark text-light", id="headImgInput") }}
-                            {% endif %}
-                        </div>
-                        {% if form.headImg.data %}
-                            <div class="col-md-12">
-                                <label class="form-label current-head-image-label">Current Head Image</label>
-                            </div>
-                            <div class="col-md-12 d-flex justify-content-center">
-                                <!-- Hidden input to store the image filename -->
-                                <input type="hidden" id="headImgField" name="headImg" value="{{ form.headImg.data }}">
+						<div class="col-md-12">
+							<label for="{{ form.headImg.id }}" class="form-label">{{ form.headImg.label.text }}</label>
+							{% if form.headImg.errors %}
+								{{ form.headImg(class="form-control bg-dark text-light is-invalid", id="headImgInput") }}
+								<div class="invalid-feedback">
+									{% for error in form.headImg.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.headImg(class="form-control bg-dark text-light", id="headImgInput") }}
+							{% endif %}
+						</div>
+						{% if form.headImg.data %}
+							<div class="col-md-12">
+								<label class="form-label current-head-image-label">Current Head Image</label>
+							</div>
+							<div class="col-md-12 d-flex justify-content-center">
+								<!-- Hidden input to store the image filename -->
+								<input type="hidden" id="headImgField" name="headImg" value="{{ form.headImg.data }}">
 
-                                <!-- Display the image preview -->
-                                <img id="headImgPreview" src="{{ form.headImg.data }}" alt="Post Image"
-                                     style="max-width: 100%;">
-                            </div>
-                        {% else %}
-                            <div class="col-md-12">
-                                <label class="form-label current-head-image-label">Default Head Image</label>
-                            </div>
-                            <div class="col-md-12 d-flex justify-content-center">
-                                <!-- Display the image preview -->
-                                <img id="headImgPreview" src="\static\upload\media\images\head_Images\default.jpg"
-                                     alt="Post Image" style="max-width: 100%;">
-                            </div>
-                        {% endif %}
+								<!-- Display the image preview -->
+								<img id="headImgPreview" src="{{ form.headImg.data }}" alt="Post Image"
+								     style="max-width: 100%;">
+							</div>
+						{% else %}
+							<div class="col-md-12">
+								<label class="form-label current-head-image-label">Default Head Image</label>
+							</div>
+							<div class="col-md-12 d-flex justify-content-center">
+								<!-- Display the image preview -->
+								<img id="headImgPreview" src="\static\upload\media\images\head_Images\default.jpg"
+								     alt="Post Image" style="max-width: 100%;">
+							</div>
+						{% endif %}
 
-                        <div class="col-md-12">
-                            <label for="{{ form.category.id }}"
-                                   class="form-label">{{ form.category.label.text }}</label>
-                            {% if form.category.errors %}
-                                {{ form.category(class="form-select bg-dark text-light is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.category.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.category(class="form-select bg-dark text-light") }}
-                            {% endif %}
+						<div class="col-md-12">
+							<label for="{{ form.category.id }}"
+							       class="form-label">{{ form.category.label.text }}</label>
+							{% if form.category.errors %}
+								{{ form.category(class="form-select bg-dark text-light is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.category.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.category(class="form-select bg-dark text-light") }}
+							{% endif %}
 
-                        </div>
+						</div>
 
-                        <div class="col-md-12">
-                            <label for="{{ form.language.id }}"
-                                   class="form-label">{{ form.language.label.text }}</label>
-                            {{ form.language(class="form-select bg-dark text-light") }}
-                        </div>
+						<div class="col-md-12">
+							<label for="{{ form.language.id }}"
+							       class="form-label">{{ form.language.label.text }}</label>
+							{{ form.language(class="form-select bg-dark text-light") }}
+						</div>
 
-                        <div class="col-md-12">
-                            <label for="{{ form.author.id }}" class="form-label">{{ form.author.label.text }}</label>
-                            {% if form.author.errors %}
-                                {{ form.author(class="form-control bg-dark text-light is-invalid") }}
-                                <div class="invalid-feedback">
-                                    {% for error in form.author.errors %}
-                                        <span>{{ error }}</span>
-                                    {% endfor %}
-                                </div>
-                            {% else %}
-                                {{ form.author(class="form-control bg-dark text-light") }}
-                            {% endif %}
-                        </div>
+						<div class="col-md-12">
+							<label for="{{ form.author.id }}" class="form-label">{{ form.author.label.text }}</label>
+							{% if form.author.errors %}
+								{{ form.author(class="form-control bg-dark text-light is-invalid") }}
+								<div class="invalid-feedback">
+									{% for error in form.author.errors %}
+										<span>{{ error }}</span>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ form.author(class="form-control bg-dark text-light") }}
+							{% endif %}
+						</div>
 
-                        <div class="col-md-12">
-                            <label for="{{ form.content.id }}" class="form-label">{{ form.content.label.text }}</label>
-                            {{ form.content(class="form-control bg-dark text-light", id="editor") }}
-                        </div>
+						<div class="col-md-12">
+							<label for="{{ form.content.id }}" class="form-label">{{ form.content.label.text }}</label>
+							{{ form.content(class="form-control bg-dark text-light", id="editor") }}
+						</div>
 
-                        <div class="col-md-12">
-                            <div class="form-check">
-                                {{ form.isPublished(class="form-check-input") }}
-                                <label class="form-check-label"
-                                       for="{{ form.isPublished.id }}">{{ form.isPublished.label.text }}</label>
-                            </div>
-                        </div>
+						<div class="col-md-12">
+							<div class="form-check">
+								{{ form.isPublished(class="form-check-input") }}
+								<label class="form-check-label"
+								       for="{{ form.isPublished.id }}">{{ form.isPublished.label.text }}</label>
+							</div>
+						</div>
 
-                        <div class="col-12 d-flex justify-content-end">
-                            {{ form.submit(class="btn btn-primary btn-lg px-5") }}
-                        </div>
+						<div class="col-12 d-flex justify-content-end">
+							{{ form.submit(class="btn btn-primary btn-lg px-5") }}
+						</div>
 
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
 
 {% block scripts %}
 
-    <script>
-        // Initialize CKEditor on the element with the ID 'editor'
-        CKEDITOR.replace('editor', {
-            // Configure the image upload URL
-            filebrowserImageUploadUrl: '/ckupload/',
+	<script>
+		// Initialize CKEditor on the element with the ID 'editor'
+		CKEDITOR.replace('editor', {
+			// Configure the image upload URL
+			filebrowserImageUploadUrl: '/ckupload/',
 
-            // Configure the upload method for file browser (form-based)
-            filebrowserUploadMethod: 'form',
+			// Configure the upload method for file browser (form-based)
+			filebrowserUploadMethod: 'form',
 
-            // Configure the browse URL for the file browser dialog
-            filebrowserBrowseUrl: '/fm/index.html'
-        });
+			// Configure the browse URL for the file browser dialog
+			filebrowserBrowseUrl: '/fm/index.html'
+		});
 
-    </script>
+	</script>
 
-    <script>
-        // Get references to HTML elements
-        const headImgInput = document.getElementById('headImgInput'); // Input element for selecting an image file
-        const headImgPreview = document.getElementById('headImgPreview'); // Image element for previewing the selected image
-        const currentHeadImageLabel = document.querySelector('.current-head-image-label'); // Label for displaying the image status
+	<script>
+		// Get references to HTML elements
+		const headImgInput = document.getElementById('headImgInput'); // Input element for selecting an image file
+		const headImgPreview = document.getElementById('headImgPreview'); // Image element for previewing the selected image
+		const currentHeadImageLabel = document.querySelector('.current-head-image-label'); // Label for displaying the image status
 
-        // Add an event listener to the headImgInput element for the "change" event
-        headImgInput.addEventListener('change', (event) => {
-            // Get the selected file from the input
-            const file = event.target.files[0]; // Access the first selected file
+		// Add an event listener to the headImgInput element for the "change" event
+		headImgInput.addEventListener('change', (event) => {
+			// Get the selected file from the input
+			const file = event.target.files[0]; // Access the first selected file
 
-            // Check if a file is selected
-            if (file) {
-                // Create a FileReader to read the selected file
-                const reader = new FileReader();
+			// Check if a file is selected
+			if (file) {
+				// Create a FileReader to read the selected file
+				const reader = new FileReader();
 
-                // Define an event handler for when the FileReader finishes loading the file
-                reader.onload = (e) => {
-                    // Set the source of the headImgPreview to the data URL of the selected image
-                    headImgPreview.src = e.target.result;
+				// Define an event handler for when the FileReader finishes loading the file
+				reader.onload = (e) => {
+					// Set the source of the headImgPreview to the data URL of the selected image
+					headImgPreview.src = e.target.result;
 
-                    // Update the label to indicate that a new head image is selected
-                    currentHeadImageLabel.textContent = 'New Head Image';
-                };
+					// Update the label to indicate that a new head image is selected
+					currentHeadImageLabel.textContent = 'New Head Image';
+				};
 
-                // Read the selected file as a data URL, which can be used as the image source
-                reader.readAsDataURL(file);
-            } else {
-                // If no file is selected, clear the image preview and update the label
-                headImgPreview.src = ''; // Clear the image preview
-                currentHeadImageLabel.textContent = 'Current Head Image'; // Update the label
-            }
-        });
-    </script>
+				// Read the selected file as a data URL, which can be used as the image source
+				reader.readAsDataURL(file);
+			} else {
+				// If no file is selected, clear the image preview and update the label
+				headImgPreview.src = ''; // Clear the image preview
+				currentHeadImageLabel.textContent = 'Current Head Image'; // Update the label
+			}
+		});
+	</script>
 
 {% endblock scripts %}

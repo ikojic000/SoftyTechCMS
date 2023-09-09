@@ -143,3 +143,4 @@ activateVenvScript.bat
 .idea/vcs.xml
 .idea/inspectionProfiles/profiles_settings.xml
 /.vs/
+/.idea/codeStyles/codeStyleConfig.xml

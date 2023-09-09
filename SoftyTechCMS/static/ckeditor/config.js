@@ -4,14 +4,14 @@
  */
 
 CKEDITOR.editorConfig = function (config) {
-    // Define changes to default configuration here. For example:
-    // config.language = 'fr';
-    //   config.uiColor = "#ff1100";
-    config.extraPlugins = "youtube";
-    config.extraPlugins = "filebrowser";
-    // *NEEDS FIXING*
-    config.extraPlugins = "slideshow";
-    // config.extraPlugins = 'carousel'
-
-    // config.filebrowserImageUploadUrl = '/filebrowser/';
+	// Define changes to default configuration here. For example:
+	// config.language = 'fr';
+	//   config.uiColor = "#ff1100";
+	config.extraPlugins = "youtube";
+	config.extraPlugins = "filebrowser";
+	// *NEEDS FIXING*
+	config.extraPlugins = "slideshow";
+	// config.extraPlugins = 'carousel'
+	
+	// config.filebrowserImageUploadUrl = '/filebrowser/';
 };

@@ -448,8 +448,8 @@ Other Changes:
 * Updated [SCAYT](https://ckeditor.com/cke4/addon/scayt) (Spell Check As You Type)
   and [WebSpellChecker](https://ckeditor.com/cke4/addon/wsc) (WSC) plugins:
     *
-    SCAYT [`scayt_minWordLength`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#scayt_minWordLength)
-    configuration option now defaults to 3 instead of 4.
+  SCAYT [`scayt_minWordLength`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_config.html#scayt_minWordLength)
+  configuration option now defaults to 3 instead of 4.
     * SCAYT default number of suggested words in the context menu changed to 3.
     * [#90](https://github.com/WebSpellChecker/ckeditor-plugin-scayt/issues/90): Fixed: Selection is lost on link
       creation if SCAYT highlights the word.
@@ -1534,11 +1534,11 @@ New Features:
           and a set of new editor events was introduced
           &mdash; [`dragstart`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-dragstart), [`drop`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-drop), [`dragend`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-dragend).
         *
-        The [Data Transfer](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR.plugins.clipboard.dataTransfer.html)
-        facade was introduced to unify access to data in various types and
-        files. [Data Transfer](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR.plugins.clipboard.dataTransfer.html)
-        is now always available in
-        the [`editor#paste`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-paste) event.
+      The [Data Transfer](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR.plugins.clipboard.dataTransfer.html)
+      facade was introduced to unify access to data in various types and
+      files. [Data Transfer](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR.plugins.clipboard.dataTransfer.html)
+      is now always available in
+      the [`editor#paste`](https://ckeditor.com/docs/ckeditor4/latest/api/CKEDITOR_editor.html#event-paste) event.
         * Switched from the pastebin to using the native clipboard access whenever possible. This solved many issues
           related to pastebin such as unnecessary scrolling or data loss. Additionally, on copy and cut from the editor
           the clipboard data is set. Therefore, on paste the editor has access to clean data, undisturbed by the

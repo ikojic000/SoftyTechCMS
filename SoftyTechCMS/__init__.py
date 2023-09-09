@@ -12,7 +12,7 @@ from flask_sqlalchemy import SQLAlchemy
 # App Configuration
 app = Flask(__name__)  # Create a Flask application instance
 db = SQLAlchemy(app)  # Initialize a SQLAlchemy database instance
-mail = Mail()  # Create a Mail instance for sending emails
+mail = Mail( )  # Create a Mail instance for sending emails
 mail.init_app(app)  # Initialize the Mail instance with the Flask app
 oauth = OAuth(app)  # Initialize the OAuth instance with the Flask app
 
@@ -41,7 +41,7 @@ filemanager_route = os.path.join(app.root_path, "static/upload")
 from SoftyTechCMS.blueprint_routes import routes
 
 # Registering blueprints using the routes function
-routes()
+routes( )
 
 # Initialize the CustomUserManager for user management
 user_manager = CustomUserManager(app, db, User)

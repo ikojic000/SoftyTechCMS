@@ -2,37 +2,37 @@
 
 
 {% block content %}
-    <div class="error-container">
-        {% if status_code == 404 %}
-            <h1 class="error-code">
-                4<span class="not-found-span"><i class="fa-solid fa-ghost"></i></span>4
-            </h1>
-            <h2 class="error-title">Page not found</h2>
-            <p class="error-text">
-                Sorry, the page you're looking for cannot be accessed
-            </p>
-        {% elif status_code == 401 %}
-            <h1 class="error-code">
-                4<span class="forbidden-span"><i class="fa-solid fa-hand"></i></span>1
-            </h1>
-            <h2 class="error-title">Unauthorized</h2>
-            <p class="error-text">Hold up! You are not authorized to access this page!</p>
-        {% elif status_code == 403 %}
-            <h1 class="error-code">
-                4<span class="forbidden-span"><i class="fa-solid fa-door-closed"></i></span>3
-            </h1>
-            <h2 class="error-title">Forbidden</h2>
-            <p class="error-text">Not this time, access forbidden!</p>
-        {% elif status_code == 500 %}
-            <h1 class="error-code">
-                5<span class="server-error-span"><i class="fa-solid fa-bomb"></i></span>0
-            </h1>
-            <h2 class="error-title">Woops!</h2>
-            <p class="error-text">Something went wrong :(</p>
-        {% else %}
-            <h1 class="error-code">{{ status_code }}</h1>
-            <h2 class="error-title">Woops!</h2>
-            <p class="error-text">{{ error }}</p>
-        {% endif %}
-    </div>
+	<div class="error-container">
+		{% if status_code == 404 %}
+			<h1 class="error-code">
+				4<span class="not-found-span"><i class="fa-solid fa-ghost"></i></span>4
+			</h1>
+			<h2 class="error-title">Page not found</h2>
+			<p class="error-text">
+				Sorry, the page you're looking for cannot be accessed
+			</p>
+		{% elif status_code == 401 %}
+			<h1 class="error-code">
+				4<span class="forbidden-span"><i class="fa-solid fa-hand"></i></span>1
+			</h1>
+			<h2 class="error-title">Unauthorized</h2>
+			<p class="error-text">Hold up! You are not authorized to access this page!</p>
+		{% elif status_code == 403 %}
+			<h1 class="error-code">
+				4<span class="forbidden-span"><i class="fa-solid fa-door-closed"></i></span>3
+			</h1>
+			<h2 class="error-title">Forbidden</h2>
+			<p class="error-text">Not this time, access forbidden!</p>
+		{% elif status_code == 500 %}
+			<h1 class="error-code">
+				5<span class="server-error-span"><i class="fa-solid fa-bomb"></i></span>0
+			</h1>
+			<h2 class="error-title">Woops!</h2>
+			<p class="error-text">Something went wrong :(</p>
+		{% else %}
+			<h1 class="error-code">{{ status_code }}</h1>
+			<h2 class="error-title">Woops!</h2>
+			<p class="error-text">{{ error }}</p>
+		{% endif %}
+	</div>
 {% endblock %}

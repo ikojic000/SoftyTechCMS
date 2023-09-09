@@ -2,43 +2,43 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords"
-          content="Tech, SoFtY, Gaming, Blog, PC, News, Review, Games, GPU, CPU, RAM, nVidia, Intel, AMD, Gigabyte, MSI, Asus, Acer, Razer, Logitech, Roccat, R.A.T., Samsung, AsTech">
-    <meta name="description"
-          content="This website is for Gaming and PC enthusiasts bringing you fresh news, reviews and etc.">
-    <meta name="author" content="Ivan Kojic">
-    <link rel="icon" href="{{ url_for('static', filename='css/images/SoFtYTechIcon.ico') }}" type="image/x-icon"/>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords"
+	      content="Tech, SoFtY, Gaming, Blog, PC, News, Review, Games, GPU, CPU, RAM, nVidia, Intel, AMD, Gigabyte, MSI, Asus, Acer, Razer, Logitech, Roccat, R.A.T., Samsung, AsTech">
+	<meta name="description"
+	      content="This website is for Gaming and PC enthusiasts bringing you fresh news, reviews and etc.">
+	<meta name="author" content="Ivan Kojic">
+	<link rel="icon" href="{{ url_for('static', filename='css/images/SoFtYTechIcon.ico') }}" type="image/x-icon"/>
 
-    {% if title %}
-        <title>Softy Tech | {{ title }}</title>
-    {% else %}
-        <title>Softy Tech</title>
-    {% endif %}
+	{% if title %}
+		<title>Softy Tech | {{ title }}</title>
+	{% else %}
+		<title>Softy Tech</title>
+	{% endif %}
 
-    <!-- Bootstrap Grid CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap-grid.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ url_for('static', filename='css/bootstrap/bootstrap-grid.min.css') }}">
+	<!-- Bootstrap Grid CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap-grid.css') }}">
+	<link rel="stylesheet" type="text/css"
+	      href="{{ url_for('static', filename='css/bootstrap/bootstrap-grid.min.css') }}">
 
-    <!-- Google Fonts - Orbitron -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"/>
+	<!-- Google Fonts - Orbitron -->
+	<link rel="preconnect" href="https://fonts.googleapis.com"/>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+	<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+	      rel="stylesheet"/>
 
 
-    <!-- My CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/navbar.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/blog-card-original.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/blog-post.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert-comment-scrollbar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+	<!-- My CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/navbar.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/blog-card-original.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/blog-post.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/alert-comment-scrollbar.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
 
 </head>
 
@@ -47,14 +47,14 @@
 {% include 'includes/navbar.html' %}
 
 <main>
-    <div class="wrapper container">
+	<div class="wrapper container">
 
-        {% include "includes/messages.html" %}
+		{% include "includes/messages.html" %}
 
-        {% block content %}
+		{% block content %}
 
-        {% endblock %}
-    </div>
+		{% endblock %}
+	</div>
 </main>
 
 {% include "includes/footer.html" %}
@@ -82,23 +82,23 @@
 <script src="https://kit.fontawesome.com/c684ba2383.js" crossorigin="anonymous"></script>
 
 <script>
-    // When the document is ready (page is fully loaded)
-    $(document).ready(function () {
-        // Find all elements with the class ".alert"
-        $('.alert').each(function () {
-            // Read the "data-timeout" attribute from the current alert element
-            var timeout = $(this).data('timeout');
+	// When the document is ready (page is fully loaded)
+	$(document).ready(function () {
+		// Find all elements with the class ".alert"
+		$('.alert').each(function () {
+			// Read the "data-timeout" attribute from the current alert element
+			var timeout = $(this).data('timeout');
 
-            // Store a reference to the current alert element
-            var alert = $(this);
+			// Store a reference to the current alert element
+			var alert = $(this);
 
-            // Use setTimeout to schedule the closure of the alert after the specified timeout
-            setTimeout(function () {
-                // Close the alert using Bootstrap's 'close' method
-                alert.alert('close');
-            }, timeout);
-        });
-    });
+			// Use setTimeout to schedule the closure of the alert after the specified timeout
+			setTimeout(function () {
+				// Close the alert using Bootstrap's 'close' method
+				alert.alert('close');
+			}, timeout);
+		});
+	});
 
 </script>
 
