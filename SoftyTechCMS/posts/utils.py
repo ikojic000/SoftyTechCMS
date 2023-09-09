@@ -4,9 +4,7 @@ from SoftyTechCMS import app
 import os
 from PIL import Image
 from skimage import io, metrics
-import numpy as np
 from wtforms.validators import ValidationError
-from SoftyTechCMS.models import Post
 
 from SoftyTechCMS.posts.database_manager import (
     get_post_by_slug_validation,

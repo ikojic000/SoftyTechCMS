@@ -8,9 +8,8 @@ from flask import (
     make_response,
 )
 from flask.json import jsonify
-from SoftyTechCMS import app, db
+from SoftyTechCMS import app
 from SoftyTechCMS.logs.request_logging import after_request, before_request
-from SoftyTechCMS.models import Post
 from SoftyTechCMS.posts.database_manager import (
     count_posts,
     create_post,
@@ -25,7 +24,6 @@ from SoftyTechCMS.posts.forms import PostForm
 from flask_login import current_user, login_required
 from flask_user import roles_required
 import os
-
 from SoftyTechCMS.posts.utils import gen_rnd_filename, get_posts_count, save_head_image
 
 # Create a Blueprint for the 'posts' module

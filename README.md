@@ -9,7 +9,7 @@ SoFtYTechCMS je Content Management System (CMS) za istoimeni portal.
 - Čitanje članaka
 - Pretraživanje članaka
 - Registriranje korisnika
-- Prijava korisnika putem korisničkog imena ili e-maila i lozinke
+- Prijava korisnika putem korisničkog imena ili e-maila i lozinke i putem Google ili Facebook računa
 - Resetiranje zaboravljene lozinke putem e-maila
 - Obavijest korisnika o promijenjenoj lozinki nakon resetiranja zaboravljene lozinke
 - Ostavljanje komentara i brisanje vlastitih komentara
@@ -22,6 +22,7 @@ SoFtYTechCMS je Content Management System (CMS) za istoimeni portal.
 - Grafički prikaz broja korisnika, članaka i komentara
 - Tablični prikaz svih članaka, korisnika i komentara
 - Mogućnost kreiranja novih članaka te ažuriranja ili brisanja postojećih
+  - Provjera po imenu i po SSIM sličnosti prilikom upload-a naslovne slike
 - Mogućnost kreiranja novih kategorija te ažuriranja ili brisanja postojećih
 - Ručno dodavanje korisnika
 - Ažuriranje dozvola (uloga) svakog korisnika
@@ -44,6 +45,7 @@ Aplikacija je izrađena pomoću različitih tehnologija i biblioteka, uključuju
 - **Flask-Mail** za slanje e-mail obavijesti
 - **Flask-WTF** za upravljanje web obrascima
 - **Flask-User** za upravljanje korisničkim računima
+- **Flask-OAuthlib** za prijavu putem Google/Facebook računa
 - **bcrypt** za kriptiranje lozinki
 
 ### Ostale tehnologije
