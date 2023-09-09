@@ -21,7 +21,6 @@ main = Blueprint("main", __name__)
 main.before_request(before_request)
 main.after_request(after_request)
 
-
 # Add 'comment_user_matches_current_user' function to the Jinja templates, making it available for rendering
 app.jinja_env.globals.update(
     comment_user_matches_current_user=comment_user_matches_current_user

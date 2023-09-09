@@ -10,7 +10,6 @@ from SoftyTechCMS.users.database_manager import (
     register_user,
 )
 
-
 # Create a Blueprint for authentication
 auth = Blueprint("auth", __name__)
 

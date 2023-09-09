@@ -135,3 +135,11 @@ activateVenvScript.bat
 # SoftyTechCMS/static/upload/media/images/head_Images/*.jpeg
 # SoftyTechCMS/static/upload/media/images/head_Images/*.png
 # SoftyTechCMS/static/upload/media/images/head_Images/*.gif
+
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/SoftyTechCMS.iml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+/.vs/
