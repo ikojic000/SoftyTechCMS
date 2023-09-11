@@ -11,7 +11,7 @@ SoFtYTechCMS je Content Management System (CMS) za istoimeni portal.
 - Registriranje korisnika
 - Prijava korisnika putem korisničkog imena ili e-maila i lozinke i putem Google ili Facebook računa
 - Resetiranje zaboravljene lozinke putem e-maila
-- Obavijest korisnika o promijenjenoj lozinki nakon resetiranja zaboravljene lozinke
+- Obavijest korisnika o promijenjenoj lozinki i promjenjenom korisničkom imenu
 - Ostavljanje komentara i brisanje vlastitih komentara
 - Kontaktiranje administratora stranice putem kontakt forme
 - Mijenjanje korisničkih postavki (ime, korisničko ime, e-mail, lozinka)
