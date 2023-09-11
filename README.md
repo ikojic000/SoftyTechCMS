@@ -9,7 +9,12 @@ SoFtYTechCMS je Content Management System (CMS) za istoimeni portal.
 - Čitanje članaka
 - Pretraživanje članaka
 - Registriranje korisnika
-- Prijava korisnika putem korisničkog imena ili e-maila i lozinke i putem Google ili Facebook računa
+    - Obavijest korisniku o registraciji
+    - Obavijest korisniku o registraciji putem Google ili Facebook računa
+- Prijava korisnika
+    - Putem SoftyTech računa koristeći korisničko ime ili email i loziku
+    - Putem Google računa
+    - Putem Facebook računa
 - Resetiranje zaboravljene lozinke putem e-maila
 - Obavijest korisnika o promijenjenoj lozinki i promjenjenom korisničkom imenu
 - Ostavljanje komentara i brisanje vlastitih komentara
