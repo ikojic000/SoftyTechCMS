@@ -1,11 +1,11 @@
 from flask import (
-    render_template,
-    url_for,
-    redirect,
-    flash,
-    request,
-    Blueprint,
-    jsonify,
+	render_template,
+	url_for,
+	redirect,
+	flash,
+	request,
+	Blueprint,
+	jsonify,
 )
 from flask_login import current_user, login_required
 from flask_user import roles_required
@@ -16,20 +16,20 @@ from SoftyTechCMS.decorators import own_account_required
 from SoftyTechCMS.logs.request_logging import after_request, before_request
 from SoftyTechCMS.posts.database_manager import get_posts_by_author
 from SoftyTechCMS.users.database_manager import (
-    count_users,
-    create_new_user,
-    get_all_users,
-    get_user_by_id,
-    update_user_account,
-    update_user_password,
-    update_user_role_and_active,
-    user_delete,
+	count_users,
+	create_new_user,
+	get_all_users,
+	get_user_by_id,
+	update_user_account,
+	update_user_password,
+	update_user_role_and_active,
+	user_delete,
 )
 from SoftyTechCMS.users.forms import (
-    CreateNewUserForm,
-    UserAccountSettingsForm,
-    UserChangePasswordForm,
-    UserRoleForm,
+	CreateNewUserForm,
+	UserAccountSettingsForm,
+	UserChangePasswordForm,
+	UserRoleForm,
 )
 from SoftyTechCMS.users.utils import get_users_count, user_has_role
 
@@ -47,8 +47,8 @@ app.jinja_env.globals.update(user_has_role=user_has_role)
 # Define a route for the admin homepage/dashboard
 @users.route("/admin")
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def admin( ):
+@roles_required(["Admin", "Superadmin"])
+def admin():
 	"""
 	Render the admin homepage/dashboard.
 
@@ -67,8 +67,8 @@ def admin( ):
 # Route for displaying a table of all users with edit/delete buttons
 @users.route("/admin/users/all")
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def all_users( ):
+@roles_required(["Admin", "Superadmin"])
+def all_users():
 	"""
 	Render a table of all users with edit/delete buttons in the admin panel.
 
@@ -77,7 +77,7 @@ def all_users( ):
 	Returns:
 		HTTP Response: Renders the admin users template.
 	"""
-	users = get_all_users( )
+	users = get_all_users()
 	title = "All Users"
 	return render_template(
 		"admin/admin-users.html", users=users, title=title, pageTitle=title
@@ -87,8 +87,8 @@ def all_users( ):
 # Route for displaying user details, posts, and comments
 @users.route("/admin/user/preview/<int:user_id>")
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def user_details( user_id ):
+@roles_required(["Admin", "Superadmin"])
+def user_details(user_id):
 	"""
 	Render user details, posts, and comments for a specific user in the admin panel.
 
@@ -116,10 +116,10 @@ def user_details( user_id ):
 
 
 # Route for creating a new user and adding them to the database
-@users.route("/admin/users/new", methods=[ "GET", "POST" ])
+@users.route("/admin/users/new", methods=["GET", "POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def create_user( ):
+@roles_required(["Admin", "Superadmin"])
+def create_user():
 	"""
 	Render a form to create a new user and add them to the database in the admin panel.
 
@@ -129,9 +129,9 @@ def create_user( ):
 		HTTP Response: Renders the user creation form template.
 	"""
 	title = "Create User"
-	form = CreateNewUserForm( )
+	form = CreateNewUserForm()
 	
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		create_new_user(
 			form.username.data,
 			form.email.data,
@@ -143,15 +143,15 @@ def create_user( ):
 		flash("User created successfully", "success")
 		return redirect(url_for("users.all_users"))
 	
-	context = { "form": form, "title": title, "pageTitle": title }
+	context = {"form": form, "title": title, "pageTitle": title}
 	return render_template("admin/admin-user-create.html", **context)
 
 
 # Route for deleting a user from the database
-@users.route("/admin/users/delete/<int:user_id>", methods=[ "GET", "POST" ])
+@users.route("/admin/users/delete/<int:user_id>", methods=["GET", "POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def delete_user( user_id ):
+@roles_required(["Admin", "Superadmin"])
+def delete_user(user_id):
 	"""
 	Render a confirmation page for deleting a user from the database in the admin panel.
 
@@ -177,10 +177,10 @@ def delete_user( user_id ):
 
 
 # Route for updating user settings in the database
-@users.route("/admin/edit/<int:user_id>", methods=[ "GET", "POST" ])
+@users.route("/admin/edit/<int:user_id>", methods=["GET", "POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def change_user_role( user_id ):
+@roles_required(["Admin", "Superadmin"])
+def change_user_role(user_id):
 	"""
 	Render a form to change user settings and update them in the database in the admin panel.
 
@@ -211,7 +211,7 @@ def change_user_role( user_id ):
 	# Check if the user being edited is a 'Superadmin'
 	is_user_superadmin = user_has_role(user, "Superadmin")
 	
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		# Get the new role names and consider 'Superadmin' role restrictions
 		new_role_names = form.role.data
 		if not user_has_role(current_user, "Superadmin"):
@@ -243,10 +243,10 @@ def change_user_role( user_id ):
 
 
 # Route for updating user account settings
-@users.route("/user/account-settings/<int:user_id>", methods=[ "GET", "POST" ])
+@users.route("/user/account-settings/<int:user_id>", methods=["GET", "POST"])
 @login_required
 @own_account_required
-def update_user_account_settings( user_id ):
+def update_user_account_settings(user_id):
 	"""
 	Render a form to update user account settings and change password in the user panel.
 
@@ -266,10 +266,10 @@ def update_user_account_settings( user_id ):
 	
 	# Create forms for updating user settings and changing the password
 	userSettingsForm = UserAccountSettingsForm(obj=user)
-	changePasswordForm = UserChangePasswordForm( )
+	changePasswordForm = UserChangePasswordForm()
 	
 	# Handle form submission for updating user account settings
-	if userSettingsForm.submitAccountSettings.data and userSettingsForm.validate( ):
+	if userSettingsForm.submitAccountSettings.data and userSettingsForm.validate():
 		update_user_account(
 			user,
 			userSettingsForm.name.data,
@@ -281,7 +281,7 @@ def update_user_account_settings( user_id ):
 		return redirect(url_for("users.update_user_account_settings", user_id=user.id))
 	
 	# Handle form submission for changing the user's password
-	if changePasswordForm.submitChangePassword.data and changePasswordForm.validate( ):
+	if changePasswordForm.submitChangePassword.data and changePasswordForm.validate():
 		update_user_password(user, changePasswordForm.password.data)
 		user_email_manager.send_password_changed_email(current_user)
 		flash("Password updated successfully", "success")
@@ -306,28 +306,28 @@ def update_user_account_settings( user_id ):
 
 
 # Route for getting the number of users
-@users.route("/user/number_of_users", methods=[ "GET" ])
-def number_of_users( ):
+@users.route("/user/number_of_users", methods=["GET"])
+def number_of_users():
 	"""
 	Get the number of users and return it as JSON.
 
 	Returns:
 		JSON Response: Contains the number of users.
 	"""
-	number_of_users = count_users( )
+	number_of_users = count_users()
 	return jsonify(number_of_users=number_of_users)
 
 
 # Route for getting the user count for all months
-@users.route("/api/users/count_by_months", methods=[ "GET" ])
-def posts_count( ):
+@users.route("/api/users/count_by_months", methods=["GET"])
+def posts_count():
 	"""
 	Get the user count for all months and return it as JSON.
 
 	Returns:
 		JSON Response: Contains a list of user counts for each month.
 	"""
-	usersCountList = [ ]
+	usersCountList = []
 	
 	# Loop through months and retrieve user counts for each month
 	for x in range(1, 13):

@@ -9,7 +9,7 @@ google = oauth.remote_app(
 	"google",
 	consumer_key=os.environ.get("GOOGLE_CLIENT_ID"),
 	consumer_secret=os.environ.get("GOOGLE_CLIENT_SECRET"),
-	request_token_params={ "scope": "email" },
+	request_token_params={"scope": "email"},
 	base_url="https://www.googleapis.com/oauth2/v1/",
 	request_token_url=None,
 	access_token_method="POST",
@@ -22,7 +22,7 @@ facebook = oauth.remote_app(
 	"facebook",
 	consumer_key=os.environ.get("FACEBOOK_APP_ID"),
 	consumer_secret=os.environ.get("FACEBOOK_APP_SECRET"),
-	request_token_params={ "scope": "email" },
+	request_token_params={"scope": "email"},
 	base_url="https://graph.facebook.com/",
 	request_token_url=None,
 	access_token_method="GET",
@@ -33,7 +33,7 @@ facebook = oauth.remote_app(
 
 # Token getter for Google OAuth
 @google.tokengetter
-def get_google_oauth_token( ):
+def get_google_oauth_token():
 	"""
 	Retrieve the Google OAuth2 access token from the session.
 
@@ -45,7 +45,7 @@ def get_google_oauth_token( ):
 
 # Token getter for Facebook OAuth
 @facebook.tokengetter
-def get_facebook_oauth_token( ):
+def get_facebook_oauth_token():
 	"""
 	Retrieve the Facebook OAuth2 access token from the session.
 

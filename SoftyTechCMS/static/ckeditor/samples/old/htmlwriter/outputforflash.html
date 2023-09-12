@@ -18,13 +18,13 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 	      content="Configuring CKEditor to produce HTML code that can be used with Adobe Flash.">
 	<style>
 
-        .alert {
-            background: #ffa84c;
-            padding: 10px 15px;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 20px;
-        }
+		.alert {
+			background: #ffa84c;
+			padding: 10px 15px;
+			font-weight: bold;
+			display: block;
+			margin-bottom: 20px;
+		}
 
 	</style>
 </head>
@@ -67,8 +67,8 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 
 				if (document.location.protocol == 'file:')
 					alert('Warning: This samples does not work when loaded from local filesystem' +
-						'due to security restrictions implemented in Flash.' +
-						'\n\nPlease load the sample from a web server instead.');
+							'due to security restrictions implemented in Flash.' +
+							'\n\nPlease load the sample from a web server instead.');
 
 				var editor = CKEDITOR.replace('editor1', {
 					/*
@@ -151,8 +151,8 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
                  */
 				function configureFlashOutput(ev) {
 					var editor = ev.editor,
-						dataProcessor = editor.dataProcessor,
-						htmlFilter = dataProcessor && dataProcessor.htmlFilter;
+							dataProcessor = editor.dataProcessor,
+							htmlFilter = dataProcessor && dataProcessor.htmlFilter;
 
 					// Out self closing tags the HTML4 way, like <br>.
 					dataProcessor.writer.selfClosingEnd = '>';
@@ -246,18 +246,18 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 				CKEDITOR.domReady(function () {
 					if (!swfobject.hasFlashPlayerVersion('8')) {
 						CKEDITOR.dom.element.createFromHtml('<span class="alert">' +
-							'At least Adobe Flash Player 8 is required to run this sample. ' +
-							'You can download it from <a href="http://get.adobe.com/flashplayer">Adobe\'s website</a>.' +
-							'</span>').insertBefore(editor.element);
+								'At least Adobe Flash Player 8 is required to run this sample. ' +
+								'You can download it from <a href="http://get.adobe.com/flashplayer">Adobe\'s website</a>.' +
+								'</span>').insertBefore(editor.element);
 					}
 
 					swfobject.embedSWF(
-						'assets/outputforflash/outputforflash.swf',
-						'ckFlashContainer',
-						'550',
-						'400',
-						'8',
-						{wmode: 'transparent'}
+							'assets/outputforflash/outputforflash.swf',
+							'ckFlashContainer',
+							'550',
+							'400',
+							'8',
+							{wmode: 'transparent'}
 					);
 				});
 

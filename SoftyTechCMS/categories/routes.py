@@ -21,8 +21,8 @@ categories.after_request(after_request)
 # Route to display all categories (admin view)
 @categories.route("/admin/categories/all")
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def all_categories( ):
+@roles_required(["Admin", "Superadmin"])
+def all_categories():
 	"""
 	Display all categories in a table with the option to add or delete categories.
 
@@ -32,10 +32,10 @@ def all_categories( ):
 	title = "All Categories"
 	
 	# Retrieve all categories from the database
-	categories_data = get_all_categories( )
+	categories_data = get_all_categories()
 	
 	# Create a CategoryForm instance for adding new categories
-	form = CategoryForm( )
+	form = CategoryForm()
 	
 	# Define the context for rendering the template
 	context = {
@@ -52,8 +52,8 @@ def all_categories( ):
 # Route to delete a category by ID (admin view)
 @categories.route("/admin/categories/delete/<int:category_id>")
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def delete_category( category_id ):
+@roles_required(["Admin", "Superadmin"])
+def delete_category(category_id):
 	"""
 	Delete a category by its ID.
 
@@ -75,10 +75,10 @@ def delete_category( category_id ):
 
 
 # Route to add a category (admin view)
-@categories.route("/admin/categories/add", methods=[ "POST" ])
+@categories.route("/admin/categories/add", methods=["POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def add_category( ):
+@roles_required(["Admin", "Superadmin"])
+def add_category():
 	"""
 	Add a new category.
 
@@ -87,10 +87,10 @@ def add_category( ):
 	"""
 	
 	# Create a CategoryForm instance
-	form = CategoryForm( )
+	form = CategoryForm()
 	
 	# Check if the form is submitted and valid
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		# Get the category name from the form
 		category_name = form.category.data
 		

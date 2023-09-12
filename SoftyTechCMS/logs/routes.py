@@ -23,10 +23,10 @@ logs.after_request(after_request)
 
 
 # Route to display all request logs (admin view)
-@logs.route("/admin/logs/request", methods=[ "GET" ])
+@logs.route("/admin/logs/request", methods=["GET"])
 @login_required
 @roles_required("Superadmin")
-def request_logs( ):
+def request_logs():
 	"""
 	Display all request logs in a table.
 
@@ -34,7 +34,7 @@ def request_logs( ):
 		render_template: Renders the admin-request-logs.html template.
 	"""
 	title = "Request Logs"
-	requestLogs = get_all_request_logs( )
+	requestLogs = get_all_request_logs()
 	
 	context = {
 		"title": title,
@@ -46,10 +46,10 @@ def request_logs( ):
 
 
 # Route to display all error logs (admin view)
-@logs.route("/admin/logs/error", methods=[ "GET" ])
+@logs.route("/admin/logs/error", methods=["GET"])
 @login_required
 @roles_required("Superadmin")
-def error_logs( ):
+def error_logs():
 	"""
 	Display all error logs in a table.
 
@@ -57,7 +57,7 @@ def error_logs( ):
 		render_template: Renders the admin-request-logs.html template.
 	"""
 	title = "Error Logs"
-	errorLogs = get_all_error_logs( )
+	errorLogs = get_all_error_logs()
 	
 	context = {
 		"title": title,
@@ -72,7 +72,7 @@ def error_logs( ):
 @logs.route("/admin/logs/request/delete")
 @login_required
 @roles_required("Superadmin")
-def delete_all_request_logs( ):
+def delete_all_request_logs():
 	"""
 	Delete all request logs from the database.
 
@@ -86,7 +86,7 @@ def delete_all_request_logs( ):
 @logs.route("/admin/logs/error/delete")
 @login_required
 @roles_required("Superadmin")
-def delete_all_error_logs( ):
+def delete_all_error_logs():
 	"""
 	Delete all error logs from the database.
 
@@ -97,10 +97,10 @@ def delete_all_error_logs( ):
 
 
 # Route to download request logs in JSON format
-@logs.route("/admin/logs/request/download/json", methods=[ "GET" ])
+@logs.route("/admin/logs/request/download/json", methods=["GET"])
 @login_required
 @roles_required("Superadmin")
-def download_request_logs_json( ):
+def download_request_logs_json():
 	"""
 	Download request logs in JSON format.
 
@@ -112,17 +112,17 @@ def download_request_logs_json( ):
 	response = Response(
 		json.dumps(data, indent=4),
 		content_type="application/json",
-		headers={ "Content-Disposition": "attachment;filename=request_logs.json" },
+		headers={"Content-Disposition": "attachment;filename=request_logs.json"},
 	)
 	
 	return response
 
 
 # Route to download request logs in CSV format
-@logs.route("/admin/logs/request/download/csv", methods=[ "GET" ])
+@logs.route("/admin/logs/request/download/csv", methods=["GET"])
 @login_required
 @roles_required("Superadmin")
-def download_request_logs_csv( ):
+def download_request_logs_csv():
 	"""
 	Download request logs in CSV format.
 
@@ -139,22 +139,22 @@ def download_request_logs_csv( ):
 		"User",
 	]
 	
-	csv_data = [ headers ] + [ list(log.values( )) for log in data ]
+	csv_data = [headers] + [list(log.values()) for log in data]
 	
 	response = Response(
 		generate_csv(csv_data),
 		content_type="text/csv",
-		headers={ "Content-Disposition": "attachment;filename=request_logs.csv" },
+		headers={"Content-Disposition": "attachment;filename=request_logs.csv"},
 	)
 	
 	return response
 
 
 # Route to download error logs in JSON format
-@logs.route("/admin/logs/error/download/json", methods=[ "GET" ])
+@logs.route("/admin/logs/error/download/json", methods=["GET"])
 @login_required
 @roles_required("Superadmin")
-def download_error_logs_json( ):
+def download_error_logs_json():
 	"""
 	Download error logs in JSON format.
 
@@ -166,17 +166,17 @@ def download_error_logs_json( ):
 	response = Response(
 		json.dumps(data, indent=4),
 		content_type="application/json",
-		headers={ "Content-Disposition": "attachment;filename=error_logs.json" },
+		headers={"Content-Disposition": "attachment;filename=error_logs.json"},
 	)
 	
 	return response
 
 
 # Route to download error logs in CSV format
-@logs.route("/admin/logs/error/download/csv", methods=[ "GET" ])
+@logs.route("/admin/logs/error/download/csv", methods=["GET"])
 @login_required
 @roles_required("Superadmin")
-def download_error_logs_csv( ):
+def download_error_logs_csv():
 	"""
 	Download error logs in CSV format.
 
@@ -195,12 +195,12 @@ def download_error_logs_csv( ):
 		"User",
 	]
 	
-	csv_data = [ headers ] + [ list(log.values( )) for log in data ]
+	csv_data = [headers] + [list(log.values()) for log in data]
 	
 	response = Response(
 		generate_csv(csv_data),
 		content_type="text/csv",
-		headers={ "Content-Disposition": "attachment;filename=error_logs.csv" },
+		headers={"Content-Disposition": "attachment;filename=error_logs.csv"},
 	)
 	
 	return response

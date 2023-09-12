@@ -3,7 +3,7 @@ from SoftyTechCMS.models import ErrorLog
 
 
 # Define a function to save an error log entry to the database
-def save_error_log( user_id, endpoint, methodType, status_code, error ):
+def save_error_log(user_id, endpoint, methodType, status_code, error):
 	"""
 	Save an error log entry to the database.
 
@@ -31,7 +31,7 @@ def save_error_log( user_id, endpoint, methodType, status_code, error ):
 		db.session.add(error_log)
 		
 		# Commit the database session to save the error log
-		db.session.commit( )
+		db.session.commit()
 	except Exception as e:
 		# In case of an exception, rollback the database session
-		db.session.rollback( )
+		db.session.rollback()

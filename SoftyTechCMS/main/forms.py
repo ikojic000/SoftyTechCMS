@@ -17,7 +17,7 @@ class SearchForm(FlaskForm):
 		submit (SubmitField): Submit button for executing the search.
 	"""
 	
-	search = StringField("Search", validators=[ DataRequired( ), Length(min=3) ])
+	search = StringField("Search", validators=[DataRequired(), Length(min=3)])
 	submit = SubmitField("")
 
 
@@ -43,7 +43,7 @@ class ContactForm(FlaskForm):
 			),
 		],
 	)
-	email = StringField("Email", validators=[ DataRequired( ), Email( ) ])
+	email = StringField("Email", validators=[DataRequired(), Email()])
 	subject = StringField(
 		"Subject",
 		validators=[

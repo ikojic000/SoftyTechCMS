@@ -84,9 +84,9 @@ CKEDITOR.replace( '<em>textarea_id</em>', {
                  * Read more: https://ckeditor.com/docs/ckeditor4/latest/guide/dev_advanced_content_filter.html
                  */
 				allowedContent:
-					'h1 h2 h3 p pre[align]; ' +
-					'blockquote code kbd samp var del ins cite q b i u strike ul ol li hr table tbody tr td th caption; ' +
-					'img[!src,alt,align,width,height]; font[!face]; font[!family]; font[!color]; font[!size]; font{!background-color}; a[!href]; a[!name]',
+						'h1 h2 h3 p pre[align]; ' +
+						'blockquote code kbd samp var del ins cite q b i u strike ul ol li hr table tbody tr td th caption; ' +
+						'img[!src,alt,align,width,height]; font[!face]; font[!family]; font[!color]; font[!size]; font{!background-color}; a[!href]; a[!name]',
 
 				/*
                  * Core styles.
@@ -188,7 +188,7 @@ CKEDITOR.replace( '<em>textarea_id</em>', {
              */
 			function configureHtmlWriter(evt) {
 				var editor = evt.editor,
-					dataProcessor = editor.dataProcessor;
+						dataProcessor = editor.dataProcessor;
 
 				// Out self closing tags the HTML4 way, like <br>.
 				dataProcessor.writer.selfClosingEnd = '>';

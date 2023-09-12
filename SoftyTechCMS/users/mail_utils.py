@@ -4,7 +4,7 @@ from SoftyTechCMS import mail, db
 from SoftyTechCMS.models import ErrorLog
 
 
-def send_register_mail( user ):
+def send_register_mail(user):
 	"""
 	Send a registration confirmation email to the user.
 
@@ -19,7 +19,7 @@ def send_register_mail( user ):
 	subject = "Welcome to SoftyTech"
 	message_body = f"Dear {user.email},\n\nThank you for registering to SoftyTech.\n\nPlease enjoy your time here.\n\nSincerely,\nSoftyTech"
 	
-	message = Message(subject=subject, recipients=[ user.email ])
+	message = Message(subject=subject, recipients=[user.email])
 	message.body = message_body
 	
 	try:
@@ -29,10 +29,10 @@ def send_register_mail( user ):
 		# Add the error log object to the database session
 		db.session.add(error)
 		# Commit the database session to save the error log
-		db.session.commit( )
+		db.session.commit()
 
 
-def send_oauth_register_mail( user ):
+def send_oauth_register_mail(user):
 	"""
 	Send a registration confirmation email to the user who registered using OAuth.
 
@@ -47,7 +47,7 @@ def send_oauth_register_mail( user ):
 	subject = "Welcome to SoftyTech"
 	message_body = f"Dear {user.email},\n\nThank you for registering to SoftyTech.\n\nAs you logged in with your Google/Facebook account please change your generated password.\n\nYour credentials:\nEmail: {user.email}\nPassword: SoftyTech123\n\nAfter that, you can log in with your Google/Facebook account or with your SoftyTech account.\n\nPlease enjoy your time here.\n\nSincerely,\nSoftyTech"
 	
-	message = Message(subject=subject, recipients=[ user.email ])
+	message = Message(subject=subject, recipients=[user.email])
 	message.body = message_body
 	
 	try:
@@ -57,4 +57,4 @@ def send_oauth_register_mail( user ):
 		# Add the error log object to the database session
 		db.session.add(error)
 		# Commit the database session to save the error log
-		db.session.commit( )
+		db.session.commit()

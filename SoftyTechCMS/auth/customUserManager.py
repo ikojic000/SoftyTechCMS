@@ -8,7 +8,7 @@ class CustomUserManager(UserManager):
 	"""
 	
 	
-	def unauthorized_view( self ):
+	def unauthorized_view(self):
 		"""
 		Handle unauthorized access.
 

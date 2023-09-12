@@ -9,7 +9,7 @@ errors = Blueprint("errors", __name__)
 
 # Define error handlers for different HTTP error codes
 @errors.app_errorhandler(400)
-def not_found_error( error ):
+def not_found_error(error):
 	"""
 	Handle a 400 Bad Request error.
 
@@ -23,7 +23,7 @@ def not_found_error( error ):
 
 
 @errors.app_errorhandler(401)
-def forbidden_error( error ):
+def forbidden_error(error):
 	"""
 	Handle a 401 Unauthorized error.
 
@@ -37,7 +37,7 @@ def forbidden_error( error ):
 
 
 @errors.app_errorhandler(403)
-def forbidden_error( error ):
+def forbidden_error(error):
 	"""
 	Handle a 403 Forbidden error.
 
@@ -51,7 +51,7 @@ def forbidden_error( error ):
 
 
 @errors.app_errorhandler(404)
-def not_found_error( error ):
+def not_found_error(error):
 	"""
 	Handle a 404 Not Found error.
 
@@ -65,7 +65,7 @@ def not_found_error( error ):
 
 
 @errors.app_errorhandler(500)
-def internal_error( error ):
+def internal_error(error):
 	"""
 	Handle a 500 Internal Server Error.
 
@@ -79,7 +79,7 @@ def internal_error( error ):
 
 
 # Define a function to render error pages
-def render_error_page( status_code, error ):
+def render_error_page(status_code, error):
 	"""
 	Render an error page with the given status code and error message.
 
@@ -97,7 +97,7 @@ def render_error_page( status_code, error ):
 	save_error_log(user_id, request.endpoint, request.method, status_code, error)
 	
 	# Create a context dictionary with status code and error message
-	context = { "status_code": status_code, "error": error }
+	context = {"status_code": status_code, "error": error}
 	
 	# Render the 'error.html' template with the context data
 	return render_template("error.html", **context)

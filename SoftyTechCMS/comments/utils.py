@@ -2,7 +2,7 @@ from SoftyTechCMS.comments.database_manager import comment_count_in_single_month
 
 
 # Define a function to get the count of comments for a specific month
-def get_comments_count( month ):
+def get_comments_count(month):
 	"""
 	Get the count of comments for a specific month.
 
@@ -20,7 +20,7 @@ def get_comments_count( month ):
 
 
 # Utility method that checks if the username of a comment's user matches the current user's username
-def comment_user_matches_current_user( comment, current_user ):
+def comment_user_matches_current_user(comment, current_user):
 	"""
 	Check if the username of a comment's user matches the current user's username.
 

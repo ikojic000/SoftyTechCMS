@@ -5,7 +5,7 @@ from SoftyTechCMS.models import ErrorLog, RequestLog
 
 
 # Prepare data for logs
-def prepare_logs_data( log_model ):
+def prepare_logs_data(log_model):
 	"""
 	Prepare log data for exporting to JSON or CSV.
 
@@ -15,8 +15,8 @@ def prepare_logs_data( log_model ):
 	Returns:
 		list of dict: A list of dictionaries containing log data.
 	"""
-	logs_data = log_model.query.all( )
-	data = [ ]
+	logs_data = log_model.query.all()
+	data = []
 	
 	for log in logs_data:
 		log_data = {
@@ -48,7 +48,7 @@ def prepare_logs_data( log_model ):
 
 
 # Generate CSV from data
-def generate_csv( data ):
+def generate_csv(data):
 	"""
 	Generate CSV data from a list of lists.
 
@@ -58,7 +58,7 @@ def generate_csv( data ):
 	Returns:
 		str: The CSV data as a string.
 	"""
-	output = StringIO( )
+	output = StringIO()
 	csv_writer = csv.writer(output)
 	csv_writer.writerows(data)
-	return output.getvalue( )
+	return output.getvalue()

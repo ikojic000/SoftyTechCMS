@@ -6,7 +6,7 @@ from flask_login import current_user
 from SoftyTechCMS.comments.database_manager import get_comment_by_id
 
 
-def own_account_required( view_func ):
+def own_account_required(view_func):
 	"""
 	Decorator that checks if the current user owns the requested account.
 
@@ -22,7 +22,7 @@ def own_account_required( view_func ):
 	
 	
 	@wraps(view_func)
-	def decorated_view( *args, **kwargs ):
+	def decorated_view(*args, **kwargs):
 		# Get the user_id from the route parameters
 		user_id = kwargs.get("user_id")
 		
@@ -40,7 +40,7 @@ def own_account_required( view_func ):
 	return decorated_view
 
 
-def owner_of_comment_required( view_func ):
+def owner_of_comment_required(view_func):
 	"""
 	Decorator that checks if the current user owns the requested comment.
 
@@ -56,7 +56,7 @@ def owner_of_comment_required( view_func ):
 	
 	
 	@wraps(view_func)
-	def decorated_view( comment_id, *args, **kwargs ):
+	def decorated_view(comment_id, *args, **kwargs):
 		# Get the comment object using the provided comment_id
 		comment = get_comment_by_id(comment_id)
 		

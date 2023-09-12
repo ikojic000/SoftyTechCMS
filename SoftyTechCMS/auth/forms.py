@@ -33,7 +33,7 @@ class LoginForm(FlaskForm):
 			),
 		],
 	)
-	password = PasswordField("Password", validators=[ DataRequired( ) ])
+	password = PasswordField("Password", validators=[DataRequired()])
 	submit = SubmitField("Login")  # Submit button
 
 
@@ -51,7 +51,7 @@ class RegisterForm(FlaskForm):
 		submit (SubmitField): The submission button for registration.
 	"""
 	
-	name = StringField("Name", validators=[ Length(max=50) ])  # Name field (optional)
+	name = StringField("Name", validators=[Length(max=50)])  # Name field (optional)
 	username = StringField(
 		"Username",
 		validators=[
@@ -69,13 +69,13 @@ class RegisterForm(FlaskForm):
 		validators=[
 			validate_email,  # Custom email validation
 			DataRequired(message="Email is required. Please enter your email."),
-			Email( ),
+			Email(),
 		],
 	)
 	password = PasswordField(
 		"Password",
 		validators=[
-			DataRequired( ),
+			DataRequired(),
 			validate_password,  # Custom password validation
 		],
 	)

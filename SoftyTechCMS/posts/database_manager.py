@@ -9,7 +9,7 @@ from SoftyTechCMS.users.database_manager import get_user_by_id
 
 
 # Get a post by its slug (unique identifier)
-def get_post_by_slug( slug ):
+def get_post_by_slug(slug):
 	"""
 	Retrieve a post from the database by its slug.
 
@@ -19,11 +19,11 @@ def get_post_by_slug( slug ):
 	Returns:
 		Post: The Post object if found, else a 404 error is raised.
 	"""
-	return Post.query.filter_by(slug=slug).first_or_404( )
+	return Post.query.filter_by(slug=slug).first_or_404()
 
 
 # Get posts with pagination
-def get_posts_pagination( request, per_page ):
+def get_posts_pagination(request, per_page):
 	"""
 	Retrieve a paginated list of published posts ordered by date posted.
 
@@ -35,12 +35,12 @@ def get_posts_pagination( request, per_page ):
 		Pagination: A Pagination object containing the posts.
 	"""
 	page = request.args.get("page", 1, type=int)
-	query = Post.query.filter_by(isPublished=True).order_by(Post.date_posted.desc( ))
+	query = Post.query.filter_by(isPublished=True).order_by(Post.date_posted.desc())
 	return query.paginate(page=page, per_page=per_page)
 
 
 # Get paginated search results
-def get_posts_searched_pagination( request, per_page, search_term ):
+def get_posts_searched_pagination(request, per_page, search_term):
 	"""
 	Retrieve paginated search results for posts.
 
@@ -65,7 +65,7 @@ def get_posts_searched_pagination( request, per_page, search_term ):
 			Post.category.has(Category.name.like(f"%{search_term}%")),
 			Post.author.like(f"%{search_term}%"),
 		),
-	).order_by(Post.date_posted.desc( ))
+	).order_by(Post.date_posted.desc())
 	
 	# Paginate the results
 	search_results = query.paginate(page=page, per_page=per_page)
@@ -74,14 +74,14 @@ def get_posts_searched_pagination( request, per_page, search_term ):
 
 
 # Get all posts
-def get_all_posts( ):
+def get_all_posts():
 	"""
 	Retrieve all posts from the database.
 
 	Returns:
 		list of Post: List of Post objects.
 	"""
-	return Post.query.all( )
+	return Post.query.all()
 
 
 # Method for creating new post
@@ -121,7 +121,7 @@ def create_post(
 			subtitle=subtitle,
 			description=description,
 			headImg=headImg,
-			slug=slug.lower( ).replace(" ", "-"),
+			slug=slug.lower().replace(" ", "-"),
 			language=language,
 			author=author,
 			content=content,
@@ -130,11 +130,11 @@ def create_post(
 		post.category = category
 		
 		db.session.add(post)
-		db.session.commit( )
+		db.session.commit()
 		flash("Post created successfully", "success")
 	except Exception as e:
 		flash("An error occurred while saving the post to the database.", "error")
-		db.session.rollback( )
+		db.session.rollback()
 		abort(
 			500,
 			"An error occurred while saving the post to the database. Please try again later.",
@@ -179,7 +179,7 @@ def post_update(
 		post.title = title
 		post.subtitle = subtitle
 		post.description = description
-		post.slug = slug.lower( ).replace(
+		post.slug = slug.lower().replace(
 			" ", "-"
 		)  # Remove whitespaces and lowercase all characters
 		post.language = language
@@ -190,19 +190,19 @@ def post_update(
 		post.headImg = headImgData
 		
 		# Commit the changes to the database
-		db.session.commit( )
+		db.session.commit()
 		
 		# Display a success flash message
 		flash("Post Updated Successfully", "success")
 	
 	except Exception as e:
-		db.session.rollback( )
+		db.session.rollback()
 		flash("An error occurred while updating the post.", "error")
 		abort(500, "An error occurred while updating the post. Please try again later.")
 
 
 # Method for publishing or unpublishing a post
-def publish_unpublish_post( post_id ):
+def publish_unpublish_post(post_id):
 	"""
 	Publish or unpublish a post by toggling its "isPublished" attribute.
 
@@ -222,10 +222,10 @@ def publish_unpublish_post( post_id ):
 			post.isPublished = True
 			flash("Post Published", "success")
 		
-		db.session.commit( )
+		db.session.commit()
 	except Exception as e:
 		flash("An error occurred while publishing/unpublishing the post.", "error")
-		db.session.rollback( )
+		db.session.rollback()
 		abort(
 			500,
 			"An error occurred while publishing/unpublishing the post. Please try again later.",
@@ -233,7 +233,7 @@ def publish_unpublish_post( post_id ):
 
 
 # Get a post by its ID
-def get_post_by_id( post_id ):
+def get_post_by_id(post_id):
 	"""
 	Retrieve a post from the database by its ID.
 
@@ -243,11 +243,11 @@ def get_post_by_id( post_id ):
 	Returns:
 		Post: The Post object if found, else a 404 error is raised.
 	"""
-	return Post.query.filter_by(id=post_id).first_or_404( )
+	return Post.query.filter_by(id=post_id).first_or_404()
 
 
 # Get posts by author
-def get_posts_by_author( author ):
+def get_posts_by_author(author):
 	"""
 	Retrieve all posts by a specific author.
 
@@ -257,10 +257,10 @@ def get_posts_by_author( author ):
 	Returns:
 		list of Post: List of Post objects.
 	"""
-	return Post.query.filter_by(author=author).all( )
+	return Post.query.filter_by(author=author).all()
 
 
-def post_delete( post ):
+def post_delete(post):
 	"""
 	Delete a post from the database.
 
@@ -272,15 +272,15 @@ def post_delete( post ):
 	"""
 	try:
 		db.session.delete(post)
-		db.session.commit( )
+		db.session.commit()
 	except Exception as e:
 		flash("An error occurred while deleting the post.", "error")
-		db.session.rollback( )
+		db.session.rollback()
 		abort(500, "An error occurred while deleting the post. Please try again later.")
 
 
 # Delete all posts by a user
-def delete_all_users_posts( user_id ):
+def delete_all_users_posts(user_id):
 	"""
 	Delete all posts by a specific user.
 
@@ -292,33 +292,33 @@ def delete_all_users_posts( user_id ):
 	"""
 	try:
 		user = get_user_by_id(user_id)
-		num_deleted = Post.query.filter_by(author=user.username).delete( )
+		num_deleted = Post.query.filter_by(author=user.username).delete()
 		
 		if num_deleted > 0:
-			db.session.commit( )
+			db.session.commit()
 			flash(f"Deleted {num_deleted} posts by {user.username}.", "success")
 		else:
 			flash(f"No posts by {user.username} to delete.", "info")
 	
 	except Exception as e:
 		flash("An error occurred while deleting posts.", "error")
-		db.session.rollback( )
+		db.session.rollback()
 		abort(500, "An error occurred while deleting posts. Please try again later.")
 
 
 # Count the total number of posts
-def count_posts( ):
+def count_posts():
 	"""
 	Count the total number of posts in the database.
 
 	Returns:
 		int: The total number of posts.
 	"""
-	return Post.query.count( )
+	return Post.query.count()
 
 
 # Count the number of posts in a specific month
-def posts_count_in_single_month( month ):
+def posts_count_in_single_month(month):
 	"""
 	Count the number of posts published in a specific month.
 
@@ -328,7 +328,7 @@ def posts_count_in_single_month( month ):
 	Returns:
 		int: The number of posts published in the specified month.
 	"""
-	current_year = datetime.utcnow( ).year
+	current_year = datetime.utcnow().year
 	start_date = datetime(current_year, month, 1)
 	if month == 12:
 		end_date = datetime(current_year + 1, 1, 1)
@@ -337,10 +337,10 @@ def posts_count_in_single_month( month ):
 	
 	return Post.query.filter(
 		Post.date_posted >= start_date, Post.date_posted < end_date
-	).count( )
+	).count()
 
 
-def get_post_by_subtitle_validation( subtitle ):
+def get_post_by_subtitle_validation(subtitle):
 	"""
 	Retrieve a post from the database by its subtitle.
 
@@ -349,10 +349,10 @@ def get_post_by_subtitle_validation( subtitle ):
 	:return: The first post found with the specified subtitle, or None if not found.
 	:rtype: Post or None
 	"""
-	return Post.query.filter_by(subtitle=subtitle).first( )
+	return Post.query.filter_by(subtitle=subtitle).first()
 
 
-def get_post_by_title_validation( title ):
+def get_post_by_title_validation(title):
 	"""
 	Retrieve a post from the database by its title.
 
@@ -361,10 +361,10 @@ def get_post_by_title_validation( title ):
 	:return: The first post found with the specified title, or None if not found.
 	:rtype: Post or None
 	"""
-	return Post.query.filter_by(title=title).first( )
+	return Post.query.filter_by(title=title).first()
 
 
-def get_post_by_slug_validation( slug ):
+def get_post_by_slug_validation(slug):
 	"""
 	Retrieve a post from the database by its slug.
 
@@ -373,4 +373,4 @@ def get_post_by_slug_validation( slug ):
 	:return: The first post found with the specified slug, or None if not found.
 	:rtype: Post or None
 	"""
-	return Post.query.filter_by(slug=slug).first( )
+	return Post.query.filter_by(slug=slug).first()

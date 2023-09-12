@@ -83,7 +83,7 @@ class PostForm(FlaskForm):
 		"Post Header Image",
 		validators=[
 			FileAllowed(
-				[ "jpg", "jpeg" ],
+				["jpg", "jpeg"],
 				message="Only .jpg, and .jpeg files are allowed!",
 			)
 		],
@@ -93,10 +93,10 @@ class PostForm(FlaskForm):
 		query_factory=lambda: Category.query,
 		allow_blank=True,
 		get_label="name",
-		validators=[ DataRequired(message="Category is required.") ],
+		validators=[DataRequired(message="Category is required.")],
 	)
 	language = SelectField(
-		"Language", choices=[ ("HRV", "Hrvatski"), ("ENG", "English") ]
+		"Language", choices=[("HRV", "Hrvatski"), ("ENG", "English")]
 	)
 	author = StringField(
 		"Author",

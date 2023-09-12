@@ -6,7 +6,7 @@ from flask_login import current_user
 from SoftyTechCMS.logs.database_manager import save_request_log
 
 
-def before_request( ):
+def before_request():
 	"""
 	Action to be taken before handling each incoming request.
 
@@ -16,10 +16,10 @@ def before_request( ):
 		None
 	"""
 	# Store the current timestamp in the "start_time" attribute of the Flask global object (g)
-	g.start_time = datetime.utcnow( )
+	g.start_time = datetime.utcnow()
 
 
-def after_request( response ):
+def after_request(response):
 	"""
 	Action to be taken after handling each incoming request.
 

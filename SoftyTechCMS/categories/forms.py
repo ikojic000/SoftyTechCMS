@@ -16,7 +16,7 @@ class CategoryForm(FlaskForm):
 	category = TextAreaField(
 		"Category",
 		validators=[
-			DataRequired( ),  # Ensure that the category field is not empty
+			DataRequired(),  # Ensure that the category field is not empty
 			Length(
 				min=3,
 				max=50,

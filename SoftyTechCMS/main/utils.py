@@ -7,7 +7,7 @@ from SoftyTechCMS import mail
 
 
 # Function to send an email
-def send_mail( subject, name, email, email_message ):
+def send_mail(subject, name, email, email_message):
 	"""
 	Send an email with the provided subject, sender, and content.
 
@@ -25,7 +25,7 @@ def send_mail( subject, name, email, email_message ):
 		message = Message(
 			subject,
 			sender=os.environ.get("SoftyTechCMS_MAIL_USER"),
-			recipients=[ os.environ.get("SoftyTechCMS_MAIL_USER") ],
+			recipients=[os.environ.get("SoftyTechCMS_MAIL_USER")],
 		)
 		
 		message.body = f"""

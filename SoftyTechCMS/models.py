@@ -7,7 +7,7 @@ from SoftyTechCMS import db, login_manager
 
 # Function for fetching user
 @login_manager.user_loader
-def load_user( user_id ):
+def load_user(user_id):
 	return User.query.get(int(user_id))
 
 
@@ -19,35 +19,35 @@ class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	username = db.Column(db.String(25), unique=True, nullable=False)
 	email = db.Column(db.String(100), unique=True, nullable=False)
-	email_confirmed_at = db.Column(db.DateTime( ), default=datetime.utcnow)
+	email_confirmed_at = db.Column(db.DateTime(), default=datetime.utcnow)
 	password = db.Column(db.String(100), nullable=False)
 	roles = db.relationship("Role", secondary="user_roles")
 	name = db.Column(db.String(50), nullable=True)
 	comments = db.relationship(
 		"Comment", backref="user", lazy="dynamic", cascade="all, delete-orphan"
 	)
-	active = db.Column(db.Boolean( ), default=True)
+	active = db.Column(db.Boolean(), default=True)
 	request_logs = db.relationship("RequestLog", backref="user", lazy="dynamic")
 	error_logs = db.relationship("ErrorLog", backref="user", lazy="dynamic")
 	
 	
-	def __repr__( self ):
+	def __repr__(self):
 		return f"User('{self.username}', '{self.email}')"
 
 
 class Role(db.Model):
 	__tablename__ = "roles"
 	
-	id = db.Column(db.Integer( ), primary_key=True)
+	id = db.Column(db.Integer(), primary_key=True)
 	name = db.Column(db.String(50), unique=True)
 
 
 class UserRoles(db.Model):
 	__tablename__ = "user_roles"
 	
-	id = db.Column(db.Integer( ), primary_key=True)
-	user_id = db.Column(db.Integer( ), db.ForeignKey("users.id", ondelete="CASCADE"))
-	role_id = db.Column(db.Integer( ), db.ForeignKey("roles.id", ondelete="CASCADE"))
+	id = db.Column(db.Integer(), primary_key=True)
+	user_id = db.Column(db.Integer(), db.ForeignKey("users.id", ondelete="CASCADE"))
+	role_id = db.Column(db.Integer(), db.ForeignKey("roles.id", ondelete="CASCADE"))
 
 
 # Post table
@@ -64,20 +64,20 @@ class Post(db.Model):
 	author = db.Column(db.String(50), nullable=False)
 	date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 	content = db.Column(db.Text, nullable=False)
-	isPublished = db.Column(db.Boolean( ), nullable=False, default=False)
+	isPublished = db.Column(db.Boolean(), nullable=False, default=False)
 	comments = db.relationship(
 		"Comment", backref="post", lazy="dynamic", cascade="all, delete-orphan"
 	)
 	
 	
-	def __repr__( self ):
+	def __repr__(self):
 		formatted_date_posted = self.date_posted.strftime("%d-%m-%Y %H:%M:%S")
 		return f"Post('{self.title}', '{self.language}', '{self.slug}', '{formatted_date_posted}')"
 
 
 # Category table
 class Category(db.Model):
-	id = db.Column(db.Integer( ), primary_key=True)
+	id = db.Column(db.Integer(), primary_key=True)
 	name = db.Column(db.String(50), unique=True)
 
 
@@ -90,7 +90,7 @@ class Comment(db.Model):
 	post_id = db.Column(db.Integer, db.ForeignKey("post.id"))
 	
 	
-	def __repr__( self ):
+	def __repr__(self):
 		return f"Comment('{self.user_id}', '{self.post_id}', '{self.content}')"
 
 

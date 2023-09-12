@@ -28,15 +28,15 @@ app.jinja_env.globals.update(
 
 
 @main.route("/test_error")
-def test_error( ):
+def test_error():
 	print("Test error - 500")
 	abort(500, "Test error message")
 
 
 # Home page route
-@main.route("/", methods=[ "GET", "POST" ])
-@main.route("/home", methods=[ "GET", "POST" ])
-def home( ):
+@main.route("/", methods=["GET", "POST"])
+@main.route("/home", methods=["GET", "POST"])
+def home():
 	"""
 	Display the home page, including a list of posts.
 
@@ -44,22 +44,22 @@ def home( ):
 		render_template: Renders the home page template.
 	"""
 	# Create a search form
-	form = SearchForm( )
+	form = SearchForm()
 	
 	# Check if the form is submitted and validate it
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		posts = get_posts_searched_pagination(request, 5, form.search.data)
 	else:
 		posts = get_posts_pagination(request, 5)
 	
-	context = { "posts": posts, "form": form }
+	context = {"posts": posts, "form": form}
 	
 	return render_template("index.html", **context)
 
 
 # About page route
 @main.route("/about")
-def about( ):
+def about():
 	"""
 	Display the about page.
 
@@ -71,7 +71,7 @@ def about( ):
 
 # About page route
 @main.route("/about/MPDTech")
-def about_mpd_tech( ):
+def about_mpd_tech():
 	"""
 	Display the MPD Tech about page.
 
@@ -82,22 +82,22 @@ def about_mpd_tech( ):
 
 
 # Contact page route
-@main.route("/contact", methods=[ "GET", "POST" ])
-def contact( ):
+@main.route("/contact", methods=["GET", "POST"])
+def contact():
 	"""
 	Display the contact page and handle contact form submissions.
 
 	Returns:
 		render_template or redirect: Renders the contact page template or redirects to the home page.
 	"""
-	form = ContactForm( )
+	form = ContactForm()
 	
 	# Pre-fill form fields if user is authenticated
 	if current_user.is_authenticated:
 		form.name.data = current_user.username
 		form.email.data = current_user.email
 	
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		send_mail(form.subject.data, form.name.data, form.email.data, form.message.data)
 		flash(
 			"Thank you for your message. We will reply as soon as possible!", "success"
@@ -113,8 +113,8 @@ def contact( ):
 
 
 # Individual post page route
-@main.route("/<slug>", methods=[ "GET", "POST" ])
-def post( slug ):
+@main.route("/<slug>", methods=["GET", "POST"])
+def post(slug):
 	"""
 	Display an individual blog post page, including comments and a comment submission form.
 
@@ -132,8 +132,8 @@ def post( slug ):
 		"static", filename=f"upload/media/images/head_Images/{post.headImg}"
 	)
 	
-	form = CommentForm( )
-	if form.validate_on_submit( ):
+	form = CommentForm()
+	if form.validate_on_submit():
 		add_comment(form.comment.data, current_user.id, post.id)
 		flash("Comment added", "success")
 		return redirect(url_for("main.post", slug=post.slug))

@@ -39,8 +39,8 @@ posts.after_request(after_request)
 # Route for displaying all posts for admin users
 @posts.route("/admin/posts/all")
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def all_posts( ):
+@roles_required(["Admin", "Superadmin"])
+def all_posts():
 	"""
 	Display all posts in an admin interface with edit and delete buttons.
 
@@ -48,7 +48,7 @@ def all_posts( ):
 		HTML: Rendered template displaying all posts.
 	"""
 	# Get all posts from the database
-	posts = get_all_posts( )
+	posts = get_all_posts()
 	title = "All Posts"
 	
 	# Create a context dictionary for rendering the template
@@ -61,10 +61,10 @@ def all_posts( ):
 
 
 # Route for adding a new post to the database
-@posts.route("/admin/posts/new", methods=[ "GET", "POST" ])
+@posts.route("/admin/posts/new", methods=["GET", "POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def add_post( ):
+@roles_required(["Admin", "Superadmin"])
+def add_post():
 	"""
 	Add a new post to the database.
 
@@ -75,7 +75,7 @@ def add_post( ):
 	form = PostForm(author=current_user.username)
 	
 	# Check if the form has been submitted and is valid
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		# Initialize headImg to None
 		headImg = None
 		if form.headImg.data:
@@ -101,16 +101,16 @@ def add_post( ):
 		return redirect(url_for("posts.all_posts"))
 	
 	# Create a context dictionary for rendering the template
-	context = { "pageTitle": title, "form": form, "title": title }
+	context = {"pageTitle": title, "form": form, "title": title}
 	
 	return render_template("admin/admin-post-create.html", **context)
 
 
 # Route for updating an existing post
-@posts.route("/admin/posts/update/<int:post_id>", methods=[ "GET", "POST" ])
+@posts.route("/admin/posts/update/<int:post_id>", methods=["GET", "POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def update_post( post_id ):
+@roles_required(["Admin", "Superadmin"])
+def update_post(post_id):
 	"""
 	Update an existing post in the database.
 
@@ -126,7 +126,7 @@ def update_post( post_id ):
 	current_headImg = post.headImg
 	
 	# Check if the form has been submitted and is valid
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		# Check if a new image file has been provided
 		if form.headImg.data:
 			# Save the uploaded head image and update post's headImg attribute
@@ -186,10 +186,10 @@ def update_post( post_id ):
 
 
 # Route for changing a post's isPublished attribute to True or False
-@posts.route("/admin/posts/publish/<int:post_id>", methods=[ "GET", "POST" ])
+@posts.route("/admin/posts/publish/<int:post_id>", methods=["GET", "POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def publish_post( post_id ):
+@roles_required(["Admin", "Superadmin"])
+def publish_post(post_id):
 	"""
 	Change a post's isPublished attribute to True or False.
 
@@ -217,10 +217,10 @@ def publish_post( post_id ):
 
 
 # Route for deleting a post
-@posts.route("/admin/posts/delete/<int:post_id>", methods=[ "GET", "POST" ])
+@posts.route("/admin/posts/delete/<int:post_id>", methods=["GET", "POST"])
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def delete_post( post_id ):
+@roles_required(["Admin", "Superadmin"])
+def delete_post(post_id):
 	"""
 	Delete a post from the database.
 
@@ -267,8 +267,8 @@ def delete_post( post_id ):
 # Method for deleting all posts by a specific user
 @posts.route("/admin/posts/delete/user/<int:user_id>")
 @login_required
-@roles_required([ "Admin", "Superadmin" ])
-def delete_all_posts_by_user( user_id ):
+@roles_required(["Admin", "Superadmin"])
+def delete_all_posts_by_user(user_id):
 	"""
 	Delete all posts by a specific user from the database.
 
@@ -286,8 +286,8 @@ def delete_all_posts_by_user( user_id ):
 
 
 # Method that returns the total number of posts
-@posts.route("/post/number_of_posts", methods=[ "GET" ])
-def number_of_posts( ):
+@posts.route("/post/number_of_posts", methods=["GET"])
+def number_of_posts():
 	"""
 	Return the total number of posts in the database.
 
@@ -295,21 +295,21 @@ def number_of_posts( ):
 		JSON: JSON response containing the number of posts.
 	"""
 	# Call the 'count_posts' function to get the total number of posts
-	number_of_posts = count_posts( )
+	number_of_posts = count_posts()
 	
 	return jsonify(number_of_posts=number_of_posts)
 
 
 # Method that returns the total number of posts by each month
-@posts.route("/api/posts/count_by_months", methods=[ "GET" ])
-def posts_count( ):
+@posts.route("/api/posts/count_by_months", methods=["GET"])
+def posts_count():
 	"""
 	Return the total number of posts for each month of the year.
 
 	Returns:
 		JSON: JSON response containing a list of post counts for each month.
 	"""
-	postsCountList = [ ]
+	postsCountList = []
 	
 	# Iterate through months (1 to 12) and get the post count for each month
 	for x in range(1, 13):
@@ -318,8 +318,8 @@ def posts_count( ):
 	return jsonify(postsCountList=postsCountList)
 
 
-@posts.route("/ckupload/", methods=[ "POST", "OPTIONS", "GET" ])
-def ckupload( ):
+@posts.route("/ckupload/", methods=["POST", "OPTIONS", "GET"])
+def ckupload():
 	"""
 	CKEditor file upload endpoint.
 
@@ -334,11 +334,11 @@ def ckupload( ):
 	
 	# Check if the request method is POST and contains the 'upload' file
 	if request.method == "POST" and "upload" in request.files:
-		fileobj = request.files[ "upload" ]
+		fileobj = request.files["upload"]
 		
 		# Get the filename and file extension
 		fname, fext = os.path.splitext(fileobj.filename)
-		rnd_name = "%s%s" % (gen_rnd_filename( ), fext)
+		rnd_name = "%s%s" % (gen_rnd_filename(), fext)
 		
 		# Define the file path where the uploaded file will be saved
 		filepath = os.path.join(app.root_path, "static/upload/media/images", rnd_name)
@@ -373,5 +373,5 @@ def ckupload( ):
 	
 	# Create an HTTP response containing JavaScript to communicate with CKEditor
 	response = make_response(res)
-	response.headers[ "Content-Type" ] = "text/html"
+	response.headers["Content-Type"] = "text/html"
 	return response

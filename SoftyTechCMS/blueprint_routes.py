@@ -8,7 +8,7 @@ from SoftyTechCMS.main.routes import main
 from SoftyTechCMS.posts.routes import posts
 
 
-def routes( ):
+def routes():
 	"""
 	Register all the application's blueprints for different routes.
 

@@ -179,13 +179,13 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 		'use strict';
 
 		var mode = (window.location.hash.substr(1) === 'advanced') ? 'advanced' : 'basic',
-			configuratorSection = CKEDITOR.document.findOne('main > .grid-container.configurator'),
-			basicInstruction = CKEDITOR.document.findOne('#help-content .basic'),
-			advancedInstruction = CKEDITOR.document.findOne('#help-content .advanced'),
+				configuratorSection = CKEDITOR.document.findOne('main > .grid-container.configurator'),
+				basicInstruction = CKEDITOR.document.findOne('#help-content .basic'),
+				advancedInstruction = CKEDITOR.document.findOne('#help-content .advanced'),
 
-			// Configurator mode switcher.
-			modeSwitchBasic = CKEDITOR.document.getById('radio-basic'),
-			modeSwitchAdvanced = CKEDITOR.document.getById('radio-advanced');
+				// Configurator mode switcher.
+				modeSwitchBasic = CKEDITOR.document.getById('radio-basic'),
+				modeSwitchAdvanced = CKEDITOR.document.getById('radio-advanced');
 
 		// Initial setup
 		function updateSwitcher() {
@@ -348,13 +348,13 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 
 			init: function () {
 				var element = CKEDITOR.dom.element.createFromHtml(
-					'<div class="staticContainer">' +
-					'<div class="grid-container" >' +
-					'<div class="grid-width-100">' +
-					'<div class="inner"></div>' +
-					'</div>' +
-					'</div>' +
-					'</div>');
+						'<div class="staticContainer">' +
+						'<div class="grid-container" >' +
+						'<div class="grid-width-100">' +
+						'<div class="inner"></div>' +
+						'</div>' +
+						'</div>' +
+						'</div>');
 
 				this.staticContainer = element.findOne('.inner');
 
@@ -420,9 +420,9 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 
 				// If element is already fixed we are checking it's placeholder.
 				var related = (element.isFixed ? element.placeholder : element.element),
-					clientRect = related.$.getBoundingClientRect(),
-					staticHeight = this.staticContainer.getSize('height'),
-					elemHeight = element.element.getSize('height');
+						clientRect = related.$.getBoundingClientRect(),
+						staticHeight = this.staticContainer.getSize('height'),
+						elemHeight = element.element.getSize('height');
 
 				if (element.isFixed) {
 					return (clientRect.top + elemHeight < staticHeight);
@@ -435,7 +435,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 		positionSticky.init();
 
 		CKEDITOR.document.getWindow().on('scroll',
-			new CKEDITOR.tools.eventsBuffer(100, positionSticky.checkAll, positionSticky).input
+				new CKEDITOR.tools.eventsBuffer(100, positionSticky.checkAll, positionSticky).input
 		);
 
 		// Make the toolbar sticky.
@@ -444,7 +444,7 @@ For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
 		// Help button and help-content.
 		(function () {
 			var helpButton = CKEDITOR.document.getById('help'),
-				helpContent = CKEDITOR.document.getById('help-content');
+					helpContent = CKEDITOR.document.getById('help-content');
 
 			// Don't show help button on IE8 because it's unsupported by Pico Modal.
 			if (CKEDITOR.env.ie && CKEDITOR.env.version == 8) {

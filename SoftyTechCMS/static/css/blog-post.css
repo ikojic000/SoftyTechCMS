@@ -129,7 +129,7 @@
     color: var(--primary-color);
     font-family: "Orbitron", sans-serif;
     text-decoration: none;
-    transition: all 1s ;
+    transition: all 1s;
 }
 
 .comment-login-link:hover {

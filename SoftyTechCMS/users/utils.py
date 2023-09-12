@@ -2,7 +2,7 @@ from SoftyTechCMS.users.database_manager import users_count_in_single_month
 
 
 # Utility method that checks if a user has a specific role
-def user_has_role( user, target_role ):
+def user_has_role(user, target_role):
 	"""
 	Check if a user has a specific role.
 
@@ -17,7 +17,7 @@ def user_has_role( user, target_role ):
 
 
 # Method for getting user count for a single month
-def get_users_count( month ):
+def get_users_count(month):
 	"""
 	Get the count of users for a single month.
 

@@ -34,19 +34,19 @@ class UpdateAccountForm(FlaskForm):
 	
 	username = StringField(
 		"Username",
-		render_kw={ "readonly": True },  # Make the field readonly
+		render_kw={"readonly": True},  # Make the field readonly
 	)
 	email = StringField(
 		"Email",
-		validators=[ Email( ), validate_email_update ],
-		render_kw={ "readonly": True },  # Make the field readonly
+		validators=[Email(), validate_email_update],
+		render_kw={"readonly": True},  # Make the field readonly
 	)
 	# Fetch all roles and create choices from role names
-	role_choices = [ (role.id, role.name) for role in Role.query.all( ) ]
+	role_choices = [(role.id, role.name) for role in Role.query.all()]
 	role = RadioField(
 		"Role",
 		choices=role_choices,
-		validators=[ DataRequired( ) ],
+		validators=[DataRequired()],
 	)
 	active = BooleanField("Active")  # Checkbox for active field
 	submit = SubmitField("Update")
@@ -65,8 +65,8 @@ class UserRoleForm(FlaskForm):
 		submit (SubmitField): Button to submit the form.
 	"""
 	
-	username = StringField("Username", render_kw={ "readonly": True })
-	email = StringField("Email", render_kw={ "readonly": True })
+	username = StringField("Username", render_kw={"readonly": True})
+	email = StringField("Email", render_kw={"readonly": True})
 	role = SelectMultipleField(
 		"User Role",
 		choices=[
@@ -110,7 +110,7 @@ class CreateNewUserForm(FlaskForm):
 		"Email",
 		validators=[
 			DataRequired(message="Email is required."),
-			Email( ),
+			Email(),
 			validate_email,
 		],
 	)
@@ -155,7 +155,7 @@ class UserAccountSettingsForm(FlaskForm):
 		"Email",
 		validators=[
 			DataRequired(message="Email is required. Please enter your email!"),
-			Email( ),
+			Email(),
 			validate_email_update,
 		],
 	)

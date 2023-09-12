@@ -8,7 +8,7 @@ from SoftyTechCMS.users.utils import user_has_role
 
 
 # Function for checking if username is taken when a new user registers
-def validate_username( self, username ):
+def validate_username(self, username):
 	"""
 	Validate the username when a new user registers.
 
@@ -25,7 +25,7 @@ def validate_username( self, username ):
 
 
 # Function for checking if email is taken when a new user registers
-def validate_email( self, email ):
+def validate_email(self, email):
 	"""
 	Validate the email address when a new user registers.
 
@@ -42,7 +42,7 @@ def validate_email( self, email ):
 
 
 # Function for checking if username is taken when a user updates their username
-def validate_username_update( form, username ):
+def validate_username_update(form, username):
 	"""
 	Validate the username when a user updates their username.
 
@@ -62,7 +62,7 @@ def validate_username_update( form, username ):
 
 
 # Function for checking if email is taken when a user updates their email address
-def validate_email_update( form, email ):
+def validate_email_update(form, email):
 	"""
 	Validate the email address when a user updates their email.
 
@@ -82,7 +82,7 @@ def validate_email_update( form, email ):
 
 
 # Function for checking if password is valid when a user registers or updates their password
-def validate_password( form, field ):
+def validate_password(form, field):
 	"""
 	Validate the password when a user registers or updates their password.
 
@@ -107,7 +107,7 @@ def validate_password( form, field ):
 
 
 # Utility function for FileManager access control
-def access_control_function( ):
+def access_control_function():
 	"""
 	Determine if the current user has access to the FileManager.
 

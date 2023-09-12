@@ -16,7 +16,7 @@ from SoftyTechCMS.posts.database_manager import (
 
 
 # Method for saving pictures to a folder on a server and returning the picture name
-def save_picture( form_picture, title ):
+def save_picture(form_picture, title):
 	"""
 	Save an image to a folder on the server and return the picture name.
 
@@ -46,7 +46,7 @@ def save_picture( form_picture, title ):
 
 
 # Method for saving images to a folder on a server and returning a unique filename
-def save_head_image( image_data, title ):
+def save_head_image(image_data, title):
 	"""
 	Save an image to a folder on the server with a unique filename and return the unique filename.
 
@@ -61,7 +61,7 @@ def save_head_image( image_data, title ):
 		return None
 	
 	filename = image_data.filename
-	extension = os.path.splitext(filename)[ 1 ].lower( )
+	extension = os.path.splitext(filename)[1].lower()
 	
 	# Build the complete path to save the image
 	save_folder = os.path.join(app.root_path, "static/upload/media/images/head_Images")
@@ -111,7 +111,7 @@ def save_head_image( image_data, title ):
 
 
 # Method to generate a unique filename
-def generate_unique_filename( title, extension ):
+def generate_unique_filename(title, extension):
 	"""
 	Generate a unique filename based on the provided title and extension.
 
@@ -122,11 +122,11 @@ def generate_unique_filename( title, extension ):
 	Returns:
 		str: The unique filename.
 	"""
-	return title + "_" + os.urandom(16).hex( ) + extension
+	return title + "_" + os.urandom(16).hex() + extension
 
 
 # Method to check if a file with the given filename exists in the folder
-def file_exists_in_folder( folder, filename ):
+def file_exists_in_folder(folder, filename):
 	"""
 	Check if a file with the given filename exists in the specified folder.
 
@@ -141,19 +141,19 @@ def file_exists_in_folder( folder, filename ):
 
 
 # Method for generating a random filename prefix
-def gen_rnd_filename( ):
+def gen_rnd_filename():
 	"""
 	Generate a random filename prefix.
 
 	Returns:
 		str: Random filename prefix.
 	"""
-	filename_prefix = datetime.datetime.now( ).strftime("%Y%m%d%H%M%S")
+	filename_prefix = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
 	return "%s%s" % (filename_prefix, str(random.randrange(1000, 10000)))
 
 
 # Method that returns post count in a single month
-def get_posts_count( month ):
+def get_posts_count(month):
 	"""
 	Get the post count for a single month.
 
@@ -167,7 +167,7 @@ def get_posts_count( month ):
 	return post_count
 
 
-def validate_title( self, title ):
+def validate_title(self, title):
 	"""
 	Custom validation method for the 'title' field.
 
@@ -187,7 +187,7 @@ def validate_title( self, title ):
 		)
 
 
-def validate_subtitle( self, subtitle ):
+def validate_subtitle(self, subtitle):
 	"""
 	Custom validation method for the 'subtitle' field.
 
@@ -207,7 +207,7 @@ def validate_subtitle( self, subtitle ):
 		)
 
 
-def validate_slug( self, slug ):
+def validate_slug(self, slug):
 	"""
 	Custom validation method for the 'slug' field.
 
