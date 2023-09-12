@@ -20,8 +20,8 @@ auth.after_request(after_request)
 
 
 # Registering to a website - Admin and User side Route
-@auth.route("/register", methods=[ "GET", "POST" ])
-def register( ):
+@auth.route("/register", methods=["GET", "POST"])
+def register():
 	"""
 	Allow users to register for the website.
 
@@ -33,10 +33,10 @@ def register( ):
 		return redirect(url_for("main.home"))
 	
 	# Create a RegisterForm instance
-	form = RegisterForm( )
+	form = RegisterForm()
 	
 	# Check if the form is submitted and valid
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		# Call the register_user function to create a new user
 		register_user(
 			form.name.data, form.username.data, form.email.data, form.password.data
@@ -49,8 +49,8 @@ def register( ):
 
 
 # Logging into a website - Admin and User side Route
-@auth.route("/login", methods=[ "GET", "POST" ])
-def login( ):
+@auth.route("/login", methods=["GET", "POST"])
+def login():
 	"""
 	Allow users to log in to the website.
 
@@ -62,10 +62,10 @@ def login( ):
 		return redirect(url_for("main.home"))
 	
 	# Create a LoginForm instance
-	form = LoginForm( )
+	form = LoginForm()
 	
 	# Check if the form is submitted and valid
-	if form.validate_on_submit( ):
+	if form.validate_on_submit():
 		# Get the user by username or email
 		user = get_user_by_username_email(form.email.data)
 		
@@ -84,18 +84,22 @@ def login( ):
 
 
 @auth.route("/login/google")
-def google_login( ):
+def google_login():
 	"""
 	Initiate the Google OAuth2 login process.
 
 	Returns:
 		redirect: Redirects to the Google OAuth2 authorization page.
 	"""
+	# Capture the "next" parameter from the request
+	next_page = request.args.get("next")
+	# Store the "next" URL in the session
+	session["oauth_login_next"] = next_page
 	return google.authorize(callback=url_for("auth.google_authorized", _external=True))
 
 
 @auth.route("/login/google/authorized")
-def google_authorized( ):
+def google_authorized():
 	"""
 	Handle the Google OAuth2 authorization callback.
 
@@ -103,25 +107,25 @@ def google_authorized( ):
 		redirect: Redirects the user to the home page after successful login.
 	"""
 	# Retrieve the response from the Google OAuth2 authorization request
-	response = google.authorized_response( )
+	response = google.authorized_response()
 	if response is None or response.get("access_token") is None:
 		# If the response is missing or does not contain an access token, show an error message
 		flash(
 			"Access denied: reason={} error={}".format(
-				request.args[ "error_reason" ], request.args[ "error_description" ]
+				request.args["error_reason"], request.args["error_description"]
 			),
 			"danger",
 		)
 		return redirect(url_for("main.home"))
 	
 	# Add the access token to the session
-	session[ "google_token" ] = (response[ "access_token" ], "")
+	session["google_token"] = (response["access_token"], "")
 	
 	# Fetch user information from Google using the access token
 	user_info = google.get("userinfo")
 	if "email" in user_info.data:
-		email = user_info.data[ "email" ]
-		username = user_info.data[ "email" ].split("@")[
+		email = user_info.data["email"]
+		username = user_info.data["email"].split("@")[
 			0
 		]  # Extract the username from the email
 		name = user_info.data.get("name")  # Get the user's name if available, or None
@@ -130,7 +134,12 @@ def google_authorized( ):
 		user = create_or_get_user(email, username, name)  # Pass the user data
 		login_user(user)  # Log in the user
 		flash("Logged in via Google!", "success")
-		return redirect(url_for("main.home"))
+		
+		# Retrieve the "next" URL from the session
+		next_page = session.pop("oauth_login_next", None)
+		
+		# Redirect the user to the appropriate page
+		return redirect(next_page) if next_page else redirect(url_for("main.home"))
 	else:
 		flash(
 			"Unable to retrieve user data from Google.", "danger"
@@ -139,20 +148,24 @@ def google_authorized( ):
 
 
 @auth.route("/login/facebook")
-def facebook_login( ):
+def facebook_login():
 	"""
 	Initiate the Facebook OAuth2 login process.
 
 	Returns:
 		redirect: Redirects to the Facebook OAuth2 authorization page.
 	"""
+	# Capture the "next" parameter from the request
+	next_page = request.args.get("next")
+	# Store the "next" URL in the session
+	session["oauth_login_next"] = next_page
 	return facebook.authorize(
 		callback=url_for("auth.facebook_authorized", _external=True)
 	)
 
 
 @auth.route("/login/facebook/authorized")
-def facebook_authorized( ):
+def facebook_authorized():
 	"""
 	Handle the Facebook OAuth2 authorization callback.
 
@@ -160,25 +173,25 @@ def facebook_authorized( ):
 		redirect: Redirects the user to the home page after successful login.
 	"""
 	# Retrieve the response from the Facebook OAuth2 authorization request
-	response = facebook.authorized_response( )
+	response = facebook.authorized_response()
 	if response is None or response.get("access_token") is None:
 		# If the response is missing or does not contain an access token, show an error message
 		flash(
 			"Access denied: reason={} error={}".format(
-				request.args[ "error_reason" ], request.args[ "error_description" ]
+				request.args["error_reason"], request.args["error_description"]
 			),
 			"danger",
 		)
 		return redirect(url_for("main.home"))
 	
 	# Add the access token to the session
-	session[ "facebook_token" ] = (response[ "access_token" ], "")
+	session["facebook_token"] = (response["access_token"], "")
 	
 	# Fetch user information from Facebook using the access token
 	user_info = facebook.get("/me?fields=id,email,name")
 	if "email" in user_info.data:
-		email = user_info.data[ "email" ]
-		username = user_info.data[ "email" ].split("@")[
+		email = user_info.data["email"]
+		username = user_info.data["email"].split("@")[
 			0
 		]  # Extract the username from the email
 		name = user_info.data.get("name")  # Get the user's name
@@ -187,7 +200,12 @@ def facebook_authorized( ):
 		user = create_or_get_user(email, username, name)  # Pass the user data
 		login_user(user)  # Log in the user
 		flash("Logged in via Facebook!", "success")
-		return redirect(url_for("main.home"))
+		
+		# Retrieve the "next" URL from the session
+		next_page = session.pop("oauth_login_next", None)
+		
+		# Redirect the user to the appropriate page
+		return redirect(next_page) if next_page else redirect(url_for("main.home"))
 	else:
 		flash(
 			"Unable to retrieve user data from Facebook.", "danger"
@@ -197,12 +215,12 @@ def facebook_authorized( ):
 
 # Logging out User - Admin and User side Route
 @auth.route("/logout")
-def logout( ):
+def logout():
 	"""
 	Allow users to log out of the website.
 
 	Returns:
 		redirect: Redirects to the login page after logout.
 	"""
-	logout_user( )
+	logout_user()
 	return redirect(url_for("auth.login"))

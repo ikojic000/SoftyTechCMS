@@ -41,7 +41,8 @@
 				</form>
 			</div>
 		{% else %}
-			<p class="message">Please login to leave a comment. &#128513</p>
+			<p class="message">Please <a href="{{ url_for('auth.login', next=request.url) }}" class="comment-login-link">login</a> to leave a
+				comment. &#128513</p>
 		{% endif %}
 		<div class="commentList">
 			{% for comment in comments %}
@@ -136,10 +137,10 @@
 			$("#topBtn").click(function () {
 				// Scroll smoothly to the top of the page
 				$("html ,body").animate(
-					{
-						scrollTop: 0,
-					},
-					500
+						{
+							scrollTop: 0,
+						},
+						500
 				);
 			});
 		});
