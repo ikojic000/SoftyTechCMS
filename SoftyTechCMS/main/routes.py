@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, flash, request, Blueprint, abort
+from flask import render_template, url_for, redirect, flash, request, Blueprint
 from flask_login import current_user
 
 from SoftyTechCMS import app
@@ -25,12 +25,6 @@ main.after_request(after_request)
 app.jinja_env.globals.update(
 	comment_user_matches_current_user=comment_user_matches_current_user
 )
-
-
-@main.route("/test_error")
-def test_error():
-	print("Test error - 500")
-	abort(500, "Test error message")
 
 
 # Home page route
